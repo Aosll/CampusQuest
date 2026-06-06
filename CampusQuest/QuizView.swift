@@ -120,17 +120,26 @@ struct QuizView: View {
             }
 
             if model.hasAnswered {
+                let isCorrect = model.selectedAnswer == question.correctAnswer
+
+                AnswerFeedbackCard(
+                    isCorrect: isCorrect,
+                    correctAnswer: question.correctAnswer,
+                    explanation: question.word.definition
+                )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+
                 Button {
                     withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
                         correctGlow = nil
                         model.next()
                     }
                 } label: {
-                    Text("Next")
+                    Text("Continue")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(.tint, in: RoundedRectangle(cornerRadius: 14))
+                        .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                         .foregroundStyle(.white)
                 }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -311,6 +320,48 @@ struct QuizView: View {
             let t = total[key] ?? 1
             return t >= 2 && Double(c) / Double(t) >= 0.75
         }.sorted()
+    }
+}
+
+// MARK: - Answer feedback
+
+private struct AnswerFeedbackCard: View {
+    let isCorrect: Bool
+    let correctAnswer: String
+    let explanation: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
+                Image(systemName: isCorrect ? "checkmark.seal.fill" : "lightbulb.fill")
+                    .foregroundStyle(isCorrect ? AppColor.success : AppColor.warning)
+                Text(isCorrect ? "Correct!" : "Not quite")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(AppColor.ink)
+                Spacer()
+            }
+
+            if !isCorrect {
+                Text("Correct answer: \(correctAnswer)")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppColor.ink)
+            }
+
+            Text(explanation)
+                .font(.caption)
+                .foregroundStyle(AppColor.inkSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            (isCorrect ? AppColor.success : AppColor.warning).opacity(0.12),
+            in: RoundedRectangle(cornerRadius: AppRadius.icon)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.icon)
+                .strokeBorder((isCorrect ? AppColor.success : AppColor.warning).opacity(0.3), lineWidth: 1)
+        )
     }
 }
 

@@ -2,8 +2,9 @@
 //  AchievementsView.swift
 //  CampusQuest
 //
-//  Shows all badges: earned ones in color, locked ones dimmed with a
-//  lock and a hint on how to unlock them.
+//  Shows all badges as a collectible grid: earned ones in color, locked
+//  ones dimmed with a lock and a hint on how to unlock them. A header
+//  summarizes "x / total badges earned".
 //
 
 import SwiftUI
@@ -17,57 +18,154 @@ struct Badge: Identifiable {
     let icon: String
 
     static let all: [Badge] = [
-        Badge(id: "First Steps",
-              title: "First Steps",
+        Badge(id: "First Word",
+              title: "First Word",
+              detail: "Find your very first word.",
+              icon: "a.circle.fill"),
+        Badge(id: "Lab Starter",
+              title: "Lab Starter",
               detail: "Complete your first level.",
-              icon: "figure.walk"),
+              icon: "flask.fill"),
         Badge(id: "Halfway There",
               title: "Halfway There",
               detail: "Complete 3 levels.",
               icon: "flag.checkered"),
-        Badge(id: "CS Graduate",
-              title: "CS Graduate",
-              detail: "Complete all levels in Computer Engineering.",
+        Badge(id: "Perfect Lab",
+              title: "Perfect Lab",
+              detail: "Finish a level with no wrong guesses.",
+              icon: "star.circle.fill"),
+        Badge(id: "3-Day Streak",
+              title: "3-Day Streak",
+              detail: "Play 3 days in a row.",
+              icon: "flame.fill"),
+        Badge(id: "Major Master",
+              title: "Major Master",
+              detail: "Complete every level in a major.",
               icon: "graduationcap.fill")
     ]
 }
 
 struct AchievementsView: View {
     @Query private var progressList: [PlayerProgress]
-    private var earned: Set<String> { Set(progressList.first?.earnedBadges ?? []) }
+    private var progress: PlayerProgress? { progressList.first }
+    private var earned: Set<String> { Set(progress?.earnedBadges ?? []) }
+
+    private let columns = [
+        GridItem(.flexible(), spacing: 14),
+        GridItem(.flexible(), spacing: 14)
+    ]
 
     var body: some View {
-        List {
-            ForEach(Badge.all) { badge in
-                let unlocked = earned.contains(badge.id)
-                HStack(spacing: 16) {
-                    Image(systemName: unlocked ? badge.icon : "lock.fill")
-                        .font(.title2)
-                        .foregroundStyle(unlocked ? Color.accentColor : .secondary)
-                        .frame(width: 44, height: 44)
-                        .background(
-                            Circle().fill(unlocked ? Color.accentColor.opacity(0.15)
-                                                   : Color(.tertiarySystemBackground))
-                        )
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 18) {
+                header
+                    .padding(.horizontal)
+                    .padding(.top, 12)
 
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(badge.title).font(.headline)
-                        Text(badge.detail).font(.caption).foregroundStyle(.secondary)
+                LazyVGrid(columns: columns, spacing: 14) {
+                    ForEach(Badge.all) { badge in
+                        BadgeTile(badge: badge, unlocked: earned.contains(badge.id))
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 24)
+            }
+        }
+        .background(LinearGradient.pageBackground.ignoresSafeArea())
+        .navigationTitle("Awards")
+        .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(.light)
+    }
+
+    private var header: some View {
+        let total = Badge.all.count
+        let count = earned.count
+        let streak = progress?.currentStreak ?? 0
+
+        return GlassCard(cornerRadius: AppRadius.largeCard) {
+            VStack(spacing: 14) {
+                HStack(spacing: 14) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: AppRadius.icon)
+                            .fill(LinearGradient.brand)
+                            .frame(width: 56, height: 56)
+                        Image(systemName: "rosette")
+                            .font(.title2.bold())
+                            .foregroundStyle(.white)
+                    }
+
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("\(count) / \(total) badges earned")
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(AppColor.ink)
+                        Text(streak > 0 ? "🔥 \(streak)-day streak" : "Play daily to build a streak")
+                            .font(.caption)
+                            .foregroundStyle(AppColor.inkSecondary)
                     }
 
                     Spacer()
-
-                    if unlocked {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                    }
                 }
-                .padding(.vertical, 4)
-                .opacity(unlocked ? 1 : 0.6)
+
+                ProgressView(value: total > 0 ? Double(count) / Double(total) : 0)
+                    .tint(AppColor.primary)
+            }
+            .padding()
+        }
+    }
+}
+
+private struct BadgeTile: View {
+    let badge: Badge
+    let unlocked: Bool
+
+    var body: some View {
+        VStack(spacing: 10) {
+            ZStack {
+                Circle()
+                    .fill(unlocked ? AppColor.primary.opacity(0.16) : AppColor.locked.opacity(0.18))
+                    .frame(width: 64, height: 64)
+                Image(systemName: unlocked ? badge.icon : "lock.fill")
+                    .font(.title2.bold())
+                    .foregroundStyle(unlocked ? AppColor.primary : AppColor.locked)
+            }
+
+            Text(badge.title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(AppColor.ink)
+                .multilineTextAlignment(.center)
+
+            Text(badge.detail)
+                .font(.caption2)
+                .foregroundStyle(AppColor.inkSecondary)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+
+            if unlocked {
+                Label("Earned", systemImage: "checkmark.seal.fill")
+                    .font(.caption2.bold())
+                    .foregroundStyle(AppColor.success)
+            } else {
+                Text("Locked")
+                    .font(.caption2.bold())
+                    .foregroundStyle(AppColor.locked)
             }
         }
-        .navigationTitle("Achievements")
-        .navigationBarTitleDisplayMode(.inline)
+        .frame(maxWidth: .infinity)
+        .frame(minHeight: 180)
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: AppRadius.card)
+                .fill(Color.white.opacity(unlocked ? 0.92 : 0.62))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.card)
+                .strokeBorder(
+                    unlocked ? AppColor.primary.opacity(0.20) : AppColor.locked.opacity(0.18),
+                    lineWidth: 1
+                )
+        )
+        .shadow(color: .black.opacity(unlocked ? 0.07 : 0.03), radius: 8, y: 3)
+        .opacity(unlocked ? 1 : 0.85)
     }
 }
 

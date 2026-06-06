@@ -64,7 +64,11 @@ struct LevelView: View {
         }
         .sheet(isPresented: $showDefinition) {
             if let word = model.lastFoundWord {
-                DefinitionCard(word: word) {
+                DefinitionCard(
+                    word: word,
+                    foundCount: model.foundCount + 1,
+                    totalWords: level.words.count
+                ) {
                     showDefinition = false
                     model.advance()
                 }
@@ -147,6 +151,7 @@ struct LevelView: View {
     private func handleGuess(_ guess: String) {
         preview = ""
         if model.submit(guess: guess) {
+            PlayerProgress.current(in: modelContext).registerWordFound()
             triggerSuccessFeedback(for: guess)
         } else if !guess.isEmpty {
             withAnimation(.default) { wrongShake += 1 }
@@ -201,7 +206,8 @@ struct LevelView: View {
         let progress = PlayerProgress.current(in: modelContext)
         reward = progress.recordCompletion(levelTitle: level.title,
                                            wordCount: level.words.count,
-                                           totalLevels: totalLevels)
+                                           totalLevels: totalLevels,
+                                           perfect: model.mistakeCount == 0)
     }
 
     // MARK: - Level complete
@@ -319,41 +325,81 @@ struct LevelView: View {
     }
 }
 
-/// Prominent card shown after a word is found, with its meaning.
+/// Prominent card shown after a word is found, with its meaning plus a
+/// reward header and progress so finding a word feels rewarding.
 struct DefinitionCard: View {
     let word: WordItem
+    var foundCount: Int = 1
+    var totalWords: Int = 1
     let onContinue: () -> Void
+
+    private var remaining: Int { max(totalWords - foundCount, 0) }
 
     var body: some View {
         VStack(spacing: 16) {
-            VStack(spacing: 14) {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.green)
+            VStack(spacing: 12) {
+                // Reward header
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title2)
+                    Text("Correct!")
+                        .font(.title2.bold())
+                    Text("+10 XP")
+                        .font(.subheadline.bold())
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(.white.opacity(0.25), in: Capsule())
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(
+                    LinearGradient(colors: [AppColor.success, AppColor.primary],
+                                   startPoint: .leading, endPoint: .trailing),
+                    in: RoundedRectangle(cornerRadius: AppRadius.icon)
+                )
+
                 Text(word.displayName)
                     .font(.title.bold())
+                    .foregroundStyle(AppColor.ink)
                 Text(word.definition)
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppColor.inkSecondary)
+
+                // Progress row
+                VStack(spacing: 6) {
+                    HStack {
+                        Label("Progress \(foundCount)/\(totalWords) words", systemImage: "checklist")
+                            .font(.caption.bold())
+                            .foregroundStyle(AppColor.ink)
+                        Spacer()
+                        Text(remaining > 0 ? "\(remaining) to go" : "Level cleared!")
+                            .font(.caption.bold())
+                            .foregroundStyle(AppColor.secondary)
+                    }
+                    ProgressView(value: Double(foundCount), total: Double(max(totalWords, 1)))
+                        .tint(AppColor.success)
+                }
+                .padding(.top, 4)
             }
-            .padding(24)
+            .padding(20)
             .frame(maxWidth: .infinity)
             .background(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: AppRadius.card)
                     .fill(Color(.secondarySystemBackground))
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .strokeBorder(Color.accentColor.opacity(0.3), lineWidth: 1)
+                RoundedRectangle(cornerRadius: AppRadius.card)
+                    .strokeBorder(AppColor.success.opacity(0.3), lineWidth: 1)
             )
             .shadow(color: .black.opacity(0.12), radius: 12, y: 4)
 
             Button(action: onContinue) {
-                Text("Got it")
+                Text(remaining > 0 ? "Next Word" : "Finish Level")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(.tint, in: RoundedRectangle(cornerRadius: 14))
+                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                     .foregroundStyle(.white)
             }
         }

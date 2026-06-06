@@ -11,12 +11,14 @@ import SwiftUI
 import SwiftData
 
 struct MainMenuView: View {
+    @Environment(ContentStore.self) private var store
     @Query private var progressList: [PlayerProgress]
     private var totalXP: Int { progressList.first?.totalXP ?? 0 }
     private var badgeCount: Int { progressList.first?.earnedBadges.count ?? 0 }
+    private var hasProgress: Bool { (progressList.first?.completedLevels.isEmpty == false) }
 
     // Deep indigo used for readable text on the light background.
-    private let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
+    private let ink = AppColor.ink
 
     var body: some View {
         NavigationStack {
@@ -26,7 +28,7 @@ struct MainMenuView: View {
                 VStack(spacing: 22) {
                     Spacer(minLength: 8)
                     logo
-                    rankCard
+                    campusIDCard
                     Spacer()
                     buttons
                     Spacer(minLength: 8)
@@ -58,58 +60,112 @@ struct MainMenuView: View {
                     .foregroundStyle(.white)
             }
             Text("Campus Quest")
-                .font(.system(size: 40, weight: .heavy, design: .rounded))
+                .font(.system(size: 38, weight: .heavy, design: .rounded))
                 .foregroundStyle(ink)
-            Text("Find the words. Build your major.")
-                .font(.footnote)
-                .foregroundStyle(ink.opacity(0.6))
+            Text("Find words. Build your future.")
+                .font(.subheadline)
+                .foregroundStyle(AppColor.inkSecondary)
         }
     }
 
-    // MARK: - Rank card
+    // MARK: - Campus ID card
 
-    private var rankCard: some View {
+    private var campusIDCard: some View {
         let rank = RankSystem.progress(forXP: totalXP)
-        return VStack(spacing: 12) {
-            HStack(spacing: 14) {
-                ZStack {
-                    Circle().fill(Color.accentColor)
-                    Text("\(rank.level)")
-                        .font(.title3.bold())
-                        .foregroundStyle(.white)
-                }
-                .frame(width: 48, height: 48)
+        let major = store.department?.name ?? "Computer Engineering"
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Level \(rank.level) · \(rank.title)")
-                        .font(.headline)
-                        .foregroundStyle(ink)
-                    Text("\(rank.xp) XP")
-                        .font(.caption)
-                        .foregroundStyle(ink.opacity(0.6))
+        return VStack(spacing: 0) {
+            // Card header strip: title + decorative dot pattern.
+            HStack {
+                HStack(spacing: 8) {
+                    Image(systemName: "graduationcap.fill")
+                        .font(.subheadline.bold())
+                    Text("CAMPUS ID CARD")
+                        .font(.caption.bold())
+                        .tracking(1.5)
                 }
+                .foregroundStyle(.white)
 
                 Spacer()
 
-                Label("\(badgeCount)", systemImage: "rosette")
-                    .font(.subheadline.bold())
-                    .foregroundStyle(ink)
+                DotPattern(columns: 6, rows: 3)
+                    .frame(height: 24)
             }
+            .padding(.horizontal, 18)
+            .padding(.vertical, 14)
+            .background(LinearGradient.brand)
 
-            VStack(spacing: 4) {
-                ProgressView(value: rank.fraction)
-                    .tint(Color.accentColor)
-                Text(rank.nextTitle != nil
-                     ? "\(rank.percent)% to \(rank.nextTitle!)"
-                     : "Max rank reached")
-                    .font(.caption2)
-                    .foregroundStyle(ink.opacity(0.6))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            // Card body: identity + XP bar.
+            VStack(spacing: 14) {
+                HStack(spacing: 14) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: AppRadius.icon)
+                            .fill(AppColor.primary.opacity(0.14))
+                            .frame(width: 56, height: 56)
+                        Image(systemName: "person.fill")
+                            .font(.title2.bold())
+                            .foregroundStyle(AppColor.primary)
+                    }
+
+                    VStack(alignment: .leading, spacing: 3) {
+                        idRow(label: "STUDENT", value: "Player")
+                        idRow(label: "MAJOR", value: major)
+                    }
+
+                    Spacer()
+
+                    VStack(alignment: .trailing, spacing: 3) {
+                        Text("LEVEL")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundStyle(AppColor.inkSecondary)
+                        Text(rank.title)
+                            .font(.subheadline.bold())
+                            .foregroundStyle(AppColor.ink)
+                        Label("\(badgeCount)/\(Badge.all.count)", systemImage: "rosette")
+                            .font(.caption2.bold())
+                            .foregroundStyle(AppColor.secondary)
+                    }
+                }
+
+                VStack(spacing: 5) {
+                    HStack {
+                        Text("\(rank.xp) XP")
+                            .font(.caption.bold())
+                            .foregroundStyle(AppColor.ink)
+                        Spacer()
+                        Text(rank.nextTitle != nil
+                             ? "\(rank.percent)% to \(rank.nextTitle!) Rank"
+                             : "Max rank reached")
+                            .font(.caption2.bold())
+                            .foregroundStyle(AppColor.inkSecondary)
+                    }
+                    ProgressView(value: rank.fraction)
+                        .tint(AppColor.primary)
+                }
             }
+            .padding(18)
+            .background(Color.white.opacity(0.92))
         }
-        .padding()
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.08), radius: 12, y: 4)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.largeCard))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.largeCard)
+                .strokeBorder(Color.white.opacity(0.6), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.12), radius: 16, y: 7)
+    }
+
+    private func idRow(label: String, value: String) -> some View {
+        HStack(spacing: 6) {
+            Text(label)
+                .font(.system(size: 9, weight: .bold))
+                .foregroundStyle(AppColor.inkSecondary)
+                .frame(width: 52, alignment: .leading)
+            Text(value)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(AppColor.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
     }
 
     // MARK: - Buttons
@@ -119,13 +175,14 @@ struct MainMenuView: View {
             NavigationLink {
                 MajorSelectView()
             } label: {
-                Text("Play")
+                Label(hasProgress ? "Continue Quest" : "Start Quest",
+                      systemImage: hasProgress ? "arrow.right.circle.fill" : "play.fill")
                     .font(.title3.bold())
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(.tint, in: RoundedRectangle(cornerRadius: 16))
+                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                     .foregroundStyle(.white)
-                    .shadow(color: Color.accentColor.opacity(0.35), radius: 10, y: 5)
+                    .shadow(color: AppColor.primary.opacity(0.35), radius: 10, y: 5)
             }
 
             HStack(spacing: 12) {

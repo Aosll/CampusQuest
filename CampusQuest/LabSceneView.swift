@@ -26,7 +26,7 @@ struct LabSceneView: View {
                     .font(.subheadline.bold())
                     .foregroundStyle(theme.ink)
                 Spacer()
-                Text("\(foundCount)/\(totalWords) online")
+                Text("\(foundCount)/\(totalWords) completed")
                     .font(.caption.bold())
                     .foregroundStyle(theme.ink.opacity(0.55))
             }

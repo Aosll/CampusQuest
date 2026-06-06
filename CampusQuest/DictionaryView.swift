@@ -160,6 +160,8 @@ struct DictionaryView: View {
 private struct LearnedLevelSection: View {
     let level: GameLevel
 
+    @State private var selectedWord: WordItem?
+
     private let columns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12)
@@ -191,17 +193,31 @@ private struct LearnedLevelSection: View {
 
             LazyVGrid(columns: columns, spacing: 12) {
                 ForEach(level.words) { word in
-                    WordCollectionCard(
-                        word: word,
-                        accent: accent(for: level.title),
-                        icon: wordIcon(for: word.category, fallback: icon(for: level.title))
-                    )
+                    Button {
+                        selectedWord = word
+                    } label: {
+                        WordCollectionCard(
+                            word: word,
+                            accent: accent(for: level.title),
+                            icon: wordIcon(for: word.category, fallback: icon(for: level.title))
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
         .padding()
         .background(Color.white.opacity(0.90), in: RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+        .sheet(item: $selectedWord) { word in
+            WordDetailSheet(
+                word: word,
+                levelTitle: level.title,
+                accent: accent(for: level.title),
+                icon: wordIcon(for: word.category, fallback: icon(for: level.title))
+            )
+            .presentationDetents([.medium])
+        }
     }
 
     private func accent(for title: String) -> Color {
@@ -332,6 +348,79 @@ private struct WordCollectionCard: View {
                 .strokeBorder(accent.opacity(0.14), lineWidth: 1)
         )
         .shadow(color: accent.opacity(0.08), radius: 7, y: 3)
+    }
+}
+
+// MARK: - Word detail sheet
+
+private struct WordDetailSheet: View {
+    let word: WordItem
+    let levelTitle: String
+    let accent: Color
+    let icon: String
+
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 18) {
+                HStack(spacing: 14) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: AppRadius.icon)
+                            .fill(accent.opacity(0.16))
+                            .frame(width: 60, height: 60)
+                        Image(systemName: icon)
+                            .font(.title2.bold())
+                            .foregroundStyle(accent)
+                    }
+
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(word.displayName)
+                            .font(.title2.bold())
+                            .foregroundStyle(AppColor.ink)
+                        Text(word.category)
+                            .font(.caption.bold())
+                            .foregroundStyle(accent)
+                    }
+
+                    Spacer()
+
+                    Label("Mastered", systemImage: "checkmark.seal.fill")
+                        .font(.caption2.bold())
+                        .foregroundStyle(AppColor.success)
+                }
+
+                detailBlock(title: "Definition", icon: "text.book.closed", body: word.definition)
+
+                detailBlock(title: "Used in", icon: "mappin.and.ellipse", body: levelTitle)
+
+                Button { dismiss() } label: {
+                    Text("Done")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
+                        .foregroundStyle(.white)
+                }
+                .padding(.top, 4)
+            }
+            .padding(20)
+        }
+    }
+
+    private func detailBlock(title: String, icon: String, body: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label(title, systemImage: icon)
+                .font(.caption.bold())
+                .foregroundStyle(AppColor.inkSecondary)
+            Text(body)
+                .font(.subheadline)
+                .foregroundStyle(AppColor.ink)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(14)
+        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: AppRadius.icon))
     }
 }
 

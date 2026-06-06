@@ -24,6 +24,11 @@ final class LevelGameModel {
     private(set) var lastFoundWord: WordItem?
     /// The shuffled letters for the current word.
     private(set) var tiles: [LetterTile] = []
+    /// Number of wrong guesses this run (0 = a perfect level).
+    private(set) var mistakeCount = 0
+
+    /// How many words have been found so far.
+    var foundCount: Int { currentIndex }
 
     init(level: GameLevel) {
         self.level = level
@@ -69,6 +74,7 @@ final class LevelGameModel {
             lastFoundWord = word
             return true
         }
+        if !guess.isEmpty { mistakeCount += 1 }
         return false
     }
 

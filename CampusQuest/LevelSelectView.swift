@@ -37,7 +37,10 @@ struct LevelSelectView: View {
 
                         VStack(spacing: 0) {
                             if index > 0 {
-                                LevelPathConnector(isActive: isUnlocked(index: index))
+                                LevelPathConnector(
+                                    isActive: isUnlocked(index: index),
+                                    curveToRight: !index.isMultiple(of: 2)
+                                )
                             }
 
                             if unlocked {
@@ -51,6 +54,7 @@ struct LevelSelectView: View {
                                     LevelRoomCard(
                                         number: index + 1,
                                         level: level,
+                                        roomName: roomName(for: level.title),
                                         icon: roomIcon(for: level.title),
                                         state: state,
                                         alignment: index.isMultiple(of: 2) ? .leading : .trailing
@@ -61,6 +65,7 @@ struct LevelSelectView: View {
                                 LevelRoomCard(
                                     number: index + 1,
                                     level: level,
+                                    roomName: roomName(for: level.title),
                                     icon: roomIcon(for: level.title),
                                     state: state,
                                     alignment: index.isMultiple(of: 2) ? .leading : .trailing
@@ -94,6 +99,19 @@ struct LevelSelectView: View {
         if index == 0 { return true }
         let previous = department.levels[index - 1]
         return progress?.isCompleted(previous.title) ?? false
+    }
+
+    /// A campus-flavored "room" name for each course, so the map reads
+    /// like a journey through buildings rather than a plain course list.
+    private func roomName(for title: String) -> String {
+        switch title {
+        case "Programming Fundamentals": return "Programming Lab"
+        case "Data Structures":          return "Data Structures Lab"
+        case "Computer Networks":        return "Network Room"
+        case "Databases":                return "Database Archive"
+        case "Cybersecurity":            return "Security Operations Center"
+        default:                         return title
+        }
     }
 
     private func roomIcon(for title: String) -> String {
@@ -193,29 +211,57 @@ enum RoomState {
     case locked
 }
 
+/// A winding "campus path" between two rooms. It swings toward the side
+/// the next card sits on, drawn as a dashed curve with a walking marker.
 private struct LevelPathConnector: View {
     let isActive: Bool
+    /// True when the path should curve toward the trailing (right) side.
+    var curveToRight: Bool = true
 
     var body: some View {
-        VStack(spacing: 4) {
-            ForEach(0..<4, id: \.self) { _ in
-                Circle()
-                    .fill(isActive ? Color.accentColor.opacity(0.55) : Color.secondary.opacity(0.22))
-                    .frame(width: 7, height: 7)
+        GeometryReader { geo in
+            let w = geo.size.width
+            let h = geo.size.height
+            let startX = curveToRight ? w * 0.35 : w * 0.65
+            let endX = curveToRight ? w * 0.65 : w * 0.35
+            let ctrlX = curveToRight ? w * 0.85 : w * 0.15
+
+            let path = Path { p in
+                p.move(to: CGPoint(x: startX, y: 0))
+                p.addQuadCurve(
+                    to: CGPoint(x: endX, y: h),
+                    control: CGPoint(x: ctrlX, y: h * 0.5)
+                )
+            }
+
+            ZStack {
+                path.stroke(
+                    isActive ? Color.accentColor.opacity(0.55) : Color.secondary.opacity(0.25),
+                    style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [2, 7])
+                )
+
+                Image(systemName: isActive ? "figure.walk" : "lock.fill")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(isActive ? Color.accentColor : Color.secondary.opacity(0.45))
+                    .padding(5)
+                    .background(.white.opacity(0.9), in: Circle())
+                    .shadow(color: .black.opacity(0.08), radius: 3, y: 1)
+                    .position(x: ctrlX, y: h * 0.5)
             }
         }
-        .frame(height: 36)
+        .frame(height: 46)
     }
 }
 
 private struct LevelRoomCard: View {
     let number: Int
     let level: GameLevel
+    let roomName: String
     let icon: String
     let state: RoomState
     let alignment: HorizontalAlignment
 
-    private let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
+    private let ink = AppColor.ink
 
     var body: some View {
         HStack {
@@ -235,14 +281,16 @@ private struct LevelRoomCard: View {
                         statusPill
                     }
 
-                    Text(level.title)
-                        .font(.headline)
+                    Text(roomName)
+                        .font(AppFont.cardTitle)
                         .foregroundStyle(state == .locked ? ink.opacity(0.45) : ink)
                         .lineLimit(2)
+                        .minimumScaleFactor(0.8)
 
-                    Text("\(level.words.count) words")
+                    Text("\(level.title) · \(level.words.count) words")
                         .font(.caption)
                         .foregroundStyle(ink.opacity(0.55))
+                        .lineLimit(1)
                 }
 
                 Spacer(minLength: 8)
@@ -264,6 +312,7 @@ private struct LevelRoomCard: View {
                 y: state == .available ? 6 : 3
             )
             .opacity(state == .locked ? 0.62 : 1)
+            .blur(radius: state == .locked ? 0.8 : 0)
             .scaleEffect(state == .available ? 1.015 : 1)
 
             if alignment == .leading {
@@ -294,8 +343,9 @@ private struct LevelRoomCard: View {
 
     private var statusPill: some View {
         Text(statusText)
-            .font(.caption2.bold())
-            .padding(.horizontal, 8)
+            .font(AppFont.tag)
+            .tracking(0.8)
+            .padding(.horizontal, 9)
             .padding(.vertical, 4)
             .foregroundStyle(statusColor)
             .background(statusColor.opacity(0.12), in: Capsule())
