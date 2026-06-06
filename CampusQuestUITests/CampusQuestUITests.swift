@@ -23,14 +23,54 @@ final class CampusQuestUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testQuizDoneReturnsToMainMenu() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        let categories = ["Programming Fundamentals", "Data Structures",
+                          "Computer Networks", "Databases", "Cybersecurity"]
+
+        // Open the quiz from the home screen.
+        XCTAssertTrue(app.buttons["Quiz"].waitForExistence(timeout: 5))
+        app.buttons["Quiz"].tap()
+
+        // Play through every question, always picking the first available option.
+        for _ in 0..<12 {
+            // If we've reached the results, stop.
+            if app.buttons["Done"].exists { break }
+
+            // Tap the first visible answer option.
+            var tappedAnswer = false
+            for category in categories {
+                let option = app.buttons.containing(
+                    NSPredicate(format: "label CONTAINS[c] %@", category)
+                ).firstMatch
+                if option.exists && option.isHittable {
+                    option.tap()
+                    tappedAnswer = true
+                    break
+                }
+            }
+
+            // Advance to the next question / results.
+            let next = app.buttons["Next Question"].exists
+                ? app.buttons["Next Question"]
+                : app.buttons["See Results"]
+            if next.waitForExistence(timeout: 3) {
+                next.tap()
+            } else if !tappedAnswer {
+                break
+            }
+        }
+
+        // On the results screen, tap Done.
+        XCTAssertTrue(app.buttons["Done"].waitForExistence(timeout: 5),
+                      "Results screen with Done button should appear")
+        app.buttons["Done"].tap()
+
+        // We should be back on the main menu (its Quiz tile is visible again).
+        XCTAssertTrue(app.buttons["Quiz"].waitForExistence(timeout: 5),
+                      "Tapping Done should return to the main menu")
     }
 
     @MainActor
