@@ -63,6 +63,18 @@ extension PlayerProgress {
         return wordsFound
     }
 
+    /// Records a finished quiz: awards 10 XP per correct answer, updates the
+    /// day streak, and re-evaluates streak badges. Returns the XP gained.
+    @discardableResult
+    func recordQuizFinished(correctCount: Int) -> Int {
+        registerActivityToday()
+        let xp = correctCount * 10
+        totalXP += xp
+        // Re-evaluate badges; Int.max guards against awarding "Major Master".
+        _ = awardBadges(totalLevels: Int.max)
+        return xp
+    }
+
     /// Records a level completion. `perfect` means no wrong guesses.
     /// Returns the reward the FIRST time only; returns nil if the level was
     /// already completed before (no double XP), though badges may still be

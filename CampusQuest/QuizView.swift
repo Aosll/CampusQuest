@@ -2,37 +2,50 @@
 //  QuizView.swift
 //  CampusQuest
 //
-//  Step 7 UI upgrade: gamified quiz with card animations, combo counter,
-//  correct/wrong feedback effects, and weak-topic analysis on results.
+//  "Soft Campus Quiz" — a gamified term-classification challenge styled to
+//  match the home and level screens: gradient background, a glass question
+//  card, a highlighted term chip, A/B/C/D answer cards with subject icons,
+//  a hint, XP/streak chips, and a rewarding correct/wrong feedback card.
 //
 
 import SwiftUI
+import SwiftData
 
 struct QuizView: View {
     @Environment(ContentStore.self) private var store
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Query private var progressList: [PlayerProgress]
 
     @State private var model: QuizSessionModel?
     @State private var cardShake: [String: Int] = [:]
     @State private var correctGlow: String? = nil
     @State private var combo = 0
-    @State private var showCombo = false
+    @State private var showHint = false
+    @State private var sessionXP = 0
+    @State private var didPersist = false
+
+    private var baseXP: Int { progressList.first?.totalXP ?? 0 }
 
     var body: some View {
-        Group {
-            if let model {
-                if model.isFinished {
-                    resultView(model)
-                } else if let question = model.currentQuestion {
-                    questionView(model, question)
+        ZStack {
+            QuizBackground().ignoresSafeArea()
+
+            Group {
+                if let model {
+                    if model.isFinished {
+                        resultView(model)
+                    } else if let question = model.currentQuestion {
+                        questionView(model, question)
+                    }
+                } else {
+                    ProgressView()
                 }
-            } else {
-                ProgressView()
             }
         }
-        .padding()
-        .navigationTitle("Quiz")
+        .navigationTitle("Quiz Challenge")
         .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(.light)
         .onAppear {
             if model == nil {
                 model = QuizSessionModel(allQuestions: store.quizQuestions)
@@ -43,110 +56,207 @@ struct QuizView: View {
     // MARK: - Question
 
     private func questionView(_ model: QuizSessionModel, _ question: QuizQuestion) -> some View {
-        VStack(spacing: 20) {
-            // Progress + Combo
-            VStack(spacing: 4) {
-                HStack {
-                    ProgressView(value: Double(model.index),
-                                 total: Double(max(model.questions.count, 1)))
+        VStack(spacing: 16) {
+            topBar(model)
 
-                    if combo >= 2 {
-                        ComboChip(count: combo)
-                            .transition(.scale.combined(with: .opacity))
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 16) {
+                    questionCard(model, question)
+
+                    answerList(model, question)
+
+                    if model.hasAnswered {
+                        feedbackSection(model, question)
                     }
                 }
-                Text(model.progressText)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            VStack(spacing: 8) {
-                Text("Which subject does this term belong to?")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                Text(question.word.displayName)
-                    .font(.largeTitle.bold())
-                    .multilineTextAlignment(.center)
-            }
-
-            Spacer()
-
-            VStack(spacing: 12) {
-                ForEach(question.options, id: \.self) { option in
-                    Button {
-                        handleAnswer(model: model, question: question, option: option)
-                    } label: {
-                        HStack {
-                            Text(option)
-                                .font(.headline)
-                                .multilineTextAlignment(.leading)
-                            Spacer()
-                            if model.hasAnswered {
-                                if option == question.correctAnswer {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .transition(.scale.combined(with: .opacity))
-                                } else if option == model.selectedAnswer {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .transition(.scale.combined(with: .opacity))
-                                }
-                            }
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(
-                            optionBackground(model, question, option),
-                            in: RoundedRectangle(cornerRadius: 14)
-                        )
-                        .foregroundStyle(optionForeground(model, question, option))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 14)
-                                .strokeBorder(optionBorder(model, question, option), lineWidth: 1.5)
-                        )
-                        .shadow(
-                            color: optionShadow(model, question, option),
-                            radius: model.hasAnswered && option == question.correctAnswer ? 12 : 4,
-                            y: 4
-                        )
-                    }
-                    .disabled(model.hasAnswered)
-                    .modifier(ShakeEffect(animatableData: CGFloat(cardShake[option] ?? 0)))
-                    .scaleEffect(correctGlow == option ? 1.03 : 1.0)
-                    .animation(.spring(response: 0.35, dampingFraction: 0.65), value: correctGlow)
-                    .animation(.spring(response: 0.35, dampingFraction: 0.65), value: model.hasAnswered)
-                }
-            }
-
-            if model.hasAnswered {
-                let isCorrect = model.selectedAnswer == question.correctAnswer
-
-                AnswerFeedbackCard(
-                    isCorrect: isCorrect,
-                    correctAnswer: question.correctAnswer,
-                    explanation: question.word.definition
-                )
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-
-                Button {
-                    withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
-                        correctGlow = nil
-                        model.next()
-                    }
-                } label: {
-                    Text("Continue")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
-                        .foregroundStyle(.white)
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .padding(.horizontal)
+                .padding(.bottom, 16)
             }
         }
         .animation(.spring(response: 0.38, dampingFraction: 0.72), value: model.hasAnswered)
-        .animation(.spring(response: 0.38, dampingFraction: 0.72), value: combo)
+        .animation(.spring(response: 0.38, dampingFraction: 0.72), value: showHint)
+    }
+
+    // MARK: Top bar (progress + XP/streak)
+
+    private func topBar(_ model: QuizSessionModel) -> some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text("Question \(min(model.index + 1, model.questions.count)) of \(model.questions.count)")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(AppColor.ink)
+
+                Spacer()
+
+                HStack(spacing: 8) {
+                    if combo >= 2 {
+                        StatChip(icon: "flame.fill", text: "\(combo)", tint: AppColor.warning)
+                            .transition(.scale.combined(with: .opacity))
+                    }
+                    StatChip(icon: "star.fill", text: "\(baseXP + sessionXP)", tint: AppColor.secondary)
+                }
+            }
+
+            // Thicker, rounded blue progress bar.
+            GeometryReader { geo in
+                let fraction = model.questions.isEmpty
+                    ? 0
+                    : Double(model.index) / Double(model.questions.count)
+                ZStack(alignment: .leading) {
+                    Capsule().fill(AppColor.locked.opacity(0.25))
+                    Capsule()
+                        .fill(LinearGradient.brand)
+                        .frame(width: max(8, geo.size.width * fraction))
+                }
+            }
+            .frame(height: 10)
+
+            Text("+10 XP per correct answer")
+                .font(.caption2.bold())
+                .foregroundStyle(AppColor.inkSecondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: combo)
+    }
+
+    // MARK: Question card
+
+    private func questionCard(_ model: QuizSessionModel, _ question: QuizQuestion) -> some View {
+        GlassCard(cornerRadius: AppRadius.largeCard) {
+            VStack(spacing: 14) {
+                HStack(spacing: 8) {
+                    Image(systemName: "text.magnifyingglass")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(AppColor.primary)
+                    Text("Classify the Term")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(AppColor.ink)
+                    Spacer()
+                }
+
+                Text("Which course does this word belong to?")
+                    .font(.callout)
+                    .foregroundStyle(AppColor.inkSecondary)
+                    .multilineTextAlignment(.center)
+
+                // Highlighted term chip.
+                VStack(spacing: 4) {
+                    Text(question.word.displayName)
+                        .font(.system(size: 30, weight: .heavy, design: .rounded))
+                        .foregroundStyle(AppColor.ink)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                        .background(
+                            Capsule().fill(
+                                LinearGradient(
+                                    colors: [AppColor.primary.opacity(0.18), AppColor.secondary.opacity(0.18)],
+                                    startPoint: .leading, endPoint: .trailing
+                                )
+                            )
+                        )
+                        .overlay(Capsule().strokeBorder(AppColor.primary.opacity(0.25), lineWidth: 1))
+                        .shadow(color: AppColor.primary.opacity(0.18), radius: 10, y: 4)
+
+                    Text("Term to classify")
+                        .font(.caption2)
+                        .foregroundStyle(AppColor.inkSecondary)
+                }
+
+                // Hint.
+                if showHint {
+                    HStack(alignment: .top, spacing: 8) {
+                        Image(systemName: "lightbulb.fill")
+                            .foregroundStyle(AppColor.warning)
+                        Text(question.word.definition)
+                            .font(.caption)
+                            .foregroundStyle(AppColor.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                    }
+                    .padding(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(AppColor.warning.opacity(0.12), in: RoundedRectangle(cornerRadius: AppRadius.icon))
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                } else if !model.hasAnswered {
+                    Button {
+                        withAnimation { showHint = true }
+                    } label: {
+                        Label("Hint", systemImage: "lightbulb")
+                            .font(.caption.bold())
+                            .foregroundStyle(AppColor.primary)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 7)
+                            .background(AppColor.primary.opacity(0.10), in: Capsule())
+                    }
+                }
+            }
+            .padding(18)
+        }
+    }
+
+    // MARK: Answer cards
+
+    private func answerList(_ model: QuizSessionModel, _ question: QuizQuestion) -> some View {
+        VStack(spacing: 12) {
+            ForEach(Array(question.options.enumerated()), id: \.element) { idx, option in
+                Button {
+                    handleAnswer(model: model, question: question, option: option)
+                } label: {
+                    AnswerCard(
+                        letter: String(UnicodeScalar(65 + idx)!),  // A, B, C, D
+                        title: option,
+                        icon: categoryIcon(option),
+                        state: cardState(model, question, option)
+                    )
+                }
+                .disabled(model.hasAnswered)
+                .buttonStyle(.plain)
+                .modifier(ShakeEffect(animatableData: CGFloat(cardShake[option] ?? 0)))
+                .scaleEffect(correctGlow == option ? 1.03 : 1.0)
+                .animation(.spring(response: 0.35, dampingFraction: 0.65), value: correctGlow)
+                .animation(.spring(response: 0.35, dampingFraction: 0.65), value: model.hasAnswered)
+            }
+        }
+    }
+
+    private func cardState(_ model: QuizSessionModel, _ question: QuizQuestion, _ option: String) -> AnswerCard.State {
+        guard model.hasAnswered else { return .normal }
+        if option == question.correctAnswer { return .correct }
+        if option == model.selectedAnswer { return .wrong }
+        return .dimmed
+    }
+
+    // MARK: Feedback
+
+    private func feedbackSection(_ model: QuizSessionModel, _ question: QuizQuestion) -> some View {
+        let isCorrect = model.selectedAnswer == question.correctAnswer
+        return VStack(spacing: 12) {
+            AnswerFeedbackCard(
+                isCorrect: isCorrect,
+                word: question.word.displayName,
+                correctAnswer: question.correctAnswer,
+                explanation: question.word.definition
+            )
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+
+            Button {
+                withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                    correctGlow = nil
+                    showHint = false
+                    model.next()
+                }
+            } label: {
+                Text(model.index + 1 >= model.questions.count ? "See Results" : "Next Question")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
+                    .foregroundStyle(.white)
+            }
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+        }
     }
 
     private func handleAnswer(model: QuizSessionModel, question: QuizQuestion, option: String) {
@@ -155,48 +265,14 @@ struct QuizView: View {
 
         if isCorrect {
             combo += 1
+            sessionXP += 10
             correctGlow = option
-            withAnimation(.spring(response: 0.28, dampingFraction: 0.60)) {
-                showCombo = combo >= 2
-            }
             UINotificationFeedbackGenerator().notificationOccurred(.success)
         } else {
             combo = 0
-            showCombo = false
             cardShake[option, default: 0] += 1
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
-    }
-
-    private func optionBackground(_ model: QuizSessionModel, _ question: QuizQuestion, _ option: String) -> Color {
-        guard model.hasAnswered else { return Color(.secondarySystemBackground) }
-        if option == question.correctAnswer {
-            return Color.green
-        }
-        if option == model.selectedAnswer {
-            return Color.red.opacity(0.82)
-        }
-        return Color(.secondarySystemBackground)
-    }
-
-    private func optionForeground(_ model: QuizSessionModel, _ question: QuizQuestion, _ option: String) -> Color {
-        guard model.hasAnswered else { return .primary }
-        if option == question.correctAnswer || option == model.selectedAnswer { return .white }
-        return .secondary
-    }
-
-    private func optionBorder(_ model: QuizSessionModel, _ question: QuizQuestion, _ option: String) -> Color {
-        guard model.hasAnswered else { return Color.secondary.opacity(0.20) }
-        if option == question.correctAnswer { return .green }
-        if option == model.selectedAnswer { return .red }
-        return Color.secondary.opacity(0.12)
-    }
-
-    private func optionShadow(_ model: QuizSessionModel, _ question: QuizQuestion, _ option: String) -> Color {
-        guard model.hasAnswered else { return .black.opacity(0.04) }
-        if option == question.correctAnswer { return .green.opacity(0.32) }
-        if option == model.selectedAnswer { return .red.opacity(0.22) }
-        return .black.opacity(0.04)
     }
 
     // MARK: - Result
@@ -208,15 +284,14 @@ struct QuizView: View {
 
         return ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
-                // Score circle
                 ZStack {
                     Circle()
-                        .stroke(Color.secondary.opacity(0.12), lineWidth: 10)
+                        .stroke(AppColor.locked.opacity(0.18), lineWidth: 10)
                         .frame(width: 130, height: 130)
                     Circle()
                         .trim(from: 0, to: CGFloat(pct) / 100.0)
                         .stroke(
-                            pct >= 70 ? Color.green : (pct >= 40 ? Color.accentColor : Color.red),
+                            pct >= 70 ? AppColor.success : (pct >= 40 ? AppColor.primary : Color.red),
                             style: StrokeStyle(lineWidth: 10, lineCap: .round)
                         )
                         .frame(width: 130, height: 130)
@@ -224,48 +299,39 @@ struct QuizView: View {
                     VStack(spacing: 2) {
                         Text("\(pct)%")
                             .font(.system(size: 34, weight: .heavy, design: .rounded))
+                            .foregroundStyle(AppColor.ink)
                         Text("score")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppColor.inkSecondary)
                     }
                 }
                 .padding(.top, 12)
 
                 Text("Quiz Complete!")
                     .font(.title.bold())
+                    .foregroundStyle(AppColor.ink)
 
-                Text("\(model.score) / \(model.questions.count) correct")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 10) {
+                    StatChip(icon: "checkmark.circle.fill", text: "\(model.score)/\(model.questions.count)", tint: AppColor.success)
+                    StatChip(icon: "star.fill", text: "+\(sessionXP) XP", tint: AppColor.secondary)
+                }
 
-                // Topic analysis
                 if !strongTopics.isEmpty || !weakTopics.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Performance Analysis")
                             .font(.headline)
+                            .foregroundStyle(AppColor.ink)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                        if !strongTopics.isEmpty {
-                            ForEach(strongTopics, id: \.self) { topic in
-                                TopicAnalysisRow(
-                                    icon: "checkmark.seal.fill",
-                                    label: "Strong in \(topic)",
-                                    color: .green
-                                )
-                            }
+                        ForEach(strongTopics, id: \.self) { topic in
+                            TopicAnalysisRow(icon: "checkmark.seal.fill", label: "Strong in \(topic)", color: AppColor.success)
                         }
-                        if !weakTopics.isEmpty {
-                            ForEach(weakTopics, id: \.self) { topic in
-                                TopicAnalysisRow(
-                                    icon: "arrow.clockwise.circle.fill",
-                                    label: "Review \(topic) again",
-                                    color: .orange
-                                )
-                            }
+                        ForEach(weakTopics, id: \.self) { topic in
+                            TopicAnalysisRow(icon: "arrow.clockwise.circle.fill", label: "Review \(topic) again", color: AppColor.warning)
                         }
                     }
                     .padding()
-                    .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 20))
+                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
                 }
 
                 Button {
@@ -275,51 +341,159 @@ struct QuizView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(.tint, in: RoundedRectangle(cornerRadius: 14))
+                        .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                         .foregroundStyle(.white)
                 }
                 .padding(.top, 4)
                 .padding(.bottom, 12)
             }
+            .padding(.horizontal)
+        }
+        .onAppear {
+            guard !didPersist else { return }
+            didPersist = true
+            PlayerProgress.current(in: modelContext).recordQuizFinished(correctCount: model.score)
         }
     }
 
     private func computeWeakTopics(_ model: QuizSessionModel) -> [String] {
         var wrong: [String: Int] = [:]
         var total: [String: Int] = [:]
-
         for (q, answered) in zip(model.questions, model.answers) {
             let cat = q.correctAnswer
             total[cat, default: 0] += 1
-            if answered != q.correctAnswer {
-                wrong[cat, default: 0] += 1
-            }
+            if answered != q.correctAnswer { wrong[cat, default: 0] += 1 }
         }
-
         return total.keys.filter { key in
-            let w = wrong[key] ?? 0
-            let t = total[key] ?? 1
-            return Double(w) / Double(t) >= 0.5
+            Double(wrong[key] ?? 0) / Double(total[key] ?? 1) >= 0.5
         }.sorted()
     }
 
     private func computeStrongTopics(_ model: QuizSessionModel) -> [String] {
         var correct: [String: Int] = [:]
         var total: [String: Int] = [:]
-
         for (q, answered) in zip(model.questions, model.answers) {
             let cat = q.correctAnswer
             total[cat, default: 0] += 1
-            if answered == q.correctAnswer {
-                correct[cat, default: 0] += 1
-            }
+            if answered == q.correctAnswer { correct[cat, default: 0] += 1 }
         }
-
         return total.keys.filter { key in
-            let c = correct[key] ?? 0
             let t = total[key] ?? 1
-            return t >= 2 && Double(c) / Double(t) >= 0.75
+            return t >= 2 && Double(correct[key] ?? 0) / Double(t) >= 0.75
         }.sorted()
+    }
+}
+
+// MARK: - Category icons
+
+/// Maps a course/category name to an SF Symbol for the answer cards.
+func categoryIcon(_ category: String) -> String {
+    let lower = category.lowercased()
+    if lower.contains("network") { return "network" }
+    if lower.contains("security") || lower.contains("cyber") { return "lock.shield" }
+    if lower.contains("structure") { return "square.stack.3d.up" }
+    if lower.contains("database") || lower.contains("sql") { return "server.rack" }
+    if lower.contains("program") || lower.contains("code") { return "chevron.left.forwardslash.chevron.right" }
+    return "graduationcap.fill"
+}
+
+// MARK: - Answer card
+
+private struct AnswerCard: View {
+    enum State { case normal, correct, wrong, dimmed }
+
+    let letter: String
+    let title: String
+    let icon: String
+    let state: State
+
+    var body: some View {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle().fill(badgeFill)
+                Text(letter)
+                    .font(.subheadline.bold())
+                    .foregroundStyle(badgeText)
+            }
+            .frame(width: 32, height: 32)
+
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(AppColor.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+
+            Spacer(minLength: 8)
+
+            Image(systemName: trailingIcon)
+                .font(.headline)
+                .foregroundStyle(accent)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(background, in: RoundedRectangle(cornerRadius: AppRadius.card))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.card)
+                .strokeBorder(border, lineWidth: 1.5)
+        )
+        .shadow(color: shadow, radius: state == .correct ? 12 : 5, y: 3)
+        .opacity(state == .dimmed ? 0.6 : 1)
+    }
+
+    private var trailingIcon: String {
+        switch state {
+        case .correct: return "checkmark.circle.fill"
+        case .wrong: return "xmark.circle.fill"
+        default: return icon
+        }
+    }
+
+    private var accent: Color {
+        switch state {
+        case .correct: return AppColor.success
+        case .wrong: return Color.red
+        default: return AppColor.primary
+        }
+    }
+
+    private var background: Color {
+        switch state {
+        case .normal, .dimmed: return Color.white.opacity(0.92)
+        case .correct: return AppColor.success.opacity(0.16)
+        case .wrong: return Color.red.opacity(0.12)
+        }
+    }
+
+    private var border: Color {
+        switch state {
+        case .normal, .dimmed: return AppColor.locked.opacity(0.22)
+        case .correct: return AppColor.success
+        case .wrong: return Color.red.opacity(0.8)
+        }
+    }
+
+    private var shadow: Color {
+        switch state {
+        case .correct: return AppColor.success.opacity(0.28)
+        case .wrong: return Color.red.opacity(0.18)
+        default: return .black.opacity(0.05)
+        }
+    }
+
+    private var badgeFill: Color {
+        switch state {
+        case .correct: return AppColor.success
+        case .wrong: return Color.red
+        default: return AppColor.primary.opacity(0.14)
+        }
+    }
+
+    private var badgeText: Color {
+        switch state {
+        case .correct, .wrong: return .white
+        default: return AppColor.primary
+        }
     }
 }
 
@@ -327,25 +501,34 @@ struct QuizView: View {
 
 private struct AnswerFeedbackCard: View {
     let isCorrect: Bool
+    let word: String
     let correctAnswer: String
     let explanation: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Image(systemName: isCorrect ? "checkmark.seal.fill" : "lightbulb.fill")
                     .foregroundStyle(isCorrect ? AppColor.success : AppColor.warning)
                 Text(isCorrect ? "Correct!" : "Not quite")
-                    .font(.subheadline.bold())
+                    .font(.headline)
                     .foregroundStyle(AppColor.ink)
                 Spacer()
+                if isCorrect {
+                    Text("+10 XP")
+                        .font(.caption.bold())
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(AppColor.success, in: Capsule())
+                }
             }
 
-            if !isCorrect {
-                Text("Correct answer: \(correctAnswer)")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppColor.ink)
-            }
+            Text(isCorrect
+                 ? "\(word) belongs to \(correctAnswer)."
+                 : "Correct answer: \(correctAnswer)")
+                .font(.subheadline.bold())
+                .foregroundStyle(AppColor.ink)
 
             Text(explanation)
                 .font(.caption)
@@ -356,43 +539,35 @@ private struct AnswerFeedbackCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             (isCorrect ? AppColor.success : AppColor.warning).opacity(0.12),
-            in: RoundedRectangle(cornerRadius: AppRadius.icon)
+            in: RoundedRectangle(cornerRadius: AppRadius.card)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: AppRadius.icon)
+            RoundedRectangle(cornerRadius: AppRadius.card)
                 .strokeBorder((isCorrect ? AppColor.success : AppColor.warning).opacity(0.3), lineWidth: 1)
         )
     }
 }
 
-// MARK: - Combo chip
+// MARK: - Small chips
 
-private struct ComboChip: View {
-    let count: Int
+private struct StatChip: View {
+    let icon: String
+    let text: String
+    let tint: Color
 
     var body: some View {
         HStack(spacing: 4) {
-            Image(systemName: "flame.fill")
-                .font(.caption.bold())
-            Text("\(count)x COMBO")
+            Image(systemName: icon)
+                .font(.caption2.bold())
+            Text(text)
                 .font(.caption.bold())
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(tint)
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
-        .background(
-            LinearGradient(
-                colors: [Color.orange, Color.red],
-                startPoint: .leading,
-                endPoint: .trailing
-            ),
-            in: Capsule()
-        )
-        .shadow(color: .orange.opacity(0.35), radius: 8, y: 3)
+        .background(tint.opacity(0.14), in: Capsule())
     }
 }
-
-// MARK: - Topic analysis row
 
 private struct TopicAnalysisRow: View {
     let icon: String
@@ -405,10 +580,45 @@ private struct TopicAnalysisRow: View {
                 .foregroundStyle(color)
             Text(label)
                 .font(.subheadline)
-                .foregroundStyle(.primary)
+                .foregroundStyle(AppColor.ink)
             Spacer()
         }
         .padding(.vertical, 4)
+    }
+}
+
+// MARK: - Background
+
+private struct QuizBackground: View {
+    var body: some View {
+        ZStack {
+            LinearGradient.pageBackground
+
+            Circle()
+                .fill(AppColor.primary.opacity(0.16))
+                .frame(width: 260, height: 260)
+                .blur(radius: 80)
+                .offset(x: 150, y: -260)
+            Circle()
+                .fill(AppColor.secondary.opacity(0.14))
+                .frame(width: 240, height: 240)
+                .blur(radius: 80)
+                .offset(x: -150, y: 320)
+
+            // Faint code symbols reinforcing the tech-campus identity.
+            faintSymbol("{ }", x: -130, y: -250, size: 40, rotation: -10)
+            faintSymbol("</>", x: 140, y: -180, size: 34, rotation: 8)
+            faintSymbol("01", x: -140, y: 300, size: 38, rotation: 6)
+            faintSymbol("#", x: 130, y: 340, size: 44, rotation: -8)
+        }
+    }
+
+    private func faintSymbol(_ text: String, x: CGFloat, y: CGFloat, size: CGFloat, rotation: Double) -> some View {
+        Text(text)
+            .font(.system(size: size, weight: .heavy, design: .monospaced))
+            .foregroundStyle(AppColor.primary.opacity(0.06))
+            .rotationEffect(.degrees(rotation))
+            .offset(x: x, y: y)
     }
 }
 
@@ -417,4 +627,5 @@ private struct TopicAnalysisRow: View {
         QuizView()
             .environment(ContentStore())
     }
+    .modelContainer(for: PlayerProgress.self, inMemory: true)
 }
