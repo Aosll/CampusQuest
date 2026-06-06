@@ -14,8 +14,10 @@ import UIKit
 struct LevelView: View {
     let level: GameLevel
     let totalLevels: Int
+    var nextLevel: GameLevel? = nil
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
 
     @State private var model: LevelGameModel
     @State private var preview = ""
@@ -26,10 +28,12 @@ struct LevelView: View {
     @State private var showWordFound = false
     @State private var foundWordText = ""
     @State private var successPulse = false
+    @State private var slotFlash = false
 
-    init(level: GameLevel, totalLevels: Int) {
+    init(level: GameLevel, totalLevels: Int, nextLevel: GameLevel? = nil) {
         self.level = level
         self.totalLevels = totalLevels
+        self.nextLevel = nextLevel
         _model = State(initialValue: LevelGameModel(level: level))
     }
 
@@ -119,22 +123,25 @@ struct LevelView: View {
         return HStack(spacing: 6) {
             ForEach(0..<word.word.count, id: \.self) { i in
                 let filled = i < chars.count
+                let flashColor: Color = slotFlash ? .green : (filled ? Color.accentColor : Color(.tertiarySystemBackground))
+                let borderColor: Color = slotFlash ? .green : (filled ? Color.accentColor : Color.secondary.opacity(0.4))
                 Text(filled ? String(chars[i]).uppercased() : "")
                     .font(.system(size: size * 0.5, weight: .bold))
                     .foregroundStyle(filled ? .white : .clear)
                     .frame(width: size, height: size + 8)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(filled ? Color.accentColor : Color(.tertiarySystemBackground))
+                            .fill(flashColor)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                            .strokeBorder(filled ? Color.accentColor
-                                                 : Color.secondary.opacity(0.4),
-                                          lineWidth: 1.5)
+                            .strokeBorder(borderColor, lineWidth: 1.5)
                     )
+                    .shadow(color: slotFlash ? .green.opacity(0.45) : .clear, radius: slotFlash ? 8 : 0)
+                    .scaleEffect(slotFlash ? 1.08 : 1.0)
             }
         }
+        .animation(.spring(response: 0.30, dampingFraction: 0.62), value: slotFlash)
     }
 
     private func handleGuess(_ guess: String) {
@@ -155,11 +162,18 @@ struct LevelView: View {
         withAnimation(.spring(response: 0.32, dampingFraction: 0.68)) {
             showWordFound = true
             successPulse = true
+            slotFlash = true
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
             withAnimation(.spring(response: 0.32, dampingFraction: 0.72)) {
                 successPulse = false
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) {
+            withAnimation(.spring(response: 0.38, dampingFraction: 0.72)) {
+                slotFlash = false
             }
         }
 
@@ -250,11 +264,56 @@ struct LevelView: View {
 
                 LearnedWordsPreview(words: level.words)
 
-                Text("Return to the campus map to continue your quest.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                // Action buttons
+                VStack(spacing: 10) {
+                    if let next = nextLevel {
+                        NavigationLink {
+                            LevelView(level: next, totalLevels: totalLevels)
+                        } label: {
+                            Label("Next Level", systemImage: "arrow.right.circle.fill")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 14))
+                                .foregroundStyle(.white)
+                        }
+                    }
+
+                    HStack(spacing: 10) {
+                        Button {
+                            model = LevelGameModel(level: level)
+                            didRecord = false
+                            reward = nil
+                        } label: {
+                            Label("Replay", systemImage: "arrow.clockwise")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+                                .foregroundStyle(.primary)
+                        }
+
+                        ShareLink(
+                            item: "I just completed \(level.title) on Campus Quest! 🎓 Found all \(level.words.count) words. #CampusQuest"
+                        ) {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+                                .foregroundStyle(.primary)
+                        }
+                    }
+
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Back to Map")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                     .padding(.bottom, 8)
+                }
             }
         }
     }

@@ -42,7 +42,11 @@ struct LevelSelectView: View {
 
                             if unlocked {
                                 NavigationLink {
-                                    LevelView(level: level, totalLevels: department.levels.count)
+                                    LevelView(
+                                        level: level,
+                                        totalLevels: department.levels.count,
+                                        nextLevel: index + 1 < department.levels.count ? department.levels[index + 1] : nil
+                                    )
                                 } label: {
                                     LevelRoomCard(
                                         number: index + 1,

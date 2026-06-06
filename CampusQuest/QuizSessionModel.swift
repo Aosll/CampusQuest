@@ -15,6 +15,7 @@ final class QuizSessionModel {
     private(set) var score = 0
     private(set) var selectedAnswer: String?
     private(set) var isFinished = false
+    private(set) var answers: [String] = []
 
     /// Picks up to `count` random questions from all available ones.
     init(allQuestions: [QuizQuestion], count: Int = 10) {
@@ -38,6 +39,7 @@ final class QuizSessionModel {
     func choose(_ option: String) {
         guard selectedAnswer == nil, let question = currentQuestion else { return }
         selectedAnswer = option
+        answers.append(option)
         if question.isCorrect(option) { score += 1 }
     }
 
