@@ -220,38 +220,23 @@ private struct LearnedLevelSection: View {
         }
     }
 
+    // Match by category prefix so numbered titles ("Databases 2") keep their color/icon.
     private func accent(for title: String) -> Color {
-        switch title {
-        case "Programming Fundamentals":
-            return Color(red: 0.16, green: 0.58, blue: 0.98)
-        case "Data Structures":
-            return Color(red: 0.42, green: 0.35, blue: 0.92)
-        case "Computer Networks":
-            return Color(red: 0.06, green: 0.68, blue: 0.64)
-        case "Databases":
-            return Color(red: 0.98, green: 0.56, blue: 0.18)
-        case "Cybersecurity":
-            return Color(red: 0.18, green: 0.76, blue: 0.34)
-        default:
-            return Color.accentColor
-        }
+        if title.hasPrefix("Programming Fundamentals") { return Color(red: 0.16, green: 0.58, blue: 0.98) }
+        if title.hasPrefix("Data Structures")          { return Color(red: 0.42, green: 0.35, blue: 0.92) }
+        if title.hasPrefix("Computer Networks")        { return Color(red: 0.06, green: 0.68, blue: 0.64) }
+        if title.hasPrefix("Databases")                { return Color(red: 0.98, green: 0.56, blue: 0.18) }
+        if title.hasPrefix("Cybersecurity")            { return Color(red: 0.18, green: 0.76, blue: 0.34) }
+        return Color.accentColor
     }
 
     private func icon(for title: String) -> String {
-        switch title {
-        case "Programming Fundamentals":
-            return "terminal.fill"
-        case "Data Structures":
-            return "square.stack.3d.up.fill"
-        case "Computer Networks":
-            return "network"
-        case "Databases":
-            return "cylinder.split.1x2.fill"
-        case "Cybersecurity":
-            return "lock.shield.fill"
-        default:
-            return "graduationcap.fill"
-        }
+        if title.hasPrefix("Programming Fundamentals") { return "terminal.fill" }
+        if title.hasPrefix("Data Structures")          { return "square.stack.3d.up.fill" }
+        if title.hasPrefix("Computer Networks")        { return "network" }
+        if title.hasPrefix("Databases")                { return "cylinder.split.1x2.fill" }
+        if title.hasPrefix("Cybersecurity")            { return "lock.shield.fill" }
+        return "graduationcap.fill"
     }
 
     private func wordIcon(for category: String, fallback: String) -> String {

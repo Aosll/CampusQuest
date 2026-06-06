@@ -2,78 +2,1279 @@
   "department": "Computer Engineering",
   "levels": [
     {
-      "title": "Programming Fundamentals",
+      "title": "Programming Fundamentals 1",
       "words": [
-        { "word": "variable", "definition": "A named container that stores a value which can change while a program runs.", "category": "Programming Fundamentals", "objectToUnlock": "code_editor" },
-        { "word": "function", "definition": "A reusable block of code that performs a specific task.", "category": "Programming Fundamentals", "objectToUnlock": "function_block" },
-        { "word": "loop", "definition": "A structure that repeats a block of code multiple times.", "category": "Programming Fundamentals", "objectToUnlock": "loop_animation" },
-        { "word": "array", "definition": "An ordered collection that stores multiple values in a single variable.", "category": "Programming Fundamentals", "objectToUnlock": "array_blocks" },
-        { "word": "condition", "definition": "A statement that runs code only when a given test is true.", "category": "Programming Fundamentals", "objectToUnlock": "branch_path" },
-        { "word": "input", "definition": "Data that a program receives, often from the user.", "category": "Programming Fundamentals", "objectToUnlock": "keyboard_icon" },
-        { "word": "output", "definition": "Data that a program produces and shows or returns.", "category": "Programming Fundamentals", "objectToUnlock": "screen_icon" },
-        { "word": "string", "definition": "A sequence of characters used to represent text.", "category": "Programming Fundamentals", "objectToUnlock": "text_line" },
-        { "word": "integer", "definition": "A whole number without a decimal point.", "category": "Programming Fundamentals", "objectToUnlock": "number_tile" },
-        { "word": "boolean", "definition": "A value that can only be true or false.", "category": "Programming Fundamentals", "objectToUnlock": "toggle_switch" }
+        {
+          "word": "algorithm",
+          "definition": "A finite, clear sequence of steps used to solve a problem.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "algorithm_visual"
+        },
+        {
+          "word": "variable",
+          "definition": "A named storage location whose value can change during program execution.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "variable_visual"
+        },
+        {
+          "word": "constant",
+          "definition": "A value that does not change while a program runs.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "constant_visual"
+        },
+        {
+          "word": "integer",
+          "definition": "A data type used to represent whole numbers.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "integer_visual"
+        },
+        {
+          "word": "boolean",
+          "definition": "A data type that stores either true or false.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "boolean_visual"
+        },
+        {
+          "word": "character",
+          "definition": "A single letter, digit, symbol, or control code.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "character_visual"
+        },
+        {
+          "word": "string",
+          "definition": "A sequence of characters used to represent text.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "string_visual"
+        },
+        {
+          "word": "statement",
+          "definition": "A single executable instruction in a program.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "statement_visual"
+        },
+        {
+          "word": "expression",
+          "definition": "A combination of values, variables, and operators that produces a result.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "expression_visual"
+        },
+        {
+          "word": "operator",
+          "definition": "A symbol or keyword that performs an operation on data.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "operator_visual"
+        }
       ]
     },
     {
-      "title": "Data Structures",
+      "title": "Programming Fundamentals 2",
       "words": [
-        { "word": "stack", "definition": "A structure where the last item added is the first one removed (LIFO).", "category": "Data Structures", "objectToUnlock": "stack_visual" },
-        { "word": "queue", "definition": "A structure where the first item added is the first one removed (FIFO).", "category": "Data Structures", "objectToUnlock": "queue_visual" },
-        { "word": "tree", "definition": "A hierarchical structure made of nodes connected like branches.", "category": "Data Structures", "objectToUnlock": "tree_visual" },
-        { "word": "graph", "definition": "A structure of nodes connected by edges to show relationships.", "category": "Data Structures", "objectToUnlock": "graph_visual" },
-        { "word": "linkedlist", "definition": "A chain of nodes where each node points to the next one.", "category": "Data Structures", "objectToUnlock": "linkedlist_visual" },
-        { "word": "node", "definition": "A single element in a data structure that holds data and links.", "category": "Data Structures", "objectToUnlock": "node_visual" },
-        { "word": "heap", "definition": "A tree-based structure used to quickly find the largest or smallest value.", "category": "Data Structures", "objectToUnlock": "heap_visual" },
-        { "word": "hash", "definition": "A function that turns data into a fixed-size value for fast lookup.", "category": "Data Structures", "objectToUnlock": "hash_visual" },
-        { "word": "array", "definition": "An ordered collection that stores multiple values in a single variable.", "category": "Data Structures", "objectToUnlock": "array_visual" },
-        { "word": "map", "definition": "A structure that links each unique key to a value.", "category": "Data Structures", "objectToUnlock": "map_visual" }
+        {
+          "word": "operand",
+          "definition": "A value or variable on which an operator acts.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "operand_visual"
+        },
+        {
+          "word": "assignment",
+          "definition": "The act of storing a value in a variable.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "assignment_visual"
+        },
+        {
+          "word": "condition",
+          "definition": "A true-or-false expression used to control program decisions.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "condition_visual"
+        },
+        {
+          "word": "loop",
+          "definition": "A structure that repeats a block of code.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "loop_visual"
+        },
+        {
+          "word": "iteration",
+          "definition": "One repetition of a loop.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "iteration_visual"
+        },
+        {
+          "word": "recursion",
+          "definition": "A technique where a function calls itself to solve a problem.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "recursion_visual"
+        },
+        {
+          "word": "function",
+          "definition": "A reusable block of code that performs a specific task and may return a value.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "function_visual"
+        },
+        {
+          "word": "procedure",
+          "definition": "A subprogram that performs a task without necessarily returning a value.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "procedure_visual"
+        },
+        {
+          "word": "method",
+          "definition": "A function that belongs to a class or object.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "method_visual"
+        }
       ]
     },
     {
-      "title": "Computer Networks",
+      "title": "Programming Fundamentals 3",
       "words": [
-        { "word": "router", "definition": "A device that directs data between different computer networks.", "category": "Computer Networks", "objectToUnlock": "router_icon" },
-        { "word": "packet", "definition": "A small unit of data sent across a network.", "category": "Computer Networks", "objectToUnlock": "packet_icon" },
-        { "word": "protocol", "definition": "A set of rules that controls how data is sent and received.", "category": "Computer Networks", "objectToUnlock": "protocol_icon" },
-        { "word": "firewall", "definition": "A security system that filters incoming and outgoing network traffic.", "category": "Computer Networks", "objectToUnlock": "firewall_icon" },
-        { "word": "server", "definition": "A computer that provides data or services to other computers.", "category": "Computer Networks", "objectToUnlock": "server_rack" },
-        { "word": "client", "definition": "A computer or app that requests services from a server.", "category": "Computer Networks", "objectToUnlock": "client_icon" },
-        { "word": "socket", "definition": "An endpoint that lets two programs communicate over a network.", "category": "Computer Networks", "objectToUnlock": "socket_icon" },
-        { "word": "domain", "definition": "A human-readable name that identifies a website on the internet.", "category": "Computer Networks", "objectToUnlock": "domain_icon" },
-        { "word": "switch", "definition": "A device that connects computers within the same network.", "category": "Computer Networks", "objectToUnlock": "switch_icon" },
-        { "word": "latency", "definition": "The delay before data starts transferring across a network.", "category": "Computer Networks", "objectToUnlock": "latency_meter" }
+        {
+          "word": "parameter",
+          "definition": "A variable defined in a function to receive input values.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "parameter_visual"
+        },
+        {
+          "word": "argument",
+          "definition": "The actual value passed to a function when it is called.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "argument_visual"
+        },
+        {
+          "word": "scope",
+          "definition": "The region of code where a variable or function can be accessed.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "scope_visual"
+        },
+        {
+          "word": "syntax",
+          "definition": "The rules that define valid code structure in a programming language.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "syntax_visual"
+        },
+        {
+          "word": "bug",
+          "definition": "A mistake or defect in a program.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "bug_visual"
+        },
+        {
+          "word": "debugging",
+          "definition": "The process of finding and fixing program errors.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "debugging_visual"
+        },
+        {
+          "word": "compiler",
+          "definition": "A tool that translates high-level source code into executable or lower-level code.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "compiler_visual"
+        },
+        {
+          "word": "interpreter",
+          "definition": "A tool that reads and executes code step by step.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "interpreter_visual"
+        },
+        {
+          "word": "assembler",
+          "definition": "A tool that translates assembly language into machine code.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "assembler_visual"
+        }
       ]
     },
     {
-      "title": "Databases",
+      "title": "Programming Fundamentals 4",
       "words": [
-        { "word": "table", "definition": "A collection of related data organized into rows and columns.", "category": "Databases", "objectToUnlock": "table_icon" },
-        { "word": "query", "definition": "A request used to read or change data in a database.", "category": "Databases", "objectToUnlock": "query_icon" },
-        { "word": "schema", "definition": "The structure that defines how a database is organized.", "category": "Databases", "objectToUnlock": "schema_icon" },
-        { "word": "index", "definition": "A structure that speeds up searching for data in a table.", "category": "Databases", "objectToUnlock": "index_icon" },
-        { "word": "relation", "definition": "A connection between two tables in a database.", "category": "Databases", "objectToUnlock": "relation_icon" },
-        { "word": "primarykey", "definition": "A column whose value uniquely identifies each row in a table.", "category": "Databases", "objectToUnlock": "primarykey_icon" },
-        { "word": "foreignkey", "definition": "A column that links one table to the primary key of another.", "category": "Databases", "objectToUnlock": "foreignkey_icon" },
-        { "word": "transaction", "definition": "A group of database operations treated as a single unit.", "category": "Databases", "objectToUnlock": "transaction_icon" },
-        { "word": "database", "definition": "An organized collection of data stored for easy access.", "category": "Databases", "objectToUnlock": "database_icon" },
-        { "word": "record", "definition": "A single row of related data in a table.", "category": "Databases", "objectToUnlock": "record_icon" }
+        {
+          "word": "bytecode",
+          "definition": "Intermediate code designed to run on a virtual machine.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "bytecode_visual"
+        },
+        {
+          "word": "linker",
+          "definition": "A tool that combines compiled code and libraries into a runnable program.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "linker_visual"
+        },
+        {
+          "word": "loader",
+          "definition": "A system component that places a program into memory and prepares it to run.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "loader_visual"
+        },
+        {
+          "word": "library",
+          "definition": "A collection of reusable functions, classes, or code resources.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "library_visual"
+        },
+        {
+          "word": "module",
+          "definition": "A logical part of a program that can be developed separately.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "module_visual"
+        },
+        {
+          "word": "package",
+          "definition": "A group of related classes, functions, or modules.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "package_visual"
+        },
+        {
+          "word": "comment",
+          "definition": "Explanatory text in code that does not affect program execution.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "comment_visual"
+        },
+        {
+          "word": "pseudocode",
+          "definition": "An informal way to describe an algorithm without using a specific programming language.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "pseudocode_visual"
+        },
+        {
+          "word": "flowchart",
+          "definition": "A diagram that represents the steps of an algorithm or process.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "flowchart_visual"
+        }
       ]
     },
     {
-      "title": "Cybersecurity",
+      "title": "Programming Fundamentals 5",
       "words": [
-        { "word": "encryption", "definition": "The process of scrambling data so only authorized people can read it.", "category": "Cybersecurity", "objectToUnlock": "encryption_icon" },
-        { "word": "malware", "definition": "Harmful software designed to damage or gain access to a system.", "category": "Cybersecurity", "objectToUnlock": "malware_icon" },
-        { "word": "phishing", "definition": "A scam that tricks people into revealing private information.", "category": "Cybersecurity", "objectToUnlock": "phishing_icon" },
-        { "word": "firewall", "definition": "A security system that filters incoming and outgoing network traffic.", "category": "Cybersecurity", "objectToUnlock": "firewall_shield" },
-        { "word": "vulnerability", "definition": "A weakness in a system that an attacker can exploit.", "category": "Cybersecurity", "objectToUnlock": "vulnerability_icon" },
-        { "word": "exploit", "definition": "A technique or code that takes advantage of a vulnerability.", "category": "Cybersecurity", "objectToUnlock": "exploit_icon" },
-        { "word": "password", "definition": "A secret string used to verify a user's identity.", "category": "Cybersecurity", "objectToUnlock": "password_icon" },
-        { "word": "authentication", "definition": "The process of confirming that someone is who they claim to be.", "category": "Cybersecurity", "objectToUnlock": "auth_icon" },
-        { "word": "threat", "definition": "A possible danger that could harm a system or its data.", "category": "Cybersecurity", "objectToUnlock": "threat_icon" },
-        { "word": "attack", "definition": "An attempt to damage, steal from, or disrupt a system.", "category": "Cybersecurity", "objectToUnlock": "attack_icon" }
+        {
+          "word": "exception",
+          "definition": "A special error condition that interrupts normal program flow.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "exception_visual"
+        },
+        {
+          "word": "input",
+          "definition": "Data provided to a program from a user, file, or another system.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "input_visual"
+        },
+        {
+          "word": "output",
+          "definition": "Data or results produced by a program.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "output_visual"
+        },
+        {
+          "word": "file",
+          "definition": "A named unit of data stored persistently.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "file_visual"
+        },
+        {
+          "word": "stream",
+          "definition": "A sequence of data read or written over time.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "stream_visual"
+        },
+        {
+          "word": "object",
+          "definition": "A programming unit that combines data and behavior.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "object_visual"
+        },
+        {
+          "word": "class",
+          "definition": "A template that defines the properties and behavior of objects.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "class_visual"
+        },
+        {
+          "word": "inheritance",
+          "definition": "A mechanism where one class receives features from another class.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "inheritance_visual"
+        },
+        {
+          "word": "encapsulation",
+          "definition": "The practice of bundling data and operations while controlling access to them.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "encapsulation_visual"
+        }
+      ]
+    },
+    {
+      "title": "Programming Fundamentals 6",
+      "words": [
+        {
+          "word": "polymorphism",
+          "definition": "The ability of the same interface to produce different behavior in different objects.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "polymorphism_visual"
+        },
+        {
+          "word": "abstraction",
+          "definition": "The practice of hiding unnecessary details and focusing on essential features.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "abstraction_visual"
+        },
+        {
+          "word": "constructor",
+          "definition": "A special method that runs when an object is created.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "constructor_visual"
+        },
+        {
+          "word": "destructor",
+          "definition": "A special method that runs when an object is destroyed or released.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "destructor_visual"
+        },
+        {
+          "word": "interface",
+          "definition": "A contract that defines behaviors a class must provide.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "interface_visual"
+        },
+        {
+          "word": "namespace",
+          "definition": "A naming context used to prevent name conflicts.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "namespace_visual"
+        },
+        {
+          "word": "literal",
+          "definition": "A fixed value written directly in source code.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "literal_visual"
+        },
+        {
+          "word": "token",
+          "definition": "The smallest meaningful unit recognized by a compiler or interpreter.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "token_visual"
+        },
+        {
+          "word": "keyword",
+          "definition": "A reserved word with special meaning in a programming language.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "keyword_visual"
+        },
+        {
+          "word": "identifier",
+          "definition": "A name given to a variable, function, class, or other program element.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "identifier_visual"
+        }
+      ]
+    },
+    {
+      "title": "Data Structures 1",
+      "words": [
+        {
+          "word": "array",
+          "definition": "An ordered data structure that stores elements by index.",
+          "category": "Data Structures",
+          "objectToUnlock": "array_visual"
+        },
+        {
+          "word": "list",
+          "definition": "A collection that stores elements in a specific order.",
+          "category": "Data Structures",
+          "objectToUnlock": "list_visual"
+        },
+        {
+          "word": "node",
+          "definition": "A basic element of a data structure that stores data and connection information.",
+          "category": "Data Structures",
+          "objectToUnlock": "node_visual"
+        },
+        {
+          "word": "pointer",
+          "definition": "A variable that stores a memory address.",
+          "category": "Data Structures",
+          "objectToUnlock": "pointer_visual"
+        },
+        {
+          "word": "reference",
+          "definition": "An indirect way to access an object or value.",
+          "category": "Data Structures",
+          "objectToUnlock": "reference_visual"
+        },
+        {
+          "word": "stack",
+          "definition": "A last-in, first-out data structure.",
+          "category": "Data Structures",
+          "objectToUnlock": "stack_visual"
+        },
+        {
+          "word": "push",
+          "definition": "The operation of adding an item to a stack.",
+          "category": "Data Structures",
+          "objectToUnlock": "push_visual"
+        },
+        {
+          "word": "pop",
+          "definition": "The operation of removing the top item from a stack.",
+          "category": "Data Structures",
+          "objectToUnlock": "pop_visual"
+        },
+        {
+          "word": "peek",
+          "definition": "The operation of viewing the top stack item without removing it.",
+          "category": "Data Structures",
+          "objectToUnlock": "peek_visual"
+        },
+        {
+          "word": "queue",
+          "definition": "A first-in, first-out data structure.",
+          "category": "Data Structures",
+          "objectToUnlock": "queue_visual"
+        }
+      ]
+    },
+    {
+      "title": "Data Structures 2",
+      "words": [
+        {
+          "word": "enqueue",
+          "definition": "The operation of adding an item to a queue.",
+          "category": "Data Structures",
+          "objectToUnlock": "enqueue_visual"
+        },
+        {
+          "word": "dequeue",
+          "definition": "The operation of removing the oldest item from a queue.",
+          "category": "Data Structures",
+          "objectToUnlock": "dequeue_visual"
+        },
+        {
+          "word": "deque",
+          "definition": "A queue that allows insertion and removal at both ends.",
+          "category": "Data Structures",
+          "objectToUnlock": "deque_visual"
+        },
+        {
+          "word": "tree",
+          "definition": "A hierarchical data structure made of connected nodes.",
+          "category": "Data Structures",
+          "objectToUnlock": "tree_visual"
+        },
+        {
+          "word": "root",
+          "definition": "The top node of a tree.",
+          "category": "Data Structures",
+          "objectToUnlock": "root_visual"
+        },
+        {
+          "word": "leaf",
+          "definition": "A tree node with no children.",
+          "category": "Data Structures",
+          "objectToUnlock": "leaf_visual"
+        },
+        {
+          "word": "subtree",
+          "definition": "A tree formed by a node and all of its descendants.",
+          "category": "Data Structures",
+          "objectToUnlock": "subtree_visual"
+        },
+        {
+          "word": "heap",
+          "definition": "A tree-based structure that maintains a priority relationship among elements.",
+          "category": "Data Structures",
+          "objectToUnlock": "heap_visual"
+        },
+        {
+          "word": "trie",
+          "definition": "A tree structure used to store strings by shared prefixes.",
+          "category": "Data Structures",
+          "objectToUnlock": "trie_visual"
+        }
+      ]
+    },
+    {
+      "title": "Data Structures 3",
+      "words": [
+        {
+          "word": "graph",
+          "definition": "A structure made of vertices and edges between them.",
+          "category": "Data Structures",
+          "objectToUnlock": "graph_visual"
+        },
+        {
+          "word": "vertex",
+          "definition": "A node in a graph.",
+          "category": "Data Structures",
+          "objectToUnlock": "vertex_visual"
+        },
+        {
+          "word": "edge",
+          "definition": "A connection between two vertices in a graph.",
+          "category": "Data Structures",
+          "objectToUnlock": "edge_visual"
+        },
+        {
+          "word": "path",
+          "definition": "A sequence of edges connecting one vertex to another.",
+          "category": "Data Structures",
+          "objectToUnlock": "path_visual"
+        },
+        {
+          "word": "cycle",
+          "definition": "A graph path that returns to its starting vertex.",
+          "category": "Data Structures",
+          "objectToUnlock": "cycle_visual"
+        },
+        {
+          "word": "collision",
+          "definition": "A case where different keys map to the same hash position.",
+          "category": "Data Structures",
+          "objectToUnlock": "collision_visual"
+        },
+        {
+          "word": "chaining",
+          "definition": "A collision handling method that stores multiple items in a list at the same position.",
+          "category": "Data Structures",
+          "objectToUnlock": "chaining_visual"
+        },
+        {
+          "word": "set",
+          "definition": "A collection of unique elements.",
+          "category": "Data Structures",
+          "objectToUnlock": "set_visual"
+        },
+        {
+          "word": "map",
+          "definition": "A data structure that stores key-value pairs.",
+          "category": "Data Structures",
+          "objectToUnlock": "map_visual"
+        }
+      ]
+    },
+    {
+      "title": "Data Structures 4",
+      "words": [
+        {
+          "word": "dictionary",
+          "definition": "A collection that provides value access through keys.",
+          "category": "Data Structures",
+          "objectToUnlock": "dictionary_visual"
+        },
+        {
+          "word": "record",
+          "definition": "A logical unit containing multiple fields.",
+          "category": "Data Structures",
+          "objectToUnlock": "record_visual"
+        },
+        {
+          "word": "field",
+          "definition": "A single data item inside a record.",
+          "category": "Data Structures",
+          "objectToUnlock": "field_visual"
+        },
+        {
+          "word": "tuple",
+          "definition": "An ordered group of a fixed number of values.",
+          "category": "Data Structures",
+          "objectToUnlock": "tuple_visual"
+        },
+        {
+          "word": "index",
+          "definition": "An auxiliary structure used to speed up data access.",
+          "category": "Data Structures",
+          "objectToUnlock": "index_visual"
+        },
+        {
+          "word": "iterator",
+          "definition": "An object used to visit elements of a collection one by one.",
+          "category": "Data Structures",
+          "objectToUnlock": "iterator_visual"
+        },
+        {
+          "word": "traversal",
+          "definition": "The process of visiting all elements in a data structure in a defined order.",
+          "category": "Data Structures",
+          "objectToUnlock": "traversal_visual"
+        },
+        {
+          "word": "sorting",
+          "definition": "The process of arranging data in a specific order.",
+          "category": "Data Structures",
+          "objectToUnlock": "sorting_visual"
+        },
+        {
+          "word": "searching",
+          "definition": "The process of finding an item in a data structure.",
+          "category": "Data Structures",
+          "objectToUnlock": "searching_visual"
+        }
+      ]
+    },
+    {
+      "title": "Computer Networks 1",
+      "words": [
+        {
+          "word": "network",
+          "definition": "A group of connected devices that can communicate and share resources.",
+          "category": "Computer Networks",
+          "objectToUnlock": "network_visual"
+        },
+        {
+          "word": "Internet",
+          "definition": "The global network of interconnected networks using standard protocols.",
+          "category": "Computer Networks",
+          "objectToUnlock": "Internet_visual"
+        },
+        {
+          "word": "intranet",
+          "definition": "A private internal network used within an organization.",
+          "category": "Computer Networks",
+          "objectToUnlock": "intranet_visual"
+        },
+        {
+          "word": "extranet",
+          "definition": "A private network that gives controlled access to external users.",
+          "category": "Computer Networks",
+          "objectToUnlock": "extranet_visual"
+        },
+        {
+          "word": "client",
+          "definition": "A device or program that requests services from a server.",
+          "category": "Computer Networks",
+          "objectToUnlock": "client_visual"
+        },
+        {
+          "word": "server",
+          "definition": "A device or program that provides services to clients.",
+          "category": "Computer Networks",
+          "objectToUnlock": "server_visual"
+        },
+        {
+          "word": "host",
+          "definition": "A computer or device connected to a network.",
+          "category": "Computer Networks",
+          "objectToUnlock": "host_visual"
+        },
+        {
+          "word": "protocol",
+          "definition": "A set of rules for communication between systems.",
+          "category": "Computer Networks",
+          "objectToUnlock": "protocol_visual"
+        },
+        {
+          "word": "subnet",
+          "definition": "A smaller logical division of a larger IP network.",
+          "category": "Computer Networks",
+          "objectToUnlock": "subnet_visual"
+        },
+        {
+          "word": "gateway",
+          "definition": "A device or node that connects different networks.",
+          "category": "Computer Networks",
+          "objectToUnlock": "gateway_visual"
+        },
+        {
+          "word": "router",
+          "definition": "A device that forwards packets between networks.",
+          "category": "Computer Networks",
+          "objectToUnlock": "router_visual"
+        },
+        {
+          "word": "switch",
+          "definition": "A device that connects devices within a local network and forwards frames.",
+          "category": "Computer Networks",
+          "objectToUnlock": "switch_visual"
+        }
+      ]
+    },
+    {
+      "title": "Computer Networks 2",
+      "words": [
+        {
+          "word": "hub",
+          "definition": "A basic network device that repeats signals to all connected ports.",
+          "category": "Computer Networks",
+          "objectToUnlock": "hub_visual"
+        },
+        {
+          "word": "bridge",
+          "definition": "A device that connects and filters traffic between network segments.",
+          "category": "Computer Networks",
+          "objectToUnlock": "bridge_visual"
+        },
+        {
+          "word": "repeater",
+          "definition": "A device that regenerates signals to extend network distance.",
+          "category": "Computer Networks",
+          "objectToUnlock": "repeater_visual"
+        },
+        {
+          "word": "modem",
+          "definition": "A device that converts signals for communication over transmission lines.",
+          "category": "Computer Networks",
+          "objectToUnlock": "modem_visual"
+        },
+        {
+          "word": "packet",
+          "definition": "A unit of data transmitted across a network.",
+          "category": "Computer Networks",
+          "objectToUnlock": "packet_visual"
+        },
+        {
+          "word": "frame",
+          "definition": "A data unit used at the data link layer.",
+          "category": "Computer Networks",
+          "objectToUnlock": "frame_visual"
+        },
+        {
+          "word": "segment",
+          "definition": "A data unit used by transport layer protocols.",
+          "category": "Computer Networks",
+          "objectToUnlock": "segment_visual"
+        },
+        {
+          "word": "datagram",
+          "definition": "A self-contained packet that carries enough information to be routed.",
+          "category": "Computer Networks",
+          "objectToUnlock": "datagram_visual"
+        },
+        {
+          "word": "bandwidth",
+          "definition": "The maximum data capacity of a communication channel.",
+          "category": "Computer Networks",
+          "objectToUnlock": "bandwidth_visual"
+        },
+        {
+          "word": "latency",
+          "definition": "The delay before data begins to arrive after being sent.",
+          "category": "Computer Networks",
+          "objectToUnlock": "latency_visual"
+        },
+        {
+          "word": "throughput",
+          "definition": "The actual amount of data successfully transferred over time.",
+          "category": "Computer Networks",
+          "objectToUnlock": "throughput_visual"
+        }
+      ]
+    },
+    {
+      "title": "Computer Networks 3",
+      "words": [
+        {
+          "word": "baud",
+          "definition": "A measure of signal changes per second in data transmission.",
+          "category": "Computer Networks",
+          "objectToUnlock": "baud_visual"
+        },
+        {
+          "word": "simplex",
+          "definition": "One-way communication only.",
+          "category": "Computer Networks",
+          "objectToUnlock": "simplex_visual"
+        },
+        {
+          "word": "multiplexing",
+          "definition": "The process of carrying multiple signals over one communication channel.",
+          "category": "Computer Networks",
+          "objectToUnlock": "multiplexing_visual"
+        },
+        {
+          "word": "Ethernet",
+          "definition": "A widely used wired local area network technology.",
+          "category": "Computer Networks",
+          "objectToUnlock": "Ethernet_visual"
+        },
+        {
+          "word": "Bluetooth",
+          "definition": "A short-range wireless communication technology.",
+          "category": "Computer Networks",
+          "objectToUnlock": "Bluetooth_visual"
+        },
+        {
+          "word": "port",
+          "definition": "A logical endpoint used by network protocols to identify applications.",
+          "category": "Computer Networks",
+          "objectToUnlock": "port_visual"
+        },
+        {
+          "word": "socket",
+          "definition": "A communication endpoint defined by an IP address and port number.",
+          "category": "Computer Networks",
+          "objectToUnlock": "socket_visual"
+        },
+        {
+          "word": "Telnet",
+          "definition": "An older protocol for remote login without built-in encryption.",
+          "category": "Computer Networks",
+          "objectToUnlock": "Telnet_visual"
+        },
+        {
+          "word": "ping",
+          "definition": "A diagnostic tool that tests reachability of a host.",
+          "category": "Computer Networks",
+          "objectToUnlock": "ping_visual"
+        },
+        {
+          "word": "traceroute",
+          "definition": "A diagnostic tool that shows the path packets take to a destination.",
+          "category": "Computer Networks",
+          "objectToUnlock": "traceroute_visual"
+        },
+        {
+          "word": "topology",
+          "definition": "The arrangement of devices and connections in a network.",
+          "category": "Computer Networks",
+          "objectToUnlock": "topology_visual"
+        }
+      ]
+    },
+    {
+      "title": "Databases 1",
+      "words": [
+        {
+          "word": "database",
+          "definition": "An organized collection of data stored for access and management.",
+          "category": "Databases",
+          "objectToUnlock": "database_visual"
+        },
+        {
+          "word": "table",
+          "definition": "A database structure made of rows and columns.",
+          "category": "Databases",
+          "objectToUnlock": "table_visual"
+        },
+        {
+          "word": "row",
+          "definition": "A single record in a database table.",
+          "category": "Databases",
+          "objectToUnlock": "row_visual"
+        },
+        {
+          "word": "column",
+          "definition": "A field or attribute in a database table.",
+          "category": "Databases",
+          "objectToUnlock": "column_visual"
+        },
+        {
+          "word": "entity",
+          "definition": "A real-world object or concept represented in a database.",
+          "category": "Databases",
+          "objectToUnlock": "entity_visual"
+        },
+        {
+          "word": "attribute",
+          "definition": "A property or characteristic of an entity.",
+          "category": "Databases",
+          "objectToUnlock": "attribute_visual"
+        },
+        {
+          "word": "relation",
+          "definition": "A table-like structure representing related data.",
+          "category": "Databases",
+          "objectToUnlock": "relation_visual"
+        },
+        {
+          "word": "schema",
+          "definition": "The defined structure of a database, including tables and relationships.",
+          "category": "Databases",
+          "objectToUnlock": "schema_visual"
+        },
+        {
+          "word": "query",
+          "definition": "A request for data or an operation on database data.",
+          "category": "Databases",
+          "objectToUnlock": "query_visual"
+        },
+        {
+          "word": "join",
+          "definition": "An operation that combines rows from multiple tables based on relationships.",
+          "category": "Databases",
+          "objectToUnlock": "join_visual"
+        }
+      ]
+    },
+    {
+      "title": "Databases 2",
+      "words": [
+        {
+          "word": "indexing",
+          "definition": "The process of creating indexes to speed up data retrieval.",
+          "category": "Databases",
+          "objectToUnlock": "indexing_visual"
+        },
+        {
+          "word": "view",
+          "definition": "A virtual table based on one or more queries.",
+          "category": "Databases",
+          "objectToUnlock": "view_visual"
+        },
+        {
+          "word": "trigger",
+          "definition": "Database code that runs automatically when a defined event occurs.",
+          "category": "Databases",
+          "objectToUnlock": "trigger_visual"
+        },
+        {
+          "word": "transaction",
+          "definition": "A group of operations treated as one successful or failed unit.",
+          "category": "Databases",
+          "objectToUnlock": "transaction_visual"
+        },
+        {
+          "word": "atomicity",
+          "definition": "The principle that a transaction fully completes or fully cancels.",
+          "category": "Databases",
+          "objectToUnlock": "atomicity_visual"
+        },
+        {
+          "word": "consistency",
+          "definition": "The principle that a database remains valid after a transaction.",
+          "category": "Databases",
+          "objectToUnlock": "consistency_visual"
+        },
+        {
+          "word": "isolation",
+          "definition": "The principle that concurrent transactions do not interfere with each other.",
+          "category": "Databases",
+          "objectToUnlock": "isolation_visual"
+        },
+        {
+          "word": "durability",
+          "definition": "The principle that completed transaction results remain permanent.",
+          "category": "Databases",
+          "objectToUnlock": "durability_visual"
+        },
+        {
+          "word": "commit",
+          "definition": "The operation that makes transaction changes permanent.",
+          "category": "Databases",
+          "objectToUnlock": "commit_visual"
+        },
+        {
+          "word": "rollback",
+          "definition": "The operation that reverses transaction changes.",
+          "category": "Databases",
+          "objectToUnlock": "rollback_visual"
+        }
+      ]
+    },
+    {
+      "title": "Databases 3",
+      "words": [
+        {
+          "word": "normalization",
+          "definition": "The process of organizing tables to reduce redundancy and inconsistency.",
+          "category": "Databases",
+          "objectToUnlock": "normalization_visual"
+        },
+        {
+          "word": "cardinality",
+          "definition": "The numerical nature of relationships between database tables.",
+          "category": "Databases",
+          "objectToUnlock": "cardinality_visual"
+        },
+        {
+          "word": "NoSQL",
+          "definition": "A category of non-relational database approaches with flexible data models.",
+          "category": "Databases",
+          "objectToUnlock": "NoSQL_visual"
+        },
+        {
+          "word": "replication",
+          "definition": "The process of keeping copies of data on multiple systems.",
+          "category": "Databases",
+          "objectToUnlock": "replication_visual"
+        },
+        {
+          "word": "sharding",
+          "definition": "The process of splitting large data sets across multiple servers.",
+          "category": "Databases",
+          "objectToUnlock": "sharding_visual"
+        },
+        {
+          "word": "backup",
+          "definition": "A copy of data made to protect against loss.",
+          "category": "Databases",
+          "objectToUnlock": "backup_visual"
+        },
+        {
+          "word": "recovery",
+          "definition": "The process of restoring a database after failure or data loss.",
+          "category": "Databases",
+          "objectToUnlock": "recovery_visual"
+        },
+        {
+          "word": "constraint",
+          "definition": "A rule that database data must follow.",
+          "category": "Databases",
+          "objectToUnlock": "constraint_visual"
+        },
+        {
+          "word": "metadata",
+          "definition": "Data that describes other data.",
+          "category": "Databases",
+          "objectToUnlock": "metadata_visual"
+        }
+      ]
+    },
+    {
+      "title": "Cybersecurity 1",
+      "words": [
+        {
+          "word": "cybersecurity",
+          "definition": "The field of protecting digital systems, networks, and data from attacks.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "cybersecurity_visual"
+        },
+        {
+          "word": "integrity",
+          "definition": "The principle that data remains accurate, complete, and protected from unauthorized change.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "integrity_visual"
+        },
+        {
+          "word": "availability",
+          "definition": "The principle that systems and data are accessible when needed.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "availability_visual"
+        },
+        {
+          "word": "authentication",
+          "definition": "The process of verifying the identity of a user or system.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "authentication_visual"
+        },
+        {
+          "word": "authorization",
+          "definition": "The process of deciding what an authenticated user can access.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "authorization_visual"
+        },
+        {
+          "word": "account",
+          "definition": "An access record that represents a user or service in a system.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "account_visual"
+        },
+        {
+          "word": "password",
+          "definition": "A secret character sequence used for authentication.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "password_visual"
+        },
+        {
+          "word": "passphrase",
+          "definition": "A longer secret phrase used like a password.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "passphrase_visual"
+        },
+        {
+          "word": "permission",
+          "definition": "A granted ability to perform an action on a resource.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "permission_visual"
+        },
+        {
+          "word": "privilege",
+          "definition": "A higher level of authority in a system.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "privilege_visual"
+        }
+      ]
+    },
+    {
+      "title": "Cybersecurity 2",
+      "words": [
+        {
+          "word": "encryption",
+          "definition": "The process of converting data into unreadable form for protection.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "encryption_visual"
+        },
+        {
+          "word": "decryption",
+          "definition": "The process of converting encrypted data back into readable form.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "decryption_visual"
+        },
+        {
+          "word": "cipher",
+          "definition": "An algorithm used to encrypt and decrypt data.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "cipher_visual"
+        },
+        {
+          "word": "plaintext",
+          "definition": "Readable data before encryption.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "plaintext_visual"
+        },
+        {
+          "word": "ciphertext",
+          "definition": "Data after encryption, unreadable without decryption.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "ciphertext_visual"
+        },
+        {
+          "word": "cryptography",
+          "definition": "The field of mathematical methods for secure communication.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "cryptography_visual"
+        },
+        {
+          "word": "certificate",
+          "definition": "A digital document that binds a public key to an identity.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "certificate_visual"
+        },
+        {
+          "word": "hashing",
+          "definition": "The process of turning data into a fixed-length digest.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "hashing_visual"
+        },
+        {
+          "word": "salt",
+          "definition": "Random data added before hashing, commonly used to protect passwords.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "salt_visual"
+        },
+        {
+          "word": "malware",
+          "definition": "Software designed to damage systems or perform unauthorized actions.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "malware_visual"
+        }
+      ]
+    },
+    {
+      "title": "Cybersecurity 3",
+      "words": [
+        {
+          "word": "virus",
+          "definition": "Malware that spreads by attaching itself to other files.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "virus_visual"
+        },
+        {
+          "word": "worm",
+          "definition": "Malware that spreads across networks without human action.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "worm_visual"
+        },
+        {
+          "word": "spyware",
+          "definition": "Software that secretly collects user information.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "spyware_visual"
+        },
+        {
+          "word": "adware",
+          "definition": "Software that displays unwanted advertisements.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "adware_visual"
+        },
+        {
+          "word": "ransomware",
+          "definition": "Malware that locks data or systems and demands payment.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "ransomware_visual"
+        },
+        {
+          "word": "rootkit",
+          "definition": "A tool that hides itself while maintaining unauthorized system access.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "rootkit_visual"
+        },
+        {
+          "word": "botnet",
+          "definition": "A network of compromised devices controlled by an attacker.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "botnet_visual"
+        },
+        {
+          "word": "phishing",
+          "definition": "An attack that tricks users into revealing passwords or sensitive information.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "phishing_visual"
+        },
+        {
+          "word": "spoofing",
+          "definition": "Faking identity or source information.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "spoofing_visual"
+        },
+        {
+          "word": "sniffing",
+          "definition": "Capturing network traffic to inspect or steal data.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "sniffing_visual"
+        }
+      ]
+    },
+    {
+      "title": "Cybersecurity 4",
+      "words": [
+        {
+          "word": "eavesdropping",
+          "definition": "Secretly listening to or monitoring communications.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "eavesdropping_visual"
+        },
+        {
+          "word": "vulnerability",
+          "definition": "A weakness that can be exploited to compromise a system.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "vulnerability_visual"
+        },
+        {
+          "word": "exploit",
+          "definition": "Code or a method that uses a vulnerability to perform unauthorized actions.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "exploit_visual"
+        },
+        {
+          "word": "patch",
+          "definition": "An update released to fix a bug or security weakness.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "patch_visual"
+        },
+        {
+          "word": "firewall",
+          "definition": "A security system that filters network traffic based on rules.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "firewall_visual"
+        },
+        {
+          "word": "logging",
+          "definition": "The process of recording system events for later review.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "logging_visual"
+        },
+        {
+          "word": "monitoring",
+          "definition": "The continuous observation of system or network activity.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "monitoring_visual"
+        },
+        {
+          "word": "incident",
+          "definition": "An event that affects or may affect security.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "incident_visual"
+        },
+        {
+          "word": "risk",
+          "definition": "The likelihood that a threat will exploit a vulnerability and cause harm.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "risk_visual"
+        },
+        {
+          "word": "threat",
+          "definition": "Anything with the potential to harm a system or data.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "threat_visual"
+        }
       ]
     }
   ]

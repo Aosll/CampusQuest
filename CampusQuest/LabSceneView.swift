@@ -357,7 +357,12 @@ private struct LabTheme {
     static func forLevel(_ levelTitle: String) -> LabTheme {
         let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
 
-        switch levelTitle {
+        // Numbered titles ("Computer Networks 2") map to their base category.
+        let category = ["Programming Fundamentals", "Data Structures",
+                        "Computer Networks", "Databases", "Cybersecurity"]
+            .first { levelTitle.hasPrefix($0) } ?? levelTitle
+
+        switch category {
         case "Programming Fundamentals":
             return LabTheme(
                 title: "Programming Lab",

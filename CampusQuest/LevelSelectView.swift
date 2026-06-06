@@ -103,32 +103,37 @@ struct LevelSelectView: View {
 
     /// A campus-flavored "room" name for each course, so the map reads
     /// like a journey through buildings rather than a plain course list.
+    /// Matches by category prefix so numbered titles ("Programming
+    /// Fundamentals 2") keep a readable room name with their part number.
     private func roomName(for title: String) -> String {
-        switch title {
-        case "Programming Fundamentals": return "Programming Lab"
-        case "Data Structures":          return "Data Structures Lab"
-        case "Computer Networks":        return "Network Room"
-        case "Databases":                return "Database Archive"
-        case "Cybersecurity":            return "Security Operations Center"
-        default:                         return title
+        if let (base, suffix) = roomBase(for: title) {
+            return suffix.isEmpty ? base : "\(base) \(suffix)"
         }
+        return title
+    }
+
+    private func roomBase(for title: String) -> (String, String)? {
+        let rooms: [(String, String)] = [
+            ("Programming Fundamentals", "Programming Lab"),
+            ("Data Structures",          "Data Structures Lab"),
+            ("Computer Networks",        "Network Room"),
+            ("Databases",                "Database Archive"),
+            ("Cybersecurity",            "Security Operations Center"),
+        ]
+        for (category, room) in rooms where title.hasPrefix(category) {
+            let suffix = title.dropFirst(category.count).trimmingCharacters(in: .whitespaces)
+            return (room, suffix)
+        }
+        return nil
     }
 
     private func roomIcon(for title: String) -> String {
-        switch title {
-        case "Programming Fundamentals":
-            return "terminal.fill"
-        case "Data Structures":
-            return "square.stack.3d.up.fill"
-        case "Computer Networks":
-            return "network"
-        case "Databases":
-            return "cylinder.split.1x2.fill"
-        case "Cybersecurity":
-            return "lock.shield.fill"
-        default:
-            return "graduationcap.fill"
-        }
+        if title.hasPrefix("Programming Fundamentals") { return "terminal.fill" }
+        if title.hasPrefix("Data Structures")          { return "square.stack.3d.up.fill" }
+        if title.hasPrefix("Computer Networks")        { return "network" }
+        if title.hasPrefix("Databases")                { return "cylinder.split.1x2.fill" }
+        if title.hasPrefix("Cybersecurity")            { return "lock.shield.fill" }
+        return "graduationcap.fill"
     }
 }
 
