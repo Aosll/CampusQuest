@@ -25,25 +25,33 @@ enum ContentError: LocalizedError {
 
 /// Holds the loaded game content and generated quiz questions.
 /// `@Observable` means SwiftUI automatically refreshes when this changes.
+/// Isolated to the main actor so its observable state is always read/written
+/// on the main thread; the heavy JSON work runs off-main (see `load`).
+@MainActor
 @Observable
 final class ContentStore {
     /// The currently loaded department (Computer Engineering for the MVP).
     var department: Department?
     /// Human-readable error to show if loading fails.
     var errorMessage: String?
+    /// True while a department's JSON is being read/decoded.
+    var isLoading = false
 
     init() {
         // MVP: load Computer Engineering at startup. Adding another major is
         // just a matter of shipping a new "<Name>.json" and loading it here
         // (or when the major is selected).
-        loadDepartment(named: "ComputerEngineering")
+        Task { await loadDepartment(named: "ComputerEngineering") }
     }
 
     /// Loads a single department's content from "<name>.json" on demand.
-    /// `name` is the JSON file's base name (e.g. "ComputerEngineering").
-    func loadDepartment(named name: String) {
+    /// Reading/decoding happens off the main thread; the result is published
+    /// on the main actor. `name` is the JSON file's base name.
+    func loadDepartment(named name: String) async {
+        isLoading = true
+        defer { isLoading = false }
         do {
-            department = try Self.load(name)
+            department = try await Self.load(name)
             errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
@@ -58,16 +66,22 @@ final class ContentStore {
         return level.words.map { QuizBuilder.makeQuestion(for: $0, allCategories: categories) }
     }
 
-    /// Reads a JSON file from the app bundle and decodes it into a Department.
-    static func load(_ filename: String) throws -> Department {
-        guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
-            throw ContentError.fileNotFound(filename)
-        }
-        do {
-            let data = try Data(contentsOf: url)
-            return try JSONDecoder().decode(Department.self, from: data)
-        } catch {
-            throw ContentError.decodingFailed(error.localizedDescription)
-        }
+    /// Reads and decodes a department JSON off the main thread. `Department`
+    /// is a value type (Sendable), so the result can safely cross back to the
+    /// main actor.
+    nonisolated static func load(_ filename: String) async throws -> Department {
+        try await Task.detached(priority: .userInitiated) {
+            guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
+                throw ContentError.fileNotFound(filename)
+            }
+            do {
+                let data = try Data(contentsOf: url)
+                return try JSONDecoder().decode(Department.self, from: data)
+            } catch let error as ContentError {
+                throw error
+            } catch {
+                throw ContentError.decodingFailed(error.localizedDescription)
+            }
+        }.value
     }
 }

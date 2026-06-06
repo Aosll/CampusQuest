@@ -9,7 +9,8 @@
 import Foundation
 
 /// A single word the player can find, with its meaning and quiz info.
-struct WordItem: Codable, Identifiable, Hashable {
+/// `nonisolated` so this pure data can be decoded off the main actor.
+nonisolated struct WordItem: Codable, Identifiable, Hashable, Sendable {
     let word: String          // e.g. "stack"
     let definition: String    // short plain-English meaning
     let category: String      // used by the mini quiz ("which subject?")
@@ -23,7 +24,7 @@ struct WordItem: Codable, Identifiable, Hashable {
 }
 
 /// One level = one course (e.g. "Data Structures"), made of several words.
-struct GameLevel: Codable, Identifiable, Hashable {
+nonisolated struct GameLevel: Codable, Identifiable, Hashable, Sendable {
     let title: String
     let words: [WordItem]
 
@@ -31,7 +32,7 @@ struct GameLevel: Codable, Identifiable, Hashable {
 }
 
 /// A university major (e.g. "Computer Engineering") containing its levels.
-struct Department: Codable, Identifiable, Hashable {
+nonisolated struct Department: Codable, Identifiable, Hashable, Sendable {
     let department: String     // matches the JSON key
     let levels: [GameLevel]
 
