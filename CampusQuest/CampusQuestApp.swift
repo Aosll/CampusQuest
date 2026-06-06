@@ -2,16 +2,23 @@
 //  CampusQuestApp.swift
 //  CampusQuest
 //
-//  Created by Ömer Efe DİKİCİ on 5.06.2026.
+//  App entry point. Creates the shared ContentStore and sets up the
+//  SwiftData container so progress is saved on the device.
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CampusQuestApp: App {
+    // Created once for the whole app; shared with all child views.
+    @State private var store = ContentStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainMenuView()
+                .environment(store)
         }
+        .modelContainer(for: PlayerProgress.self)
     }
 }

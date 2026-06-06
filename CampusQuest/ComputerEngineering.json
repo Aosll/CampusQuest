@@ -1,0 +1,80 @@
+{
+  "department": "Computer Engineering",
+  "levels": [
+    {
+      "title": "Programming Fundamentals",
+      "words": [
+        { "word": "variable", "definition": "A named container that stores a value which can change while a program runs.", "category": "Programming Fundamentals", "objectToUnlock": "code_editor" },
+        { "word": "function", "definition": "A reusable block of code that performs a specific task.", "category": "Programming Fundamentals", "objectToUnlock": "function_block" },
+        { "word": "loop", "definition": "A structure that repeats a block of code multiple times.", "category": "Programming Fundamentals", "objectToUnlock": "loop_animation" },
+        { "word": "array", "definition": "An ordered collection that stores multiple values in a single variable.", "category": "Programming Fundamentals", "objectToUnlock": "array_blocks" },
+        { "word": "condition", "definition": "A statement that runs code only when a given test is true.", "category": "Programming Fundamentals", "objectToUnlock": "branch_path" },
+        { "word": "input", "definition": "Data that a program receives, often from the user.", "category": "Programming Fundamentals", "objectToUnlock": "keyboard_icon" },
+        { "word": "output", "definition": "Data that a program produces and shows or returns.", "category": "Programming Fundamentals", "objectToUnlock": "screen_icon" },
+        { "word": "string", "definition": "A sequence of characters used to represent text.", "category": "Programming Fundamentals", "objectToUnlock": "text_line" },
+        { "word": "integer", "definition": "A whole number without a decimal point.", "category": "Programming Fundamentals", "objectToUnlock": "number_tile" },
+        { "word": "boolean", "definition": "A value that can only be true or false.", "category": "Programming Fundamentals", "objectToUnlock": "toggle_switch" }
+      ]
+    },
+    {
+      "title": "Data Structures",
+      "words": [
+        { "word": "stack", "definition": "A structure where the last item added is the first one removed (LIFO).", "category": "Data Structures", "objectToUnlock": "stack_visual" },
+        { "word": "queue", "definition": "A structure where the first item added is the first one removed (FIFO).", "category": "Data Structures", "objectToUnlock": "queue_visual" },
+        { "word": "tree", "definition": "A hierarchical structure made of nodes connected like branches.", "category": "Data Structures", "objectToUnlock": "tree_visual" },
+        { "word": "graph", "definition": "A structure of nodes connected by edges to show relationships.", "category": "Data Structures", "objectToUnlock": "graph_visual" },
+        { "word": "linkedlist", "definition": "A chain of nodes where each node points to the next one.", "category": "Data Structures", "objectToUnlock": "linkedlist_visual" },
+        { "word": "node", "definition": "A single element in a data structure that holds data and links.", "category": "Data Structures", "objectToUnlock": "node_visual" },
+        { "word": "heap", "definition": "A tree-based structure used to quickly find the largest or smallest value.", "category": "Data Structures", "objectToUnlock": "heap_visual" },
+        { "word": "hash", "definition": "A function that turns data into a fixed-size value for fast lookup.", "category": "Data Structures", "objectToUnlock": "hash_visual" },
+        { "word": "array", "definition": "An ordered collection that stores multiple values in a single variable.", "category": "Data Structures", "objectToUnlock": "array_visual" },
+        { "word": "map", "definition": "A structure that links each unique key to a value.", "category": "Data Structures", "objectToUnlock": "map_visual" }
+      ]
+    },
+    {
+      "title": "Computer Networks",
+      "words": [
+        { "word": "router", "definition": "A device that directs data between different computer networks.", "category": "Computer Networks", "objectToUnlock": "router_icon" },
+        { "word": "packet", "definition": "A small unit of data sent across a network.", "category": "Computer Networks", "objectToUnlock": "packet_icon" },
+        { "word": "protocol", "definition": "A set of rules that controls how data is sent and received.", "category": "Computer Networks", "objectToUnlock": "protocol_icon" },
+        { "word": "firewall", "definition": "A security system that filters incoming and outgoing network traffic.", "category": "Computer Networks", "objectToUnlock": "firewall_icon" },
+        { "word": "server", "definition": "A computer that provides data or services to other computers.", "category": "Computer Networks", "objectToUnlock": "server_rack" },
+        { "word": "client", "definition": "A computer or app that requests services from a server.", "category": "Computer Networks", "objectToUnlock": "client_icon" },
+        { "word": "socket", "definition": "An endpoint that lets two programs communicate over a network.", "category": "Computer Networks", "objectToUnlock": "socket_icon" },
+        { "word": "domain", "definition": "A human-readable name that identifies a website on the internet.", "category": "Computer Networks", "objectToUnlock": "domain_icon" },
+        { "word": "switch", "definition": "A device that connects computers within the same network.", "category": "Computer Networks", "objectToUnlock": "switch_icon" },
+        { "word": "latency", "definition": "The delay before data starts transferring across a network.", "category": "Computer Networks", "objectToUnlock": "latency_meter" }
+      ]
+    },
+    {
+      "title": "Databases",
+      "words": [
+        { "word": "table", "definition": "A collection of related data organized into rows and columns.", "category": "Databases", "objectToUnlock": "table_icon" },
+        { "word": "query", "definition": "A request used to read or change data in a database.", "category": "Databases", "objectToUnlock": "query_icon" },
+        { "word": "schema", "definition": "The structure that defines how a database is organized.", "category": "Databases", "objectToUnlock": "schema_icon" },
+        { "word": "index", "definition": "A structure that speeds up searching for data in a table.", "category": "Databases", "objectToUnlock": "index_icon" },
+        { "word": "relation", "definition": "A connection between two tables in a database.", "category": "Databases", "objectToUnlock": "relation_icon" },
+        { "word": "primarykey", "definition": "A column whose value uniquely identifies each row in a table.", "category": "Databases", "objectToUnlock": "primarykey_icon" },
+        { "word": "foreignkey", "definition": "A column that links one table to the primary key of another.", "category": "Databases", "objectToUnlock": "foreignkey_icon" },
+        { "word": "transaction", "definition": "A group of database operations treated as a single unit.", "category": "Databases", "objectToUnlock": "transaction_icon" },
+        { "word": "database", "definition": "An organized collection of data stored for easy access.", "category": "Databases", "objectToUnlock": "database_icon" },
+        { "word": "record", "definition": "A single row of related data in a table.", "category": "Databases", "objectToUnlock": "record_icon" }
+      ]
+    },
+    {
+      "title": "Cybersecurity",
+      "words": [
+        { "word": "encryption", "definition": "The process of scrambling data so only authorized people can read it.", "category": "Cybersecurity", "objectToUnlock": "encryption_icon" },
+        { "word": "malware", "definition": "Harmful software designed to damage or gain access to a system.", "category": "Cybersecurity", "objectToUnlock": "malware_icon" },
+        { "word": "phishing", "definition": "A scam that tricks people into revealing private information.", "category": "Cybersecurity", "objectToUnlock": "phishing_icon" },
+        { "word": "firewall", "definition": "A security system that filters incoming and outgoing network traffic.", "category": "Cybersecurity", "objectToUnlock": "firewall_shield" },
+        { "word": "vulnerability", "definition": "A weakness in a system that an attacker can exploit.", "category": "Cybersecurity", "objectToUnlock": "vulnerability_icon" },
+        { "word": "exploit", "definition": "A technique or code that takes advantage of a vulnerability.", "category": "Cybersecurity", "objectToUnlock": "exploit_icon" },
+        { "word": "password", "definition": "A secret string used to verify a user's identity.", "category": "Cybersecurity", "objectToUnlock": "password_icon" },
+        { "word": "authentication", "definition": "The process of confirming that someone is who they claim to be.", "category": "Cybersecurity", "objectToUnlock": "auth_icon" },
+        { "word": "threat", "definition": "A possible danger that could harm a system or its data.", "category": "Cybersecurity", "objectToUnlock": "threat_icon" },
+        { "word": "attack", "definition": "An attempt to damage, steal from, or disrupt a system.", "category": "Cybersecurity", "objectToUnlock": "attack_icon" }
+      ]
+    }
+  ]
+}
