@@ -33,13 +33,17 @@ final class ContentStore {
     var errorMessage: String?
 
     init() {
-        loadComputerEngineering()
+        // MVP: load Computer Engineering at startup. Adding another major is
+        // just a matter of shipping a new "<Name>.json" and loading it here
+        // (or when the major is selected).
+        loadDepartment(named: "ComputerEngineering")
     }
 
-    /// Loads the Computer Engineering content.
-    func loadComputerEngineering() {
+    /// Loads a single department's content from "<name>.json" on demand.
+    /// `name` is the JSON file's base name (e.g. "ComputerEngineering").
+    func loadDepartment(named name: String) {
         do {
-            department = try Self.load("ComputerEngineering")
+            department = try Self.load(name)
             errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
