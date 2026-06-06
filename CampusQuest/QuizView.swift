@@ -48,7 +48,9 @@ struct QuizView: View {
         .preferredColorScheme(.light)
         .onAppear {
             if model == nil {
-                model = QuizSessionModel(allQuestions: store.quizQuestions)
+                // Generate questions on demand, per level, when the quiz opens.
+                let questions = store.department?.levels.flatMap { store.questions(for: $0) } ?? []
+                model = QuizSessionModel(allQuestions: questions)
             }
         }
     }

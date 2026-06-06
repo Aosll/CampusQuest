@@ -29,8 +29,6 @@ enum ContentError: LocalizedError {
 final class ContentStore {
     /// The currently loaded department (Computer Engineering for the MVP).
     var department: Department?
-    /// One quiz question generated for every word in the department.
-    var quizQuestions: [QuizQuestion] = []
     /// Human-readable error to show if loading fails.
     var errorMessage: String?
 
@@ -38,12 +36,10 @@ final class ContentStore {
         loadComputerEngineering()
     }
 
-    /// Loads the Computer Engineering content and builds its quiz questions.
+    /// Loads the Computer Engineering content.
     func loadComputerEngineering() {
         do {
-            let dept = try Self.load("ComputerEngineering")
-            department = dept
-            quizQuestions = Self.makeAllQuestions(for: dept)
+            department = try Self.load("ComputerEngineering")
             errorMessage = nil
         } catch {
             errorMessage = error.localizedDescription
@@ -51,12 +47,11 @@ final class ContentStore {
         }
     }
 
-    /// Builds one quiz question for every word in the department.
-    static func makeAllQuestions(for department: Department) -> [QuizQuestion] {
-        let categories = department.allCategories
-        return department.levels
-            .flatMap { $0.words }
-            .map { QuizBuilder.makeQuestion(for: $0, allCategories: categories) }
+    /// Builds quiz questions for a single level on demand, using the whole
+    /// department's categories as possible answer choices.
+    func questions(for level: GameLevel) -> [QuizQuestion] {
+        let categories = department?.allCategories ?? []
+        return level.words.map { QuizBuilder.makeQuestion(for: $0, allCategories: categories) }
     }
 
     /// Reads a JSON file from the app bundle and decodes it into a Department.
