@@ -21,13 +21,16 @@ struct CampusQuestApp: App {
                 .environment(store)
                 .environment(auth)
         }
-        .modelContainer(for: PlayerProgress.self)
     }
 }
 
 /// The authentication gate. Lives in a real View (not the Scene body) so
 /// that @Observable state changes reliably re-render the tree:
 /// signed out -> login screen, otherwise the main menu.
+///
+/// The SwiftData container is chosen by auth state: signed-in players use
+/// the on-disk store, guests use a fresh in-memory store so their progress
+/// is never written to disk.
 struct RootView: View {
     @Environment(AuthManager.self) private var auth
 
@@ -36,6 +39,7 @@ struct RootView: View {
             LoginView()
         } else {
             MainMenuView()
+                .modelContainer(auth.activeContainer)
         }
     }
 }

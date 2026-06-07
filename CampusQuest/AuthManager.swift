@@ -14,6 +14,7 @@
 
 import Foundation
 import Observation
+import SwiftData
 
 /// The possible authentication states for the app.
 enum AuthState: Equatable {
@@ -36,9 +37,47 @@ final class AuthManager {
     /// The current auth state. Persisted on every change.
     private(set) var state: AuthState = .signedOut
 
+    /// On-disk SwiftData store used by signed-in (Apple) players. Created
+    /// once and kept for the app's lifetime.
+    @ObservationIgnored
+    private(set) lazy var persistentContainer: ModelContainer = {
+        do {
+            return try ModelContainer(for: PlayerProgress.self)
+        } catch {
+            fatalError("Could not create persistent ModelContainer: \(error)")
+        }
+    }()
+
+    /// In-memory SwiftData store used by guests. Recreated fresh for every
+    /// guest session so a guest ALWAYS starts from scratch and nothing is
+    /// ever written to disk (see PRIVACY RULE above).
+    @ObservationIgnored
+    private(set) var guestContainer: ModelContainer?
+
+    /// The container the rest of the app should use for the current state.
+    var activeContainer: ModelContainer {
+        if case .guest = state, let guestContainer { return guestContainer }
+        return persistentContainer
+    }
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        self.state = restore()
+        let restored = restore()
+        self.state = restored
+        // A restored guest session still gets a brand-new in-memory store.
+        if case .guest = restored {
+            self.guestContainer = Self.makeGuestContainer()
+        }
+    }
+
+    /// Builds a fresh in-memory container (no on-disk persistence).
+    private static func makeGuestContainer() -> ModelContainer {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        do {
+            return try ModelContainer(for: PlayerProgress.self, configurations: config)
+        } catch {
+            fatalError("Could not create in-memory ModelContainer: \(error)")
+        }
     }
 
     // MARK: - Derived
@@ -67,16 +106,22 @@ final class AuthManager {
     func signInApple(userID: String, displayName: String?) {
         let storedName = defaults.string(forKey: Keys.displayName)
         let name = displayName ?? storedName ?? "Student"
+        // Drop any leftover guest store so its in-memory data is released.
+        guestContainer = nil
         state = .signedInApple(userID: userID, displayName: name)
         persist()
     }
 
     func continueAsGuest() {
+        // Fresh in-memory store every time: each guest starts from zero.
+        guestContainer = Self.makeGuestContainer()
         state = .guest
         persist()
     }
 
     func signOut() {
+        // Releasing the in-memory store discards all guest progress.
+        guestContainer = nil
         state = .signedOut
         defaults.removeObject(forKey: Keys.appleUserID)
         defaults.removeObject(forKey: Keys.displayName)
