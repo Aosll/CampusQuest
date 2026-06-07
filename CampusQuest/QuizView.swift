@@ -10,6 +10,7 @@
 
 import SwiftUI
 import SwiftData
+import Combine
 
 struct QuizView: View {
     @Environment(ContentStore.self) private var store
@@ -24,8 +25,22 @@ struct QuizView: View {
     @State private var showHint = false
     @State private var sessionXP = 0
     @State private var didPersist = false
+    @State private var timeRemaining = 0
+    @State private var xpFloat = false
+
+    /// Ticks once per second to drive the per-question countdown.
+    private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private var baseXP: Int { progressList.first?.totalXP ?? 0 }
+
+    /// Difficulty derived from the term's length (heuristic): label, seconds, color.
+    private func difficulty(for question: QuizQuestion) -> (label: String, time: Int, color: Color) {
+        switch question.word.word.count {
+        case ...5:  return ("Easy", 20, AppColor.success)
+        case 6...8: return ("Medium", 15, AppColor.warning)
+        default:    return ("Hard", 12, Color(red: 0.90, green: 0.27, blue: 0.31))
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -46,13 +61,11 @@ struct QuizView: View {
         .navigationTitle("Quiz Challenge")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.light)
-        .onAppear {
-            if model == nil {
-                // Generate questions on demand, per level, when the quiz opens.
-                let questions = store.department?.levels.flatMap { store.questions(for: $0) } ?? []
-                model = QuizSessionModel(allQuestions: questions)
-            }
-        }
+        .onAppear { buildModelIfNeeded() }
+        // Content loads asynchronously; build the quiz once it's available.
+        .onChange(of: store.department?.id) { _, _ in buildModelIfNeeded() }
+        .onReceive(ticker) { _ in tick() }
+        .onChange(of: model?.index) { _, _ in resetTimer() }
     }
 
     // MARK: - Question
@@ -96,6 +109,18 @@ struct QuizView: View {
                             .transition(.scale.combined(with: .opacity))
                     }
                     StatChip(icon: "star.fill", text: "\(baseXP + sessionXP)", tint: AppColor.secondary)
+                        .scaleEffect(xpFloat ? 1.12 : 1)
+                        .animation(.spring(response: 0.3, dampingFraction: 0.5), value: xpFloat)
+                        .overlay(alignment: .top) {
+                            // +10 XP floats up toward the counter on a correct answer.
+                            if xpFloat {
+                                Text("+10")
+                                    .font(.caption.bold())
+                                    .foregroundStyle(AppColor.success)
+                                    .offset(y: xpFloat ? -22 : 6)
+                                    .opacity(xpFloat ? 0 : 1)
+                            }
+                        }
                 }
             }
 
@@ -136,6 +161,29 @@ struct QuizView: View {
                         .font(.subheadline.bold())
                         .foregroundStyle(AppColor.ink)
                     Spacer()
+
+                    let diff = difficulty(for: question)
+                    // Difficulty indicator.
+                    Text(diff.label)
+                        .font(.caption2.bold())
+                        .foregroundStyle(diff.color)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(diff.color.opacity(0.14), in: Capsule())
+
+                    // Countdown timer.
+                    HStack(spacing: 3) {
+                        Image(systemName: "timer")
+                        Text("\(timeRemaining)s")
+                    }
+                    .font(.caption2.bold())
+                    .foregroundStyle(timeRemaining <= 5 && !model.hasAnswered ? Color.red : AppColor.inkSecondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        (timeRemaining <= 5 && !model.hasAnswered ? Color.red : AppColor.inkSecondary).opacity(0.12),
+                        in: Capsule()
+                    )
                 }
 
                 Text("Which course does this word belong to?")
@@ -269,12 +317,51 @@ struct QuizView: View {
             combo += 1
             sessionXP += 10
             correctGlow = option
+            // Float +10 XP toward the counter.
+            xpFloat = false
+            withAnimation(.easeOut(duration: 0.9)) { xpFloat = true }
             UINotificationFeedbackGenerator().notificationOccurred(.success)
         } else {
             combo = 0
             cardShake[option, default: 0] += 1
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
+    }
+
+    /// Builds the quiz session once content is available (guards against the
+    /// content still loading when the screen first appears).
+    private func buildModelIfNeeded() {
+        guard model == nil, let department = store.department else { return }
+        let questions = department.levels.flatMap { store.questions(for: $0) }
+        guard !questions.isEmpty else { return }
+        model = QuizSessionModel(allQuestions: questions)
+        resetTimer()
+    }
+
+    // MARK: - Timer
+
+    private func resetTimer() {
+        guard let model, let q = model.currentQuestion, !model.isFinished else { return }
+        timeRemaining = difficulty(for: q).time
+        xpFloat = false
+    }
+
+    private func tick() {
+        guard let model, !model.isFinished, !model.hasAnswered else { return }
+        if timeRemaining > 0 {
+            timeRemaining -= 1
+        } else {
+            timeOut(model: model)
+        }
+    }
+
+    /// Time ran out: record a non-matching answer so it counts as wrong and
+    /// the correct option is revealed.
+    private func timeOut(model: QuizSessionModel) {
+        guard !model.hasAnswered else { return }
+        combo = 0
+        model.choose("__timeout__")
+        UINotificationFeedbackGenerator().notificationOccurred(.error)
     }
 
     // MARK: - Result
@@ -314,9 +401,27 @@ struct QuizView: View {
                     .foregroundStyle(AppColor.ink)
 
                 HStack(spacing: 10) {
-                    StatChip(icon: "checkmark.circle.fill", text: "\(model.score)/\(model.questions.count)", tint: AppColor.success)
+                    StatChip(icon: "checkmark.circle.fill", text: "\(model.score)/\(model.questions.count) correct", tint: AppColor.success)
                     StatChip(icon: "star.fill", text: "+\(sessionXP) XP", tint: AppColor.secondary)
                 }
+
+                // Rank progress after the freshly earned XP.
+                let rank = RankSystem.progress(forXP: baseXP)
+                VStack(spacing: 6) {
+                    HStack {
+                        Label(rank.title, systemImage: "graduationcap.fill")
+                            .font(.subheadline.bold())
+                            .foregroundStyle(AppColor.ink)
+                        Spacer()
+                        Text(rank.nextTitle != nil ? "\(rank.percent)% to \(rank.nextTitle!)" : "Max rank")
+                            .font(.caption.bold())
+                            .foregroundStyle(AppColor.inkSecondary)
+                    }
+                    ProgressView(value: rank.fraction)
+                        .tint(AppColor.primary)
+                }
+                .padding()
+                .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
 
                 if !strongTopics.isEmpty || !weakTopics.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
