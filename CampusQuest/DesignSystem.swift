@@ -94,6 +94,19 @@ struct GlassCard<Content: View>: View {
     }
 }
 
+/// A lightweight press style: the control scales down and dims slightly
+/// while pressed, giving every tappable surface a tactile, game-like feel.
+struct PressableButtonStyle: ButtonStyle {
+    var scale: CGFloat = 0.96
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? scale : 1)
+            .opacity(configuration.isPressed ? 0.92 : 1)
+            .animation(.spring(response: 0.28, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
+
 /// A faint dotted "QR / circuit" decoration used on the ID card and
 /// major cards to reinforce the tech-campus theme.
 struct DotPattern: View {

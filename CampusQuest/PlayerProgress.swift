@@ -23,6 +23,18 @@ final class PlayerProgress {
     /// Last day the player was active, as "yyyy-MM-dd". Empty = never.
     var lastPlayedDay: String = ""
 
+    // MARK: Daily challenge counters (reset each calendar day)
+    /// The day the daily counters below belong to ("yyyy-MM-dd").
+    var dailyDay: String = ""
+    /// Words found today.
+    var dailyWords: Int = 0
+    /// XP earned today.
+    var dailyXP: Int = 0
+    /// Levels completed today.
+    var dailyLevels: Int = 0
+    /// Day on which today's daily-challenge reward was claimed.
+    var dailyChallengeClaimedDay: String = ""
+
     init(totalXP: Int = 0,
          completedLevels: [String] = [],
          earnedBadges: [String] = []) {
@@ -58,8 +70,9 @@ extension PlayerProgress {
     /// every correct guess. Returns the new running total of words found.
     @discardableResult
     func registerWordFound() -> Int {
+        touchToday()
         wordsFound += 1
-        registerActivityToday()
+        dailyWords += 1
         return wordsFound
     }
 
@@ -67,9 +80,10 @@ extension PlayerProgress {
     /// day streak, and re-evaluates streak badges. Returns the XP gained.
     @discardableResult
     func recordQuizFinished(correctCount: Int) -> Int {
-        registerActivityToday()
+        touchToday()
         let xp = correctCount * 10
         totalXP += xp
+        dailyXP += xp
         // Re-evaluate badges; Int.max guards against awarding "Major Master".
         _ = awardBadges(totalLevels: Int.max)
         return xp
@@ -83,7 +97,7 @@ extension PlayerProgress {
                           wordCount: Int,
                           totalLevels: Int,
                           perfect: Bool = false) -> LevelReward? {
-        registerActivityToday()
+        touchToday()
         if perfect { bestPerfectLab = true }
 
         guard !completedLevels.contains(levelTitle) else {
@@ -95,28 +109,61 @@ extension PlayerProgress {
 
         let xpGained = wordCount * 10 + 50
         totalXP += xpGained
+        dailyXP += xpGained
+        dailyLevels += 1
 
         let newBadges = awardBadges(totalLevels: totalLevels)
         return LevelReward(xpGained: xpGained, newBadges: newBadges)
     }
 
-    /// Updates the day-based streak: +1 for consecutive days, reset to 1
-    /// after a gap, no-op if already counted today.
-    private func registerActivityToday() {
+    /// "yyyy-MM-dd" string for a date (default today), in a stable locale.
+    static func dayString(_ date: Date = Date()) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter.string(from: date)
+    }
 
-        let today = formatter.string(from: Date())
-        guard today != lastPlayedDay else { return }
+    /// Rolls daily counters over at the start of a new day and updates the
+    /// day-based play streak. Called by every progress-recording method.
+    private func touchToday() {
+        let today = Self.dayString()
 
-        if let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()),
-           formatter.string(from: yesterday) == lastPlayedDay {
-            currentStreak += 1
-        } else {
-            currentStreak = 1
+        // Reset daily-challenge counters when the calendar day changes.
+        if dailyDay != today {
+            dailyDay = today
+            dailyWords = 0
+            dailyXP = 0
+            dailyLevels = 0
         }
-        lastPlayedDay = today
+
+        // Update the play streak once per day.
+        if today != lastPlayedDay {
+            if let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()),
+               Self.dayString(yesterday) == lastPlayedDay {
+                currentStreak += 1
+            } else {
+                currentStreak = 1
+            }
+            lastPlayedDay = today
+        }
+    }
+
+    /// The most recently earned badge id, if any (for the home widget).
+    var recentBadgeID: String? { earnedBadges.last }
+
+    /// True if today's daily-challenge reward has already been claimed.
+    var dailyChallengeClaimedToday: Bool { dailyChallengeClaimedDay == Self.dayString() }
+
+    /// Grants the daily-challenge reward once per day when the target is met.
+    /// Returns the XP granted (0 if already claimed or not yet complete).
+    @discardableResult
+    func claimDailyChallenge(reward: Int, progress: Int, target: Int) -> Int {
+        let today = Self.dayString()
+        guard progress >= target, dailyChallengeClaimedDay != today else { return 0 }
+        dailyChallengeClaimedDay = today
+        totalXP += reward
+        return reward
     }
 
     /// Gives any badges whose thresholds are now met. Returns the new ones.
