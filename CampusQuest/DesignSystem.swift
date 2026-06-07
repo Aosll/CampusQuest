@@ -75,6 +75,17 @@ enum CoursePalette {
     }
 }
 
+/// Heuristic word difficulty from length (no per-word data needed).
+enum WordDifficulty {
+    static func label(for word: String) -> (text: String, color: Color) {
+        switch word.count {
+        case ...5:  return ("Easy", AppColor.success)
+        case 6...8: return ("Medium", AppColor.warning)
+        default:    return ("Hard", Color(red: 0.90, green: 0.27, blue: 0.31))
+        }
+    }
+}
+
 extension LinearGradient {
     /// The app's primary blue → purple gradient (buttons, logos, accents).
     static let brand = LinearGradient(

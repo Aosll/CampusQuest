@@ -15,7 +15,12 @@ struct DictionaryView: View {
     @Query private var progressList: [PlayerProgress]
     private var progress: PlayerProgress? { progressList.first }
 
+    @State private var searchText = ""
+    @State private var selectedCategory: String? = nil
+
     private let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
+    private let categories = ["Programming Fundamentals", "Data Structures",
+                              "Computer Networks", "Databases", "Cybersecurity"]
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -29,13 +34,22 @@ struct DictionaryView: View {
                         .padding(.horizontal)
                         .padding(.top, 20)
                 } else {
-                    VStack(spacing: 18) {
-                        ForEach(learnedLevels) { level in
-                            LearnedLevelSection(level: level)
+                    filterBar
+
+                    let sections = filteredLevels
+                    if sections.isEmpty {
+                        noResults
+                            .padding(.horizontal)
+                            .padding(.top, 20)
+                    } else {
+                        VStack(spacing: 18) {
+                            ForEach(sections) { level in
+                                LearnedLevelSection(level: level, searchText: searchText)
+                            }
                         }
+                        .padding(.horizontal)
+                        .padding(.bottom, 24)
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 24)
                 }
             }
         }
@@ -45,9 +59,95 @@ struct DictionaryView: View {
         .preferredColorScheme(.light)
     }
 
+    // MARK: Search + category filters
+
+    private var filterBar: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 8) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(AppColor.inkSecondary)
+                TextField("Search words", text: $searchText)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                if !searchText.isEmpty {
+                    Button { searchText = "" } label: {
+                        Image(systemName: "xmark.circle.fill").foregroundStyle(AppColor.inkSecondary)
+                    }
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(Color.white.opacity(0.9), in: Capsule())
+            .overlay(Capsule().strokeBorder(AppColor.primary.opacity(0.14), lineWidth: 1))
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    categoryChip(title: "All", value: nil)
+                    ForEach(categories, id: \.self) { cat in
+                        categoryChip(title: shortName(cat), value: cat)
+                    }
+                }
+                .padding(.horizontal, 2)
+            }
+        }
+        .padding(.horizontal)
+    }
+
+    private func categoryChip(title: String, value: String?) -> some View {
+        let selected = selectedCategory == value
+        let color = value.map { CoursePalette.color(for: $0) } ?? AppColor.primary
+        return Button {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { selectedCategory = value }
+        } label: {
+            Text(title)
+                .font(.caption.bold())
+                .foregroundStyle(selected ? .white : color)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(selected ? AnyShapeStyle(color) : AnyShapeStyle(color.opacity(0.12)), in: Capsule())
+        }
+        .buttonStyle(PressableButtonStyle())
+    }
+
+    private func shortName(_ category: String) -> String {
+        switch category {
+        case "Programming Fundamentals": return "Programming"
+        case "Data Structures":          return "Data Struct."
+        case "Computer Networks":        return "Networks"
+        default:                         return category
+        }
+    }
+
+    private var noResults: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 40))
+                .foregroundStyle(AppColor.inkSecondary.opacity(0.6))
+            Text("No matching words")
+                .font(.headline)
+                .foregroundStyle(ink)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+    }
+
     private var learnedLevels: [GameLevel] {
         guard let department = store.department, let progress else { return [] }
         return department.levels.filter { progress.isCompleted($0.title) }
+    }
+
+    /// Levels after applying the category filter and dropping ones with no
+    /// words matching the current search.
+    private var filteredLevels: [GameLevel] {
+        let query = searchText.trimmingCharacters(in: .whitespaces).lowercased()
+        return learnedLevels.filter { level in
+            if let cat = selectedCategory, !level.title.hasPrefix(cat) { return false }
+            if query.isEmpty { return true }
+            return level.words.contains { word in
+                word.displayName.lowercased().contains(query) ||
+                word.definition.lowercased().contains(query)
+            }
+        }
     }
 
     private var learnedWordCount: Int {
@@ -159,6 +259,7 @@ struct DictionaryView: View {
 
 private struct LearnedLevelSection: View {
     let level: GameLevel
+    var searchText: String = ""
 
     @State private var selectedWord: WordItem?
 
@@ -166,6 +267,16 @@ private struct LearnedLevelSection: View {
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12)
     ]
+
+    /// Words in this level matching the current search query.
+    private var words: [WordItem] {
+        let query = searchText.trimmingCharacters(in: .whitespaces).lowercased()
+        guard !query.isEmpty else { return level.words }
+        return level.words.filter {
+            $0.displayName.lowercased().contains(query) ||
+            $0.definition.lowercased().contains(query)
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -180,7 +291,7 @@ private struct LearnedLevelSection: View {
                     Text(level.title)
                         .font(.headline)
 
-                    Text("\(level.words.count) mastered words")
+                    Text("\(words.count) mastered words")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -192,7 +303,7 @@ private struct LearnedLevelSection: View {
             }
 
             LazyVGrid(columns: columns, spacing: 12) {
-                ForEach(level.words) { word in
+                ForEach(words) { word in
                     Button {
                         selectedWord = word
                     } label: {
@@ -359,13 +470,22 @@ private struct WordDetailSheet: View {
                             .foregroundStyle(accent)
                     }
 
-                    VStack(alignment: .leading, spacing: 3) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text(word.displayName)
                             .font(.title2.bold())
                             .foregroundStyle(AppColor.ink)
-                        Text(word.category)
-                            .font(.caption.bold())
-                            .foregroundStyle(accent)
+                        HStack(spacing: 6) {
+                            Text(word.category)
+                                .font(.caption.bold())
+                                .foregroundStyle(accent)
+                            let diff = WordDifficulty.label(for: word.word)
+                            Text(diff.text)
+                                .font(.caption2.bold())
+                                .foregroundStyle(diff.color)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 2)
+                                .background(diff.color.opacity(0.15), in: Capsule())
+                        }
                     }
 
                     Spacer()
@@ -376,6 +496,8 @@ private struct WordDetailSheet: View {
                 }
 
                 detailBlock(title: "Definition", icon: "text.book.closed", body: word.definition)
+
+                detailBlock(title: "Course", icon: "graduationcap", body: word.category)
 
                 detailBlock(title: "Used in", icon: "mappin.and.ellipse", body: levelTitle)
 

@@ -18,6 +18,8 @@ final class PlayerProgress {
     var wordsFound: Int = 0
     /// Best single-level streak of correct guesses without a mistake.
     var bestPerfectLab: Bool = false
+    /// Total correct quiz answers across all sessions (drives Quiz Master).
+    var quizCorrectTotal: Int = 0
     /// Day-based play streak.
     var currentStreak: Int = 0
     /// Last day the player was active, as "yyyy-MM-dd". Empty = never.
@@ -84,8 +86,8 @@ extension PlayerProgress {
         let xp = correctCount * 10
         totalXP += xp
         dailyXP += xp
-        // Re-evaluate badges; Int.max guards against awarding "Major Master".
-        _ = awardBadges(totalLevels: Int.max)
+        quizCorrectTotal += correctCount
+        _ = awardAchievements()
         return xp
     }
 
@@ -101,8 +103,8 @@ extension PlayerProgress {
         if perfect { bestPerfectLab = true }
 
         guard !completedLevels.contains(levelTitle) else {
-            // No duplicate XP, but a first-ever perfect run can still unlock a badge.
-            let extra = awardBadges(totalLevels: totalLevels)
+            // No duplicate XP, but newly met achievements can still unlock.
+            let extra = awardAchievements()
             return extra.isEmpty ? nil : LevelReward(xpGained: 0, newBadges: extra)
         }
         completedLevels.append(levelTitle)
@@ -112,7 +114,7 @@ extension PlayerProgress {
         dailyXP += xpGained
         dailyLevels += 1
 
-        let newBadges = awardBadges(totalLevels: totalLevels)
+        let newBadges = awardAchievements()
         return LevelReward(xpGained: xpGained, newBadges: newBadges)
     }
 
@@ -157,9 +159,6 @@ extension PlayerProgress {
         return true
     }
 
-    /// The most recently earned badge id, if any (for the home widget).
-    var recentBadgeID: String? { earnedBadges.last }
-
     /// True if today's daily-challenge reward has already been claimed.
     var dailyChallengeClaimedToday: Bool { dailyChallengeClaimedDay == Self.dayString() }
 
@@ -174,22 +173,17 @@ extension PlayerProgress {
         return reward
     }
 
-    /// Gives any badges whose thresholds are now met. Returns the new ones.
-    private func awardBadges(totalLevels: Int) -> [String] {
-        var awarded: [String] = []
-        func give(_ id: String) {
-            if !earnedBadges.contains(id) {
-                earnedBadges.append(id)
-                awarded.append(id)
+    /// Records any achievements whose targets are now met. Persists their ids
+    /// in `earnedBadges` and returns the titles of the newly unlocked ones.
+    @discardableResult
+    private func awardAchievements() -> [String] {
+        var newlyUnlocked: [String] = []
+        for achievement in Achievement.all where achievement.isUnlocked(self) {
+            if !earnedBadges.contains(achievement.id) {
+                earnedBadges.append(achievement.id)
+                newlyUnlocked.append(achievement.title)
             }
         }
-        let done = completedLevels.count
-        if wordsFound >= 1 { give("First Word") }
-        if done >= 1 { give("Lab Starter") }
-        if done >= 3 { give("Halfway There") }
-        if bestPerfectLab { give("Perfect Lab") }
-        if currentStreak >= 3 { give("3-Day Streak") }
-        if done >= totalLevels { give("Major Master") }
-        return awarded
+        return newlyUnlocked
     }
 }

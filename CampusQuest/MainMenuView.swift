@@ -16,7 +16,8 @@ struct MainMenuView: View {
     @Query private var progressList: [PlayerProgress]
     private var progress: PlayerProgress? { progressList.first }
     private var totalXP: Int { progress?.totalXP ?? 0 }
-    private var badgeCount: Int { progress?.earnedBadges.count ?? 0 }
+    private var unlockedAchievements: [Achievement] { progress.map { Achievement.unlocked(for: $0) } ?? [] }
+    private var badgeCount: Int { unlockedAchievements.count }
     private var hasProgress: Bool { (progress?.completedLevels.isEmpty == false) }
     private var streak: Int { progress?.currentStreak ?? 0 }
 
@@ -153,7 +154,7 @@ struct MainMenuView: View {
                         Text(rank.title)
                             .font(.subheadline.bold())
                             .foregroundStyle(AppColor.ink)
-                        Label("\(badgeCount)/\(Badge.all.count)", systemImage: "rosette")
+                        Label("\(badgeCount)/\(Achievement.all.count)", systemImage: "rosette")
                             .font(.caption2.bold())
                             .foregroundStyle(AppColor.secondary)
                     }
@@ -297,18 +298,17 @@ struct MainMenuView: View {
 
     @ViewBuilder
     private var recentAchievementCard: some View {
-        if let id = progress?.recentBadgeID,
-           let badge = Badge.all.first(where: { $0.id == id }) {
+        if let badge = unlockedAchievements.last {
             HStack(spacing: 12) {
                 ZStack {
-                    Circle().fill(AppColor.secondary.opacity(0.16)).frame(width: 44, height: 44)
+                    Circle().fill(badge.tier.color.opacity(0.16)).frame(width: 44, height: 44)
                     Image(systemName: badge.icon)
                         .font(.headline.bold())
-                        .foregroundStyle(AppColor.secondary)
+                        .foregroundStyle(badge.tier.color)
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Recent Achievement")
+                    Text("Recent Achievement · \(badge.tier.rawValue)")
                         .font(.caption2.bold())
                         .foregroundStyle(AppColor.inkSecondary)
                     Text(badge.title)
