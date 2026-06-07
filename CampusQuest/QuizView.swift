@@ -305,6 +305,7 @@ struct QuizView: View {
                     .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                     .foregroundStyle(.white)
             }
+            .buttonStyle(PressableButtonStyle())
             .transition(.move(edge: .bottom).combined(with: .opacity))
         }
     }
@@ -451,6 +452,7 @@ struct QuizView: View {
                         .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                         .foregroundStyle(.white)
                 }
+                .buttonStyle(PressableButtonStyle())
                 .padding(.top, 4)
                 .padding(.bottom, 12)
             }

@@ -8,6 +8,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct MajorSelectView: View {
     @Environment(ContentStore.self) private var store
@@ -29,7 +30,10 @@ struct MajorSelectView: View {
                             isLocked: false
                         )
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(PressableButtonStyle())
+                    .simultaneousGesture(TapGesture().onEnded {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    })
                 }
 
                 // Placeholders for future majors.

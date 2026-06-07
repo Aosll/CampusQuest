@@ -9,6 +9,7 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct LevelSelectView: View {
     let department: Department
@@ -63,6 +64,9 @@ struct LevelSelectView: View {
                                     )
                                 }
                                 .buttonStyle(PressableButtonStyle())
+                                .simultaneousGesture(TapGesture().onEnded {
+                                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                })
                             } else {
                                 LevelRoomCard(
                                     number: index + 1,

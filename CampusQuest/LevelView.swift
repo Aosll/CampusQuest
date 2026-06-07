@@ -348,6 +348,7 @@ struct LevelView: View {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.55)) {
                         completionPop = true
                     }
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                 }
 
                 RewardSummaryCard(
@@ -385,9 +386,11 @@ struct LevelView: View {
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.accentColor, in: RoundedRectangle(cornerRadius: 14))
+                                .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
                                 .foregroundStyle(.white)
+                                .shadow(color: AppColor.primary.opacity(0.35), radius: 10, y: 5)
                         }
+                        .buttonStyle(PressableButtonStyle())
                     }
 
                     HStack(spacing: 10) {
@@ -395,14 +398,16 @@ struct LevelView: View {
                             model = LevelGameModel(level: level)
                             didRecord = false
                             reward = nil
+                            completionPop = false
                         } label: {
                             Label("Replay", systemImage: "arrow.clockwise")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 14))
+                                .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: AppRadius.control))
                                 .foregroundStyle(.primary)
                         }
+                        .buttonStyle(PressableButtonStyle())
 
                         ShareLink(
                             item: "I just completed \(level.title) on Campus Quest! 🎓 Found all \(level.words.count) words. #CampusQuest"
@@ -518,6 +523,8 @@ private struct RewardSummaryCard: View {
     let newBadges: [String]
     let wordCount: Int
 
+    @State private var badgePop = false
+
     var body: some View {
         VStack(spacing: 14) {
             HStack(spacing: 12) {
@@ -538,12 +545,13 @@ private struct RewardSummaryCard: View {
 
             if !newBadges.isEmpty {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(newBadges.count > 1 ? "New badges unlocked" : "New badge unlocked")
+                    Label(newBadges.count > 1 ? "New achievements unlocked" : "New achievement unlocked",
+                          systemImage: "sparkles")
                         .font(.caption.bold())
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppColor.secondary)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    ForEach(newBadges, id: \.self) { badge in
+                    ForEach(Array(newBadges.enumerated()), id: \.element) { index, badge in
                         HStack(spacing: 8) {
                             Image(systemName: "rosette")
                                 .foregroundStyle(Color.accentColor)
@@ -555,7 +563,15 @@ private struct RewardSummaryCard: View {
                         }
                         .padding(10)
                         .background(Color.accentColor.opacity(0.10), in: RoundedRectangle(cornerRadius: 12))
+                        .scaleEffect(badgePop ? 1 : 0.7)
+                        .opacity(badgePop ? 1 : 0)
+                        .animation(.spring(response: 0.45, dampingFraction: 0.55)
+                            .delay(0.2 + Double(index) * 0.12), value: badgePop)
                     }
+                }
+                .onAppear {
+                    badgePop = true
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                 }
             }
         }
