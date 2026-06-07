@@ -39,7 +39,12 @@ struct MainMenuView: View {
                     VStack(spacing: 18) {
                         streakRow
                         logo
-                        campusIDCard
+                        NavigationLink {
+                            CampusIDDetailView()
+                        } label: {
+                            campusIDCard
+                        }
+                        .buttonStyle(PressableButtonStyle(scale: 0.98))
                         dailyChallengeCard
                         recentAchievementCard
                         buttons
