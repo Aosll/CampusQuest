@@ -18,6 +18,8 @@ struct LevelView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Query private var progressList: [PlayerProgress]
+    private var availableXP: Int { progressList.first?.totalXP ?? 0 }
 
     @State private var model: LevelGameModel
     @State private var preview = ""
@@ -29,6 +31,15 @@ struct LevelView: View {
     @State private var foundWordText = ""
     @State private var successPulse = false
     @State private var slotFlash = false
+    @State private var combo = 0
+    @State private var revealedCount = 0
+    @State private var particleTrigger = 0
+    @State private var showParticles = false
+    @State private var floatingXP = false
+    @State private var completionPop = false
+
+    /// XP cost to reveal one letter via the Hint button.
+    private let hintCost = 5
 
     init(level: GameLevel, totalLevels: Int, nextLevel: GameLevel? = nil) {
         self.level = level
@@ -71,6 +82,8 @@ struct LevelView: View {
                 ) {
                     showDefinition = false
                     model.advance()
+                    revealedCount = 0
+                    floatingXP = false
                 }
                 .presentationDetents([.medium])
             }
@@ -81,10 +94,18 @@ struct LevelView: View {
 
     private func gameView(for word: WordItem) -> some View {
         VStack(spacing: 14) {
-            LabSceneView(levelTitle: level.title,
-                         totalWords: level.words.count,
-                         foundCount: model.currentIndex)
-                .scaleEffect(successPulse ? 1.025 : 1)
+            ZStack(alignment: .top) {
+                LabSceneView(levelTitle: level.title,
+                             totalWords: level.words.count,
+                             foundCount: model.currentIndex)
+                    .scaleEffect(successPulse ? 1.025 : 1)
+
+                if combo >= 2 {
+                    ComboBadge(count: combo)
+                        .padding(.top, 6)
+                        .transition(.scale.combined(with: .opacity))
+                }
+            }
 
             VStack(spacing: 4) {
                 Text("HINT")
@@ -97,8 +118,26 @@ struct LevelView: View {
             }
             .padding(.horizontal)
 
-            answerSlots(for: word)
-                .modifier(ShakeEffect(animatableData: CGFloat(wrongShake)))
+            // Answer slots with success particles + floating XP overlay.
+            ZStack {
+                answerSlots(for: word)
+                    .modifier(ShakeEffect(animatableData: CGFloat(wrongShake)))
+
+                if showParticles {
+                    ParticleBurst(color: CoursePalette.color(for: level.title))
+                        .id(particleTrigger)
+                        .allowsHitTesting(false)
+                }
+
+                if floatingXP {
+                    Text("+10 XP")
+                        .font(.headline.bold())
+                        .foregroundStyle(AppColor.success)
+                        .offset(y: floatingXP ? -54 : -10)
+                        .opacity(floatingXP ? 0 : 1)
+                        .allowsHitTesting(false)
+                }
+            }
 
             Spacer(minLength: 8)
 
@@ -111,27 +150,56 @@ struct LevelView: View {
 
             Spacer(minLength: 4)
 
-            Button {
-                model.shuffleTiles()
-            } label: {
-                Label("Shuffle", systemImage: "shuffle")
+            HStack(spacing: 12) {
+                Button {
+                    model.shuffleTiles()
+                } label: {
+                    Label("Shuffle", systemImage: "shuffle")
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+
+                Button {
+                    useHint(for: word)
+                } label: {
+                    Label("Hint (\(hintCost) XP)", systemImage: "lightbulb.fill")
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                .tint(AppColor.warning)
+                .disabled(!canUseHint(for: word))
             }
-            .buttonStyle(.bordered)
-            .controlSize(.large)
         }
+    }
+
+    private func canUseHint(for word: WordItem) -> Bool {
+        revealedCount < word.word.count - 1 && availableXP >= hintCost
+    }
+
+    private func useHint(for word: WordItem) {
+        guard canUseHint(for: word) else { return }
+        guard PlayerProgress.current(in: modelContext).spendXP(hintCost) else { return }
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+            revealedCount += 1
+        }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
 
     private func answerSlots(for word: WordItem) -> some View {
         let size = slotWidth(for: word.word.count)
         let chars = Array(preview)
+        let answer = Array(word.word)
         return HStack(spacing: 6) {
             ForEach(0..<word.word.count, id: \.self) { i in
                 let filled = i < chars.count
+                // A hinted (revealed) letter shows faintly until the player types it.
+                let revealed = !filled && i < revealedCount
                 let flashColor: Color = slotFlash ? .green : (filled ? Color.accentColor : Color(.tertiarySystemBackground))
-                let borderColor: Color = slotFlash ? .green : (filled ? Color.accentColor : Color.secondary.opacity(0.4))
-                Text(filled ? String(chars[i]).uppercased() : "")
+                let borderColor: Color = slotFlash ? .green : (filled ? Color.accentColor : (revealed ? AppColor.warning.opacity(0.6) : Color.secondary.opacity(0.4)))
+                Text(filled ? String(chars[i]).uppercased()
+                            : (revealed ? String(answer[i]).uppercased() : ""))
                     .font(.system(size: size * 0.5, weight: .bold))
-                    .foregroundStyle(filled ? .white : .clear)
+                    .foregroundStyle(filled ? .white : (revealed ? AppColor.warning.opacity(0.7) : .clear))
                     .frame(width: size, height: size + 8)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
@@ -152,9 +220,11 @@ struct LevelView: View {
         preview = ""
         if model.submit(guess: guess) {
             PlayerProgress.current(in: modelContext).registerWordFound()
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { combo += 1 }
             triggerSuccessFeedback(for: guess)
         } else if !guess.isEmpty {
             withAnimation(.default) { wrongShake += 1 }
+            withAnimation { combo = 0 }
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
     }
@@ -163,6 +233,13 @@ struct LevelView: View {
         foundWordText = guess.uppercased()
 
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+
+        // Particle burst + floating XP.
+        particleTrigger += 1
+        showParticles = true
+        floatingXP = false
+        withAnimation(.easeOut(duration: 0.9)) { floatingXP = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) { showParticles = false }
 
         withAnimation(.spring(response: 0.32, dampingFraction: 0.68)) {
             showWordFound = true
@@ -200,6 +277,15 @@ struct LevelView: View {
         return min(34, max(16, raw))
     }
 
+    /// Stars for the run: 3 for a clean run, 2 for a few slips, else 1.
+    private var starsEarned: Int {
+        switch model.mistakeCount {
+        case 0:    return 3
+        case 1...2: return 2
+        default:   return 1
+        }
+    }
+
     // MARK: - Progress
 
     private func recordCompletion() {
@@ -232,6 +318,20 @@ struct LevelView: View {
                             .foregroundStyle(.green)
                             .shadow(color: .green.opacity(0.30), radius: 12, y: 5)
                     }
+                    .scaleEffect(completionPop ? 1 : 0.5)
+                    .opacity(completionPop ? 1 : 0)
+
+                    // Stars earned based on how clean the run was.
+                    HStack(spacing: 10) {
+                        ForEach(0..<3, id: \.self) { i in
+                            Image(systemName: i < starsEarned ? "star.fill" : "star")
+                                .font(.title2)
+                                .foregroundStyle(i < starsEarned ? AppColor.warning : Color.secondary.opacity(0.35))
+                                .scaleEffect(completionPop ? 1 : 0.3)
+                                .animation(.spring(response: 0.4, dampingFraction: 0.5)
+                                    .delay(0.15 + Double(i) * 0.12), value: completionPop)
+                        }
+                    }
 
                     Text("Level Complete!")
                         .font(.system(size: 32, weight: .heavy, design: .rounded))
@@ -244,6 +344,11 @@ struct LevelView: View {
                         .padding(.horizontal)
                 }
                 .padding(.top, 10)
+                .onAppear {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.55)) {
+                        completionPop = true
+                    }
+                }
 
                 RewardSummaryCard(
                     xpGained: reward?.xpGained,
@@ -565,6 +670,53 @@ struct ShakeEffect: GeometryEffect {
     func effectValue(size: CGSize) -> ProjectionTransform {
         let translationX = travel * sin(animatableData * .pi * shakesPerUnit)
         return ProjectionTransform(CGAffineTransform(translationX: translationX, y: 0))
+    }
+}
+
+/// A small combo indicator shown for consecutive correct words.
+private struct ComboBadge: View {
+    let count: Int
+
+    var body: some View {
+        HStack(spacing: 5) {
+            Image(systemName: "flame.fill")
+            Text("Combo x\(count)")
+        }
+        .font(.caption.bold())
+        .foregroundStyle(.white)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(
+            LinearGradient(colors: [.orange, .red], startPoint: .leading, endPoint: .trailing),
+            in: Capsule()
+        )
+        .shadow(color: .orange.opacity(0.4), radius: 8, y: 3)
+    }
+}
+
+/// A short particle burst played when a word is solved. Recreate it with a
+/// changing `.id(...)` to replay the animation.
+private struct ParticleBurst: View {
+    let color: Color
+    private let count = 12
+    @State private var animate = false
+
+    var body: some View {
+        ZStack {
+            ForEach(0..<count, id: \.self) { i in
+                let angle = Double(i) / Double(count) * 2 * .pi
+                Circle()
+                    .fill(i.isMultiple(of: 2) ? color : AppColor.warning)
+                    .frame(width: 8, height: 8)
+                    .offset(x: animate ? cos(angle) * 80 : 0,
+                            y: animate ? sin(angle) * 50 : 0)
+                    .opacity(animate ? 0 : 1)
+                    .scaleEffect(animate ? 0.2 : 1)
+            }
+        }
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.7)) { animate = true }
+        }
     }
 }
 

@@ -149,6 +149,14 @@ extension PlayerProgress {
         }
     }
 
+    /// Spends XP if the player can afford it. Returns true on success.
+    @discardableResult
+    func spendXP(_ amount: Int) -> Bool {
+        guard totalXP >= amount else { return false }
+        totalXP -= amount
+        return true
+    }
+
     /// The most recently earned badge id, if any (for the home widget).
     var recentBadgeID: String? { earnedBadges.last }
 
