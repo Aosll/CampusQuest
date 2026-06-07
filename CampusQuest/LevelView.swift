@@ -108,7 +108,7 @@ struct LevelView: View {
             }
 
             VStack(spacing: 4) {
-                Text("HINT")
+                Text("CLUE")
                     .font(.caption2.bold())
                     .foregroundStyle(.tint)
                 Text(word.definition)
