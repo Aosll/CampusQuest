@@ -38,6 +38,15 @@ struct DailyChallenge {
         }
     }
 
+    /// A short sentence explaining what the player must do today.
+    var detail: String {
+        switch kind {
+        case .solveWords(let n):     return "Solve \(n) words in the word puzzles today to complete this challenge."
+        case .earnXP(let n):         return "Earn \(n) XP from any activity today to complete this challenge."
+        case .completeLevels(let n): return "Finish \(n) levels today to complete this challenge."
+        }
+    }
+
     var iconName: String {
         switch kind {
         case .solveWords:     return "textformat.abc"

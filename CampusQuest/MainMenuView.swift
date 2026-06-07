@@ -22,6 +22,8 @@ struct MainMenuView: View {
     private var streak: Int { progress?.currentStreak ?? 0 }
 
     @State private var claimPulse = false
+    @State private var showDailyChallengeDetail = false
+    @State private var showAchievementDetail = false
 
     // Deep indigo used for readable text on the light background.
     private let ink = AppColor.ink
@@ -277,6 +279,11 @@ struct MainMenuView: View {
                 .strokeBorder(AppColor.primary.opacity(0.12), lineWidth: 1)
         )
         .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+        .contentShape(RoundedRectangle(cornerRadius: AppRadius.card))
+        .onTapGesture { showDailyChallengeDetail = true }
+        .sheet(isPresented: $showDailyChallengeDetail) {
+            DailyChallengeDetailView(challenge: challenge, current: current, target: target)
+        }
     }
 
     private func claimDailyReward(_ challenge: DailyChallenge) {
@@ -327,6 +334,11 @@ struct MainMenuView: View {
             .padding(14)
             .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
             .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+            .contentShape(RoundedRectangle(cornerRadius: AppRadius.card))
+            .onTapGesture { showAchievementDetail = true }
+            .sheet(isPresented: $showAchievementDetail) {
+                AchievementDetailView(badge: badge)
+            }
         }
     }
 
@@ -377,6 +389,128 @@ struct MainMenuView: View {
                 .buttonStyle(PressableButtonStyle())
             }
         }
+    }
+}
+
+/// Detail popup for the daily challenge shown on the home screen.
+struct DailyChallengeDetailView: View {
+    let challenge: DailyChallenge
+    let current: Int
+    let target: Int
+    @Environment(\.dismiss) private var dismiss
+
+    private var fraction: Double {
+        target > 0 ? min(Double(current) / Double(target), 1) : 0
+    }
+
+    var body: some View {
+        VStack(spacing: 22) {
+            Image(systemName: challenge.iconName)
+                .font(.system(size: 34, weight: .bold))
+                .foregroundStyle(.white)
+                .frame(width: 72, height: 72)
+                .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: 20))
+                .padding(.top, 8)
+
+            VStack(spacing: 6) {
+                Text("Daily Challenge")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppColor.inkSecondary)
+                Text(challenge.title)
+                    .font(.title2.bold())
+                    .foregroundStyle(AppColor.ink)
+                Text(challenge.detail)
+                    .font(.callout)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(AppColor.inkSecondary)
+            }
+
+            VStack(spacing: 8) {
+                ProgressView(value: fraction)
+                    .tint(AppColor.primary)
+                HStack {
+                    Text("\(min(current, target)) / \(target)")
+                        .font(.caption.bold())
+                        .foregroundStyle(AppColor.inkSecondary)
+                    Spacer()
+                    HStack(spacing: 4) {
+                        Image(systemName: "star.fill")
+                        Text("+\(challenge.rewardXP) XP")
+                    }
+                    .font(.caption.bold())
+                    .foregroundStyle(AppColor.secondary)
+                }
+            }
+            .padding(16)
+            .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+
+            Spacer()
+
+            Button { dismiss() } label: {
+                Text("Done")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
+            }
+            .buttonStyle(PressableButtonStyle())
+        }
+        .padding(24)
+        .background(CampusBackground())
+        .presentationDetents([.medium, .large])
+        .preferredColorScheme(.light)
+    }
+}
+
+/// Detail popup for a single earned badge shown on the home screen.
+struct AchievementDetailView: View {
+    let badge: Achievement
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        VStack(spacing: 22) {
+            ZStack {
+                Circle().fill(badge.tier.color.opacity(0.16)).frame(width: 96, height: 96)
+                Image(systemName: badge.icon)
+                    .font(.system(size: 40, weight: .bold))
+                    .foregroundStyle(badge.tier.color)
+            }
+            .padding(.top, 8)
+
+            VStack(spacing: 8) {
+                Text(badge.title)
+                    .font(.title2.bold())
+                    .foregroundStyle(AppColor.ink)
+                Text(badge.tier.rawValue)
+                    .font(.caption.bold())
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 5)
+                    .background(badge.tier.color, in: Capsule())
+                Text(badge.detail)
+                    .font(.callout)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(AppColor.inkSecondary)
+                    .padding(.top, 2)
+            }
+
+            Spacer()
+
+            Button { dismiss() } label: {
+                Text("Done")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: AppRadius.control))
+            }
+            .buttonStyle(PressableButtonStyle())
+        }
+        .padding(24)
+        .background(CampusBackground())
+        .presentationDetents([.medium])
+        .preferredColorScheme(.light)
     }
 }
 
