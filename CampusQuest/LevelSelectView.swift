@@ -56,17 +56,21 @@ struct LevelSelectView: View {
                                         level: level,
                                         roomName: roomName(for: level.title),
                                         icon: roomIcon(for: level.title),
+                                        courseColor: CoursePalette.color(for: level.title),
+                                        xpReward: xpReward(for: level),
                                         state: state,
                                         alignment: index.isMultiple(of: 2) ? .leading : .trailing
                                     )
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(PressableButtonStyle())
                             } else {
                                 LevelRoomCard(
                                     number: index + 1,
                                     level: level,
                                     roomName: roomName(for: level.title),
                                     icon: roomIcon(for: level.title),
+                                    courseColor: CoursePalette.color(for: level.title),
+                                    xpReward: xpReward(for: level),
                                     state: state,
                                     alignment: index.isMultiple(of: 2) ? .leading : .trailing
                                 )
@@ -128,12 +132,12 @@ struct LevelSelectView: View {
     }
 
     private func roomIcon(for title: String) -> String {
-        if title.hasPrefix("Programming Fundamentals") { return "terminal.fill" }
-        if title.hasPrefix("Data Structures")          { return "square.stack.3d.up.fill" }
-        if title.hasPrefix("Computer Networks")        { return "network" }
-        if title.hasPrefix("Databases")                { return "cylinder.split.1x2.fill" }
-        if title.hasPrefix("Cybersecurity")            { return "lock.shield.fill" }
-        return "graduationcap.fill"
+        CoursePalette.icon(for: title)
+    }
+
+    /// XP a level awards on first completion (matches PlayerProgress).
+    private func xpReward(for level: GameLevel) -> Int {
+        level.words.count * 10 + 50
     }
 }
 
@@ -240,21 +244,29 @@ private struct LevelPathConnector: View {
             }
 
             ZStack {
+                // Soft wide base for depth.
                 path.stroke(
-                    isActive ? Color.accentColor.opacity(0.55) : Color.secondary.opacity(0.25),
-                    style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [2, 7])
+                    isActive ? AppColor.primary.opacity(0.18) : Color.secondary.opacity(0.10),
+                    style: StrokeStyle(lineWidth: 9, lineCap: .round)
+                )
+                // Smooth solid route on top.
+                path.stroke(
+                    isActive
+                        ? AnyShapeStyle(LinearGradient.brand)
+                        : AnyShapeStyle(Color.secondary.opacity(0.28)),
+                    style: StrokeStyle(lineWidth: 4, lineCap: .round)
                 )
 
                 Image(systemName: isActive ? "figure.walk" : "lock.fill")
                     .font(.system(size: 11, weight: .bold))
-                    .foregroundStyle(isActive ? Color.accentColor : Color.secondary.opacity(0.45))
+                    .foregroundStyle(isActive ? AppColor.primary : Color.secondary.opacity(0.45))
                     .padding(5)
-                    .background(.white.opacity(0.9), in: Circle())
-                    .shadow(color: .black.opacity(0.08), radius: 3, y: 1)
+                    .background(.white, in: Circle())
+                    .shadow(color: .black.opacity(0.10), radius: 3, y: 1)
                     .position(x: ctrlX, y: h * 0.5)
             }
         }
-        .frame(height: 46)
+        .frame(height: 50)
     }
 }
 
@@ -263,6 +275,8 @@ private struct LevelRoomCard: View {
     let level: GameLevel
     let roomName: String
     let icon: String
+    let courseColor: Color
+    let xpReward: Int
     let state: RoomState
     let alignment: HorizontalAlignment
 
@@ -296,6 +310,20 @@ private struct LevelRoomCard: View {
                         .font(.caption)
                         .foregroundStyle(ink.opacity(0.55))
                         .lineLimit(1)
+
+                    // XP reward badge.
+                    HStack(spacing: 4) {
+                        Image(systemName: "star.fill")
+                        Text("\(xpReward) XP")
+                    }
+                    .font(.caption2.bold())
+                    .foregroundStyle(state == .completed ? AppColor.success : courseColor)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(
+                        (state == .completed ? AppColor.success : courseColor).opacity(0.12),
+                        in: Capsule()
+                    )
                 }
 
                 Spacer(minLength: 8)
@@ -381,9 +409,9 @@ private struct LevelRoomCard: View {
     private var statusColor: Color {
         switch state {
         case .completed:
-            return .green
+            return AppColor.success
         case .available:
-            return Color.accentColor
+            return courseColor
         case .locked:
             return .secondary
         }
@@ -401,9 +429,9 @@ private struct LevelRoomCard: View {
     private var borderColor: Color {
         switch state {
         case .completed:
-            return .green.opacity(0.28)
+            return AppColor.success.opacity(0.30)
         case .available:
-            return Color.accentColor.opacity(0.42)
+            return courseColor.opacity(0.5)
         case .locked:
             return .secondary.opacity(0.14)
         }
@@ -412,9 +440,9 @@ private struct LevelRoomCard: View {
     private var shadowColor: Color {
         switch state {
         case .completed:
-            return .green.opacity(0.12)
+            return AppColor.success.opacity(0.12)
         case .available:
-            return Color.accentColor.opacity(0.18)
+            return courseColor.opacity(0.28)
         case .locked:
             return .black.opacity(0.04)
         }
@@ -424,16 +452,13 @@ private struct LevelRoomCard: View {
         switch state {
         case .completed:
             return LinearGradient(
-                colors: [.green, Color.accentColor],
+                colors: [AppColor.success, courseColor],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
         case .available:
             return LinearGradient(
-                colors: [
-                    Color.accentColor,
-                    Color(red: 0.50, green: 0.42, blue: 0.96)
-                ],
+                colors: [courseColor, courseColor.opacity(0.7)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

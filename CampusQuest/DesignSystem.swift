@@ -52,6 +52,29 @@ enum AppRadius {
     static let icon: CGFloat = 16
 }
 
+/// Shared per-course color + icon coding, used across the level map and
+/// dictionary so each subject reads with the same identity everywhere.
+/// Matches by category prefix so numbered titles ("Databases 2") resolve.
+enum CoursePalette {
+    static func color(for title: String) -> Color {
+        if title.hasPrefix("Programming Fundamentals") { return AppColor.primary }                 // blue
+        if title.hasPrefix("Data Structures")          { return AppColor.secondary }              // purple
+        if title.hasPrefix("Computer Networks")        { return AppColor.success }                // green
+        if title.hasPrefix("Databases")                { return AppColor.warning }                // orange
+        if title.hasPrefix("Cybersecurity")            { return Color(red: 0.90, green: 0.27, blue: 0.31) } // red
+        return AppColor.primary
+    }
+
+    static func icon(for title: String) -> String {
+        if title.hasPrefix("Programming Fundamentals") { return "terminal.fill" }
+        if title.hasPrefix("Data Structures")          { return "square.stack.3d.up.fill" }
+        if title.hasPrefix("Computer Networks")        { return "network" }
+        if title.hasPrefix("Databases")                { return "cylinder.split.1x2.fill" }
+        if title.hasPrefix("Cybersecurity")            { return "lock.shield.fill" }
+        return "graduationcap.fill"
+    }
+}
+
 extension LinearGradient {
     /// The app's primary blue → purple gradient (buttons, logos, accents).
     static let brand = LinearGradient(
