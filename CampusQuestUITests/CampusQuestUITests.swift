@@ -27,6 +27,13 @@ final class CampusQuestUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
+        // The app launches into the login gate; continue as guest to reach
+        // the main menu.
+        let guestButton = app.buttons["Continue as Guest"]
+        if guestButton.waitForExistence(timeout: 5) {
+            guestButton.tap()
+        }
+
         let categories = ["Programming Fundamentals", "Data Structures",
                           "Computer Networks", "Databases", "Cybersecurity"]
 

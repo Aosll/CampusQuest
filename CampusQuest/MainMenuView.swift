@@ -13,6 +13,7 @@ import UIKit
 
 struct MainMenuView: View {
     @Environment(ContentStore.self) private var store
+    @Environment(AuthManager.self) private var auth
     @Query private var progressList: [PlayerProgress]
     private var progress: PlayerProgress? { progressList.first }
     private var totalXP: Int { progress?.totalXP ?? 0 }
@@ -24,6 +25,7 @@ struct MainMenuView: View {
     @State private var claimPulse = false
     @State private var showDailyChallengeDetail = false
     @State private var showAchievementDetail = false
+    @State private var showSettings = false
 
     // Deep indigo used for readable text on the light background.
     private let ink = AppColor.ink
@@ -48,6 +50,9 @@ struct MainMenuView: View {
                 }
             }
             .preferredColorScheme(.light)
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+            }
         }
     }
 
@@ -55,7 +60,6 @@ struct MainMenuView: View {
 
     private var streakRow: some View {
         HStack {
-            Spacer()
             if streak > 0 {
                 HStack(spacing: 6) {
                     Image(systemName: "flame.fill")
@@ -72,6 +76,20 @@ struct MainMenuView: View {
                 )
                 .shadow(color: AppColor.warning.opacity(0.35), radius: 8, y: 3)
             }
+
+            Spacer()
+
+            Button {
+                showSettings = true
+            } label: {
+                Image(systemName: "gearshape.fill")
+                    .font(.headline)
+                    .foregroundStyle(AppColor.inkSecondary)
+                    .frame(width: 40, height: 40)
+                    .background(Color.white.opacity(0.85), in: Circle())
+                    .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
+            }
+            .buttonStyle(PressableButtonStyle())
         }
     }
 
@@ -143,7 +161,7 @@ struct MainMenuView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 3) {
-                        idRow(label: "STUDENT", value: "Player")
+                        idRow(label: "STUDENT", value: auth.studentName)
                         idRow(label: "MAJOR", value: major)
                     }
 
@@ -388,6 +406,72 @@ struct MainMenuView: View {
                 }
                 .buttonStyle(PressableButtonStyle())
             }
+        }
+    }
+}
+
+/// A minimal settings sheet. For now it shows the current account and a
+/// Sign Out action that returns the user to the login screen.
+struct SettingsView: View {
+    @Environment(AuthManager.self) private var auth
+    @Environment(\.dismiss) private var dismiss
+
+    private var accountLabel: String {
+        switch auth.state {
+        case .signedInApple(_, let name): return "Signed in with Apple · \(name)"
+        case .guest:                      return "Guest mode · this device only"
+        case .signedOut:                  return "Signed out"
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                CampusBackground()
+
+                VStack(spacing: 20) {
+                    HStack(spacing: 12) {
+                        Image(systemName: auth.isGuest ? "person.crop.circle.dashed" : "person.crop.circle.fill")
+                            .font(.title)
+                            .foregroundStyle(AppColor.primary)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Account")
+                                .font(.caption.bold())
+                                .foregroundStyle(AppColor.inkSecondary)
+                            Text(accountLabel)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(AppColor.ink)
+                        }
+                        Spacer()
+                    }
+                    .padding(16)
+                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+
+                    Button(role: .destructive) {
+                        auth.signOut()
+                        dismiss()
+                    } label: {
+                        Label("Sign Out", systemImage: "rectangle.portrait.and.arrow.right")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.white.opacity(0.9),
+                                        in: RoundedRectangle(cornerRadius: AppRadius.control))
+                    }
+                    .buttonStyle(PressableButtonStyle())
+
+                    Spacer()
+                }
+                .padding(24)
+            }
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { dismiss() }
+                }
+            }
+            .preferredColorScheme(.light)
         }
     }
 }
