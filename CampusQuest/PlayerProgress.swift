@@ -22,6 +22,8 @@ final class PlayerProgress {
     var quizCorrectTotal: Int = 0
     /// Day-based play streak.
     var currentStreak: Int = 0
+    /// Highest day-based streak the player has ever reached.
+    var longestStreak: Int = 0
     /// Last day the player was active, as "yyyy-MM-dd". Empty = never.
     var lastPlayedDay: String = ""
 
@@ -36,6 +38,12 @@ final class PlayerProgress {
     var dailyLevels: Int = 0
     /// Day on which today's daily-challenge reward was claimed.
     var dailyChallengeClaimedDay: String = ""
+
+    // MARK: Playable Daily Challenge (the deterministic mini-game)
+    /// When the player last finished the playable Daily Challenge. nil = never.
+    /// Tracked separately from normal levels so the mini-game never affects
+    /// `completedLevels` or the regular level progression.
+    var lastDailyCompletedDate: Date? = nil
 
     init(totalXP: Int = 0,
          completedLevels: [String] = [],
@@ -147,8 +155,18 @@ extension PlayerProgress {
             } else {
                 currentStreak = 1
             }
+            if currentStreak > longestStreak {
+                longestStreak = currentStreak
+            }
             lastPlayedDay = today
         }
+    }
+
+    /// Marks today as an active day and updates the play streak using the same
+    /// rules as any other activity. Safe to call on app launch; the caller is
+    /// responsible for saving the context (see `StreakManager`).
+    func updateStreakForToday() {
+        touchToday()
     }
 
     /// Spends XP if the player can afford it. Returns true on success.
@@ -171,6 +189,28 @@ extension PlayerProgress {
         dailyChallengeClaimedDay = today
         totalXP += reward
         return reward
+    }
+
+    /// True if the playable Daily Challenge mini-game was already finished today.
+    var didCompleteDailyChallengeToday: Bool {
+        guard let last = lastDailyCompletedDate else { return false }
+        return Calendar.current.isDateInToday(last)
+    }
+
+    /// Records a finished playable Daily Challenge. Grants a one-time daily
+    /// bonus (added to total + today's XP counter), updates the streak, and
+    /// re-evaluates achievements. Does NOT touch `completedLevels`, so the
+    /// mini-game stays separate from normal level progression. Returns the
+    /// reward the first time only; nil if it was already completed today.
+    @discardableResult
+    func recordDailyChallengeGame(bonusXP: Int) -> LevelReward? {
+        touchToday()
+        guard !didCompleteDailyChallengeToday else { return nil }
+        lastDailyCompletedDate = Date()
+        totalXP += bonusXP
+        dailyXP += bonusXP
+        let newBadges = awardAchievements()
+        return LevelReward(xpGained: bonusXP, newBadges: newBadges)
     }
 
     /// Records any achievements whose targets are now met. Persists their ids

@@ -11,10 +11,20 @@ import SwiftUI
 import SwiftData
 import UIKit
 
+/// How a `LevelView` records its completion.
+enum LevelMode {
+    /// A normal course level: writes to `completedLevels` and grants level XP.
+    case normal
+    /// The playable Daily Challenge: grants a one-time daily bonus and never
+    /// touches `completedLevels` or the regular level progression.
+    case daily
+}
+
 struct LevelView: View {
     let level: GameLevel
     let totalLevels: Int
     var nextLevel: GameLevel? = nil
+    var mode: LevelMode = .normal
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
@@ -41,10 +51,11 @@ struct LevelView: View {
     /// XP cost to reveal one letter via the Hint button.
     private let hintCost = 5
 
-    init(level: GameLevel, totalLevels: Int, nextLevel: GameLevel? = nil) {
+    init(level: GameLevel, totalLevels: Int, nextLevel: GameLevel? = nil, mode: LevelMode = .normal) {
         self.level = level
         self.totalLevels = totalLevels
         self.nextLevel = nextLevel
+        self.mode = mode
         _model = State(initialValue: LevelGameModel(level: level))
     }
 
@@ -71,6 +82,9 @@ struct LevelView: View {
             if complete && !didRecord {
                 didRecord = true
                 recordCompletion()
+                // Ask for notification permission only after the player has
+                // engaged (finished a level), never on first launch.
+                Task { await NotificationManager.shared.requestAuthorizationIfNeeded() }
             }
         }
         .sheet(isPresented: $showDefinition) {
@@ -290,10 +304,16 @@ struct LevelView: View {
 
     private func recordCompletion() {
         let progress = PlayerProgress.current(in: modelContext)
-        reward = progress.recordCompletion(levelTitle: level.title,
-                                           wordCount: level.words.count,
-                                           totalLevels: totalLevels,
-                                           perfect: model.mistakeCount == 0)
+        switch mode {
+        case .normal:
+            reward = progress.recordCompletion(levelTitle: level.title,
+                                               wordCount: level.words.count,
+                                               totalLevels: totalLevels,
+                                               perfect: model.mistakeCount == 0)
+        case .daily:
+            // Separate bonus path: never affects `completedLevels`.
+            reward = progress.recordDailyChallengeGame(bonusXP: DailyChallengeGame.bonusXP)
+        }
     }
 
     // MARK: - Level complete

@@ -14,6 +14,7 @@ import UIKit
 struct MainMenuView: View {
     @Environment(ContentStore.self) private var store
     @Environment(AuthManager.self) private var auth
+    @Environment(\.modelContext) private var modelContext
     @Query private var progressList: [PlayerProgress]
     private var progress: PlayerProgress? { progressList.first }
     private var totalXP: Int { progress?.totalXP ?? 0 }
@@ -21,6 +22,7 @@ struct MainMenuView: View {
     private var badgeCount: Int { unlockedAchievements.count }
     private var hasProgress: Bool { (progress?.completedLevels.isEmpty == false) }
     private var streak: Int { progress?.currentStreak ?? 0 }
+    private var dailyChallengeDone: Bool { progress?.didCompleteDailyChallengeToday ?? false }
 
     @State private var claimPulse = false
     @State private var showDailyChallengeDetail = false
@@ -57,6 +59,10 @@ struct MainMenuView: View {
             .preferredColorScheme(.light)
             .sheet(isPresented: $showSettings) {
                 SettingsView()
+            }
+            .task {
+                // Refresh the play streak when the home screen first appears.
+                StreakManager.updateStreak(in: modelContext)
             }
         }
     }
@@ -397,6 +403,8 @@ struct MainMenuView: View {
             }
             .buttonStyle(PressableButtonStyle(scale: 0.97))
 
+            dailyChallengeButton
+
             HStack(spacing: 12) {
                 NavigationLink { QuizView() } label: {
                     MenuTileLabel(title: "Quiz", icon: "questionmark.circle")
@@ -413,6 +421,52 @@ struct MainMenuView: View {
             }
         }
     }
+
+    /// Opens the playable Daily Challenge. Shows a "Completed" state once
+    /// today's challenge has been finished (it can still be replayed, but the
+    /// bonus is only granted once per day).
+    private var dailyChallengeButton: some View {
+        NavigationLink {
+            DailyChallengeView()
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: dailyChallengeDone ? "checkmark.seal.fill" : "calendar.badge.clock")
+                    .font(.title3.bold())
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("Daily Challenge")
+                        .font(.headline)
+                    Text(dailyChallengeDone
+                         ? "Completed · come back tomorrow"
+                         : "\(DailyChallengeGame.wordCount) words · +\(DailyChallengeGame.bonusXP) XP")
+                        .font(.caption.bold())
+                        .opacity(0.85)
+                }
+                Spacer()
+                if dailyChallengeDone {
+                    Text("Completed")
+                        .font(.caption.bold())
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(.white.opacity(0.25), in: Capsule())
+                } else {
+                    Image(systemName: "chevron.right")
+                        .font(.caption.bold())
+                }
+            }
+            .foregroundStyle(.white)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: AppRadius.control)
+                    .fill(dailyChallengeDone
+                          ? LinearGradient(colors: [AppColor.success, AppColor.success.opacity(0.8)],
+                                           startPoint: .leading, endPoint: .trailing)
+                          : LinearGradient(colors: [AppColor.secondary, AppColor.primary],
+                                           startPoint: .leading, endPoint: .trailing))
+            )
+            .shadow(color: AppColor.secondary.opacity(0.30), radius: 12, y: 6)
+        }
+        .buttonStyle(PressableButtonStyle(scale: 0.97))
+    }
 }
 
 /// A minimal settings sheet. For now it shows the current account and a
@@ -420,6 +474,7 @@ struct MainMenuView: View {
 struct SettingsView: View {
     @Environment(AuthManager.self) private var auth
     @Environment(\.dismiss) private var dismiss
+    @State private var notificationsEnabled = NotificationManager.shared.isEnabled
 
     private var accountLabel: String {
         switch auth.state {
@@ -451,6 +506,28 @@ struct SettingsView: View {
                     }
                     .padding(16)
                     .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+
+                    Toggle(isOn: $notificationsEnabled) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "bell.fill")
+                                .font(.title3)
+                                .foregroundStyle(AppColor.warning)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Daily Reminder")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(AppColor.ink)
+                                Text("A nudge at 7:00 PM to keep your streak")
+                                    .font(.caption)
+                                    .foregroundStyle(AppColor.inkSecondary)
+                            }
+                        }
+                    }
+                    .tint(AppColor.primary)
+                    .padding(16)
+                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    .onChange(of: notificationsEnabled) { _, enabled in
+                        Task { await NotificationManager.shared.setEnabled(enabled) }
+                    }
 
                     Button(role: .destructive) {
                         auth.signOut()
