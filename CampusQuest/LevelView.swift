@@ -28,6 +28,7 @@ struct LevelView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(AuthManager.self) private var auth
     @Query private var progressList: [PlayerProgress]
     private var availableXP: Int { progressList.first?.totalXP ?? 0 }
 
@@ -300,6 +301,26 @@ struct LevelView: View {
         }
     }
 
+    /// The "Course Completed" share card text shown after finishing a level.
+    private var shareMessage: String {
+        let rank = RankSystem.progress(forXP: availableXP)
+        var lines = [
+            "🎓 Course Completed",
+            "",
+            level.title,
+            "",
+            "👤 \(auth.studentName)",
+            "🏅 \(rank.title)",
+            "📚 \(level.words.count) Terms Learned"
+        ]
+        if let xp = reward?.xpGained, xp > 0 {
+            lines.append("⚡ +\(xp) XP")
+        }
+        lines.append("")
+        lines.append("CampusQuest: Word Majors")
+        return lines.joined(separator: "\n")
+    }
+
     // MARK: - Progress
 
     private func recordCompletion() {
@@ -429,9 +450,7 @@ struct LevelView: View {
                         }
                         .buttonStyle(PressableButtonStyle())
 
-                        ShareLink(
-                            item: "I just completed \(level.title) on Campus Quest! 🎓 Found all \(level.words.count) words. #CampusQuest"
-                        ) {
+                        ShareLink(item: shareMessage) {
                             Label("Share", systemImage: "square.and.arrow.up")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
@@ -804,5 +823,6 @@ private struct WordFoundToast: View {
             Text("No content")
         }
     }
+    .environment(AuthManager())
     .modelContainer(for: PlayerProgress.self, inMemory: true)
 }
