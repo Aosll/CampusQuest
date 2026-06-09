@@ -473,6 +473,7 @@ struct MainMenuView: View {
 /// Sign Out action that returns the user to the login screen.
 struct SettingsView: View {
     @Environment(AuthManager.self) private var auth
+    @Environment(LanguageManager.self) private var language
     @Environment(\.dismiss) private var dismiss
     @State private var notificationsEnabled = NotificationManager.shared.isEnabled
 
@@ -528,6 +529,31 @@ struct SettingsView: View {
                     .onChange(of: notificationsEnabled) { _, enabled in
                         Task { await NotificationManager.shared.setEnabled(enabled) }
                     }
+
+                    NavigationLink {
+                        LanguagePickerView()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "globe")
+                                .font(.title3)
+                                .foregroundStyle(AppColor.primary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Language")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(AppColor.ink)
+                                Text("\(language.selection.flag) \(language.selection.displayName)")
+                                    .font(.caption)
+                                    .foregroundStyle(AppColor.inkSecondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption.bold())
+                                .foregroundStyle(AppColor.inkSecondary)
+                        }
+                        .padding(16)
+                        .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    }
+                    .buttonStyle(PressableButtonStyle())
 
                     Button(role: .destructive) {
                         auth.signOut()
