@@ -129,8 +129,10 @@ struct CampusLogo: View {
                     .font(.system(size: 46))
                     .foregroundStyle(.white)
             }
-            Text("Campus Quest")
+            Text("CampusQuest Academy")
                 .font(.system(size: 38, weight: .heavy, design: .rounded))
+                .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.7)
                 .foregroundStyle(AppColor.ink)
             Text("Find words. Build your future.")
                 .font(.subheadline)

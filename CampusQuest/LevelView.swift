@@ -317,7 +317,7 @@ struct LevelView: View {
             lines.append("⚡ +\(xp) XP")
         }
         lines.append("")
-        lines.append("CampusQuest: Word Majors")
+        lines.append("CampusQuest Academy")
         return lines.joined(separator: "\n")
     }
 
