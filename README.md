@@ -4,17 +4,18 @@
 
 **A bright, gamified iOS word game that turns computer-science terminology into a daily learning habit.**
 
-[English](#-english) · [Türkçe](#-türkçe)
-
 ![Platform](https://img.shields.io/badge/platform-iOS%2017.5%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-SwiftUI%20%2B%20SwiftData-orange)
 ![Version](https://img.shields.io/badge/version-1.0-brightgreen)
 
+**Choose your language · Dilini seç**
+
 </div>
 
----
+<details>
+<summary><b>🇺🇸 Read in English</b></summary>
 
-## 🇺🇸 English
+<br>
 
 ### Overview
 
@@ -84,9 +85,12 @@ CampusQuest/
 
 Guest mode never writes to disk, syncs to the cloud, or collects statistics. Sign-in is local only — there is no server. Profile photos are stored on-device.
 
----
+</details>
 
-## 🇹🇷 Türkçe
+<details>
+<summary><b>🇹🇷 Türkçe oku</b></summary>
+
+<br>
 
 ### Genel Bakış
 
@@ -156,10 +160,4 @@ CampusQuest/
 
 Misafir modu hiçbir zaman diske yazmaz, buluta senkronlamaz veya istatistik toplamaz. Giriş yalnızca yereldir — sunucu yoktur. Profil fotoğrafları cihazda saklanır.
 
----
-
-<div align="center">
-
-Made with ❤️ by **Ömer Efe Dikici**
-
-</div>
+</details>
