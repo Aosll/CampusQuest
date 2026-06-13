@@ -164,14 +164,7 @@ struct MainMenuView: View {
             // Card body: identity + XP bar.
             VStack(spacing: 14) {
                 HStack(spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: AppRadius.icon)
-                            .fill(AppColor.primary.opacity(0.14))
-                            .frame(width: 56, height: 56)
-                        Image(systemName: "person.fill")
-                            .font(.title2.bold())
-                            .foregroundStyle(AppColor.primary)
-                    }
+                    AvatarView(size: 56, isGuest: auth.isGuest, name: auth.studentName)
 
                     VStack(alignment: .leading, spacing: 3) {
                         idRow(label: "STUDENT", value: auth.studentName)

@@ -24,6 +24,8 @@ struct CampusIDDetailView: View {
         progress.map { Achievement.unlocked(for: $0) } ?? []
     }
 
+    @State private var showAvatarPicker = false
+
     var body: some View {
         let rank = RankSystem.progress(forXP: totalXP)
         let major = store.department?.name ?? "Computer Engineering"
@@ -43,21 +45,33 @@ struct CampusIDDetailView: View {
         .navigationTitle("Campus ID")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.light)
+        .sheet(isPresented: $showAvatarPicker) {
+            AvatarPickerView(name: auth.studentName)
+        }
     }
 
     // MARK: - Header
 
     private func header(rank: RankProgress) -> some View {
         VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(LinearGradient.brand)
-                    .frame(width: 96, height: 96)
-                    .shadow(color: AppColor.primary.opacity(0.35), radius: 12, y: 6)
-                Image(systemName: "person.fill")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.white)
-            }
+            AvatarView(size: 96, isGuest: auth.isGuest, name: auth.studentName)
+                .overlay(alignment: .bottomTrailing) {
+                    // Only signed-in (Apple) players can change their photo.
+                    if !auth.isGuest {
+                        Button {
+                            showAvatarPicker = true
+                        } label: {
+                            Image(systemName: "camera.fill")
+                                .font(.caption.bold())
+                                .foregroundStyle(.white)
+                                .frame(width: 28, height: 28)
+                                .background(AppColor.primary, in: Circle())
+                                .overlay(Circle().strokeBorder(.white, lineWidth: 2))
+                        }
+                        .buttonStyle(PressableButtonStyle())
+                        .offset(x: 4, y: 4)
+                    }
+                }
             Text(auth.studentName)
                 .font(AppFont.screenTitle)
                 .foregroundStyle(AppColor.ink)
