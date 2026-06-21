@@ -18,6 +18,9 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var progressList: [PlayerProgress]
 
+    /// The field the player chose to be quizzed on. Asked every time the quiz
+    /// opens, independent of the active major shown on the Campus ID card.
+    @State private var selectedDepartment: Department?
     @State private var model: QuizSessionModel?
     @State private var cardShake: [String: Int] = [:]
     @State private var correctGlow: String? = nil
@@ -47,7 +50,10 @@ struct QuizView: View {
             QuizBackground().ignoresSafeArea()
 
             Group {
-                if let model {
+                if selectedDepartment == nil {
+                    // Ask which field to be quizzed on before starting.
+                    subjectPicker
+                } else if let model {
                     if model.isFinished {
                         resultView(model)
                     } else if let question = model.currentQuestion {
@@ -61,11 +67,69 @@ struct QuizView: View {
         .navigationTitle("Quiz Challenge")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.light)
-        .onAppear { buildModelIfNeeded() }
-        // Content loads asynchronously; build the quiz once it's available.
-        .onChange(of: store.department?.id) { _, _ in buildModelIfNeeded() }
         .onReceive(ticker) { _ in tick() }
         .onChange(of: model?.index) { _, _ in resetTimer() }
+    }
+
+    // MARK: - Subject picker
+
+    private var subjectPicker: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 22) {
+                VStack(spacing: 10) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 22)
+                            .fill(LinearGradient.brand)
+                            .frame(width: 80, height: 80)
+                            .shadow(color: .black.opacity(0.15), radius: 10, y: 5)
+                        Image(systemName: "questionmark.circle.fill")
+                            .font(.system(size: 40))
+                            .foregroundStyle(.white)
+                    }
+                    Text("Choose a Quiz Subject")
+                        .font(.system(size: 26, weight: .heavy, design: .rounded))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(AppColor.ink)
+                    Text("Pick a field to be quizzed on.")
+                        .font(.subheadline)
+                        .foregroundStyle(AppColor.inkSecondary)
+                }
+                .padding(.top, 12)
+
+                VStack(spacing: 16) {
+                    ForEach(store.departments) { department in
+                        let style = MajorStyle.style(for: department.name)
+                        Button {
+                            selectedDepartment = department
+                            buildModelIfNeeded()
+                        } label: {
+                            MajorCard(
+                                title: department.name,
+                                subtitle: "\(wordCount(department)) terms",
+                                systemImage: style.symbol,
+                                accent: style.accent,
+                                pattern: style.pattern,
+                                isLocked: false
+                            )
+                        }
+                        .buttonStyle(PressableButtonStyle())
+                    }
+
+                    // Placeholder for a major that has no content yet.
+                    MajorCard(title: "Architecture",
+                              subtitle: "Coming soon",
+                              systemImage: "building.columns",
+                              accent: AppColor.secondary,
+                              pattern: .blueprint,
+                              isLocked: true)
+                }
+            }
+            .padding()
+        }
+    }
+
+    private func wordCount(_ department: Department) -> Int {
+        department.levels.reduce(0) { $0 + $1.words.count }
     }
 
     // MARK: - Question
@@ -329,11 +393,15 @@ struct QuizView: View {
         }
     }
 
-    /// Builds the quiz session once content is available (guards against the
-    /// content still loading when the screen first appears).
+    /// Builds the quiz session from the chosen subject. Wrong-answer options
+    /// are drawn from that subject's own categories, so a Medicine quiz offers
+    /// Medicine fields and a CS quiz offers CS fields.
     private func buildModelIfNeeded() {
-        guard model == nil, let department = store.department else { return }
-        let questions = department.levels.flatMap { store.questions(for: $0) }
+        guard model == nil, let department = selectedDepartment else { return }
+        let categories = department.allCategories
+        let questions = department.levels
+            .flatMap { $0.words }
+            .map { QuizBuilder.makeQuestion(for: $0, allCategories: categories) }
         guard !questions.isEmpty else { return }
         model = QuizSessionModel(allQuestions: questions)
         resetTimer()
