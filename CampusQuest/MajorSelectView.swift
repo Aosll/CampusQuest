@@ -16,38 +16,35 @@ struct MajorSelectView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // The one playable major (loaded from JSON).
-                if let department = store.department {
+                // Every playable major loaded from JSON. Tapping one makes it
+                // the active major and opens its levels.
+                ForEach(store.departments) { department in
+                    let style = MajorStyle.style(for: department.name)
                     NavigationLink {
                         LevelSelectView(department: department)
                     } label: {
                         MajorCard(
                             title: department.name,
                             subtitle: "\(department.levels.count) levels · Open now",
-                            systemImage: "desktopcomputer",
-                            accent: AppColor.primary,
-                            pattern: .code,
+                            systemImage: style.symbol,
+                            accent: style.accent,
+                            pattern: style.pattern,
                             isLocked: false
                         )
                     }
                     .buttonStyle(PressableButtonStyle())
                     .simultaneousGesture(TapGesture().onEnded {
+                        store.select(department)
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                     })
                 }
 
-                // Placeholders for future majors.
+                // Placeholder for a future major.
                 MajorCard(title: "Architecture",
                           subtitle: "New faculty opening soon",
                           systemImage: "building.columns",
                           accent: AppColor.secondary,
                           pattern: .blueprint,
-                          isLocked: true)
-                MajorCard(title: "Medicine",
-                          subtitle: "Under construction",
-                          systemImage: "cross.case",
-                          accent: AppColor.success,
-                          pattern: .health,
                           isLocked: true)
             }
             .padding()
@@ -62,6 +59,25 @@ struct MajorSelectView: View {
 /// Faint decorative pattern themed to each major.
 enum MajorPattern {
     case code, blueprint, health
+}
+
+/// Visual styling (icon, accent, pattern) for a playable major, chosen by name
+/// with a sensible fallback so a newly added major still looks intentional.
+struct MajorStyle {
+    let symbol: String
+    let accent: Color
+    let pattern: MajorPattern
+
+    static func style(for name: String) -> MajorStyle {
+        switch name {
+        case "Medicine":
+            return MajorStyle(symbol: "cross.case", accent: AppColor.success, pattern: .health)
+        case "Computer Engineering":
+            return MajorStyle(symbol: "desktopcomputer", accent: AppColor.primary, pattern: .code)
+        default:
+            return MajorStyle(symbol: "graduationcap", accent: AppColor.primary, pattern: .code)
+        }
+    }
 }
 
 /// A reusable card showing one major.

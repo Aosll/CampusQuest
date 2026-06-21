@@ -1,0 +1,1480 @@
+word,definition,category
+aorta,Main artery carrying blood from the heart,Anatomy
+atrium,Upper chamber of the heart,Anatomy
+ventricle,Lower chamber of the heart,Anatomy
+valve,Structure controlling blood flow direction,Anatomy
+septum,Wall separating body chambers,Anatomy
+artery,Blood vessel carrying blood away from the heart,Anatomy
+vein,Blood vessel carrying blood toward the heart,Anatomy
+capillary,Small vessel connecting arteries and veins,Anatomy
+femur,Thigh bone,Anatomy
+tibia,Larger bone of the lower leg,Anatomy
+fibula,Smaller bone of the lower leg,Anatomy
+patella,Kneecap bone,Anatomy
+pelvis,Bony structure supporting the trunk,Anatomy
+sacrum,Fused bone at the base of the spine,Anatomy
+coccyx,Tailbone,Anatomy
+sternum,Breastbone,Anatomy
+scapula,Shoulder blade,Anatomy
+clavicle,Collar bone,Anatomy
+humerus,Upper arm bone,Anatomy
+radius,Forearm bone on the thumb side,Anatomy
+ulna,Forearm bone on the little finger side,Anatomy
+carpus,Wrist bones,Anatomy
+metacarpal,Hand bone between wrist and fingers,Anatomy
+phalanx,Finger or toe bone,Anatomy
+mandible,Lower jaw bone,Anatomy
+maxilla,Upper jaw bone,Anatomy
+zygoma,Cheek bone,Anatomy
+frontal,Forehead bone,Anatomy
+parietal,Bone forming the roof of the skull,Anatomy
+temporal,Side skull bone,Anatomy
+occipital,Back skull bone,Anatomy
+sphenoid,Bone at the skull base,Anatomy
+ethmoid,Bone separating the nasal cavity,Anatomy
+vertebra,Individual spinal bone,Anatomy
+cervical,Neck region vertebra,Anatomy
+thoracic,Chest region vertebra,Anatomy
+lumbar,Lower back vertebra,Anatomy
+rib,Bone protecting thoracic organs,Anatomy
+cartilage,Firm flexible connective tissue,Anatomy
+ligament,Tissue connecting bone to bone,Anatomy
+tendon,Tissue connecting muscle to bone,Anatomy
+fascia,Fibrous connective tissue sheet,Anatomy
+periosteum,Membrane covering bone,Anatomy
+marrow,Soft tissue inside bones,Anatomy
+joint,Point where two bones meet,Anatomy
+synovium,Joint lining membrane,Anatomy
+meniscus,Crescent shaped cartilage in a joint,Anatomy
+muscle,Tissue responsible for movement,Anatomy
+myofiber,Muscle cell,Anatomy
+biceps,Muscle of the upper arm,Anatomy
+triceps,Muscle extending the elbow,Anatomy
+deltoid,Shoulder muscle,Anatomy
+pectoral,Chest muscle,Anatomy
+trapezius,Upper back muscle,Anatomy
+latissimus,Large back muscle,Anatomy
+gluteus,Hip muscle,Anatomy
+quadriceps,Front thigh muscle group,Anatomy
+hamstring,Back thigh muscle group,Anatomy
+diaphragm,Main breathing muscle,Anatomy
+heart,Muscular organ pumping blood,Anatomy
+lung,Organ responsible for gas exchange,Anatomy
+bronchus,Major airway branch,Anatomy
+alveolus,Air sac in the lung,Anatomy
+trachea,Windpipe,Anatomy
+larynx,Voice box,Anatomy
+pharynx,Passage connecting mouth and throat,Anatomy
+nasal,Nose related structure,Anatomy
+sinus,Air filled cranial cavity,Anatomy
+tongue,Muscular organ of the mouth,Anatomy
+palate,Roof of the mouth,Anatomy
+tooth,Calcified oral structure,Anatomy
+incisor,Front cutting tooth,Anatomy
+canine,Pointed tooth,Anatomy
+molar,Grinding tooth,Anatomy
+esophagus,Tube carrying food to the stomach,Anatomy
+stomach,Digestive organ,Anatomy
+duodenum,First part of the small intestine,Anatomy
+jejunum,Middle part of the small intestine,Anatomy
+ileum,Final part of the small intestine,Anatomy
+colon,Main section of the large intestine,Anatomy
+rectum,Terminal part of the large intestine,Anatomy
+anus,Terminal digestive opening,Anatomy
+liver,Large metabolic organ,Anatomy
+pancreas,Gland producing enzymes and hormones,Anatomy
+spleen,Lymphoid organ filtering blood,Anatomy
+gallbladder,Organ storing bile,Anatomy
+kidney,Organ filtering blood,Anatomy
+nephron,Functional unit of the kidney,Anatomy
+ureter,Tube carrying urine to the bladder,Anatomy
+bladder,Urine storage organ,Anatomy
+urethra,Tube carrying urine outside the body,Anatomy
+ovary,Female reproductive gland,Anatomy
+uterus,Female reproductive organ,Anatomy
+cervix,Lower portion of the uterus,Anatomy
+vagina,Female reproductive canal,Anatomy
+testis,Male reproductive gland,Anatomy
+scrotum,Sac containing the testes,Anatomy
+prostate,Male reproductive gland,Anatomy
+epididymis,Structure storing sperm,Anatomy
+penis,External male reproductive organ,Anatomy
+brain,Central nervous system organ,Anatomy
+cerebrum,Largest part of the brain,Anatomy
+cerebellum,Brain region coordinating movement,Anatomy
+brainstem,Structure connecting brain and spinal cord,Anatomy
+pons,Part of the brainstem,Anatomy
+medulla,Lower brainstem structure,Anatomy
+thalamus,Sensory relay center,Anatomy
+hypothalamus,Regulatory brain center,Anatomy
+pituitary,Master endocrine gland,Anatomy
+pineal,Small endocrine gland in the brain,Anatomy
+spinal,Related to the spinal cord,Anatomy
+neuron,Nerve cell,Anatomy
+axon,Nerve fiber carrying signals,Anatomy
+dendrite,Neuron branch receiving signals,Anatomy
+synapse,Junction between neurons,Anatomy
+ganglion,Cluster of nerve cells,Anatomy
+nerve,Bundle of neural fibers,Anatomy
+myelin,Insulating nerve covering,Anatomy
+retina,Light sensitive eye layer,Anatomy
+cornea,Transparent front eye structure,Anatomy
+iris,Colored eye structure,Anatomy
+pupil,Opening in the iris,Anatomy
+lens,Structure focusing light,Anatomy
+cochlea,Hearing organ of the inner ear,Anatomy
+vestibule,Balance structure of the inner ear,Anatomy
+tympanum,Eardrum,Anatomy
+dermis,Inner skin layer,Anatomy
+epidermis,Outer skin layer,Anatomy
+hypodermis,Deep skin layer,Anatomy
+follicle,Hair producing structure,Anatomy
+gland,Secretory organ,Anatomy
+thyroid,Endocrine gland in the neck,Anatomy
+parathyroid,Gland regulating calcium levels,Anatomy
+adrenal,Gland above the kidney,Anatomy
+lymph,Lymphatic fluid,Anatomy
+lymphnode,Immune filtering structure,Anatomy
+tonsil,Lymphoid tissue in the throat,Anatomy
+appendix,Lymphoid intestinal structure,Anatomy
+mesentery,Peritoneal fold supporting intestines,Anatomy
+omentum,Peritoneal abdominal fold,Anatomy
+peritoneum,Abdominal cavity membrane,Anatomy
+pleura,Membrane surrounding the lungs,Anatomy
+pericardium,Membrane surrounding the heart,Anatomy
+endocardium,Inner lining of the heart,Anatomy
+myocardium,Heart muscle layer,Anatomy
+epicardium,Outer heart layer,Anatomy
+cortex,Outer layer of an organ,Anatomy
+hilum,Entry point of vessels and nerves,Anatomy
+lobule,Small subdivision of an organ,Anatomy
+lobar,Related to a lobe,Anatomy
+cell,Basic structural unit of life,Histology
+nucleus,Cell structure containing DNA,Histology
+nucleolus,Site of ribosome production,Histology
+cytoplasm,Material surrounding cell organelles,Histology
+membrane,Outer boundary of a cell,Histology
+organelle,Specialized structure within a cell,Histology
+mitosis,Cell division producing identical cells,Histology
+meiosis,Cell division producing gametes,Histology
+chromatin,DNA protein complex in the nucleus,Histology
+chromosome,DNA carrying genetic material,Histology
+ribosome,Structure responsible for protein synthesis,Histology
+lysosome,Organelle containing digestive enzymes,Histology
+peroxisome,Organelle involved in oxidation,Histology
+golgi,Organelle processing proteins,Histology
+centriole,Structure involved in cell division,Histology
+vacuole,Storage compartment in cells,Histology
+microvilli,Tiny projections increasing surface area,Histology
+cilia,Hairlike projections on cell surfaces,Histology
+flagellum,Structure enabling cell movement,Histology
+epithelium,Tissue covering surfaces and cavities,Histology
+endothelium,Epithelial lining of blood vessels,Histology
+mesothelium,Epithelial lining of body cavities,Histology
+squamous,Flat epithelial cell type,Histology
+cuboidal,Cube shaped epithelial cell type,Histology
+columnar,Tall epithelial cell type,Histology
+stratified,Layered epithelial arrangement,Histology
+simple,Single layered epithelial arrangement,Histology
+keratin,Protective structural protein,Histology
+keratinized,Containing keratin layers,Histology
+basement,Supporting layer beneath epithelium,Histology
+lamina,Thin layer of tissue,Histology
+stroma,Supporting connective tissue,Histology
+parenchyma,Functional tissue of an organ,Histology
+matrix,Material between cells,Histology
+collagen,Major structural protein,Histology
+elastin,Elastic connective tissue protein,Histology
+reticular,Network forming connective tissue,Histology
+fibroblast,Cell producing connective tissue,Histology
+fibrocyte,Mature connective tissue cell,Histology
+adipocyte,Fat storage cell,Histology
+chondrocyte,Cartilage cell,Histology
+osteocyte,Mature bone cell,Histology
+osteoblast,Bone forming cell,Histology
+osteoclast,Bone resorbing cell,Histology
+myocyte,Muscle cell,Histology
+sarcomere,Functional unit of muscle,Histology
+myofibril,Contractile structure in muscle,Histology
+actin,Muscle contractile protein,Histology
+myosin,Motor protein in muscle,Histology
+neuron,Nerve cell,Histology
+neuroglia,Supporting nervous tissue cells,Histology
+astrocyte,Star shaped glial cell,Histology
+oligodendrocyte,Myelin producing CNS cell,Histology
+microglia,Immune cell of nervous tissue,Histology
+ependyma,Cells lining brain ventricles,Histology
+axon,Nerve signal transmitting process,Histology
+dendrite,Nerve signal receiving process,Histology
+synapse,Communication junction between neurons,Histology
+ganglion,Collection of nerve cell bodies,Histology
+soma,Cell body of a neuron,Histology
+myelin,Insulating nerve sheath,Histology
+node,Gap between myelin segments,Histology
+fascicle,Bundle of fibers,Histology
+retina,Light sensitive neural tissue,Histology
+cornea,Transparent anterior eye tissue,Histology
+lens,Focusing structure of the eye,Histology
+iris,Pigmented eye structure,Histology
+dermis,Inner skin layer,Histology
+epidermis,Outer skin layer,Histology
+hypodermis,Subcutaneous tissue layer,Histology
+follicle,Hair producing structure,Histology
+sebaceous,Oil secreting gland tissue,Histology
+sweat,Skin gland secretion,Histology
+goblet,Mucus secreting epithelial cell,Histology
+acinus,Secretory unit of a gland,Histology
+duct,Passage carrying gland secretions,Histology
+lobule,Small subdivision of an organ,Histology
+sinusoid,Specialized capillary channel,Histology
+alveolus,Microscopic air sac,Histology
+bronchiole,Small airway branch,Histology
+glomerulus,Capillary tuft in kidney,Histology
+tubule,Small tubular structure,Histology
+nephron,Functional kidney unit,Histology
+podocyte,Specialized glomerular cell,Histology
+hepatocyte,Liver cell,Histology
+islet,Endocrine pancreatic cell cluster,Histology
+acinar,Related to glandular acini,Histology
+mucosa,Mucous membrane layer,Histology
+submucosa,Connective tissue beneath mucosa,Histology
+serosa,Outer organ covering,Histology
+adventitia,External connective tissue layer,Histology
+crypt,Glandular epithelial invagination,Histology
+villus,Fingerlike intestinal projection,Histology
+papilla,Small tissue projection,Histology
+trabecula,Supporting tissue beam,Histology
+lacuna,Small cavity within tissue,Histology
+canaliculus,Microscopic channel in tissue,Histology
+periosteum,Connective tissue covering bone,Histology
+endosteum,Membrane lining bone cavities,Histology
+marrow,Soft tissue within bone,Histology
+thymus,Primary lymphoid organ,Histology
+tonsil,Lymphoid tissue aggregate,Histology
+spleen,Lymphoid blood filtering organ,Histology
+lymphnode,Lymph filtering organ,Histology
+lymphocyte,Immune system cell,Histology
+macrophage,Phagocytic immune cell,Histology
+neutrophil,Most abundant white blood cell,Histology
+eosinophil,Granule containing immune cell,Histology
+basophil,Histamine releasing immune cell,Histology
+monocyte,Circulating precursor immune cell,Histology
+plasma,Antibody producing immune cell,Histology
+mastcell,Inflammatory mediator cell,Histology
+erythrocyte,Red blood cell,Histology
+leukocyte,White blood cell,Histology
+platelet,Blood clotting cell fragment,Histology
+hemoglobin,Oxygen carrying protein,Histology
+capillary,Smallest blood vessel,Histology
+arteriole,Small artery branch,Histology
+venule,Small vein branch,Histology
+intima,Innermost vessel layer,Histology
+media,Middle vessel layer,Histology
+endocardium,Inner heart lining,Histology
+myocardium,Heart muscle layer,Histology
+epicardium,Outer heart layer,Histology
+pericardium,Heart surrounding membrane,Histology
+pleura,Lung surrounding membrane,Histology
+peritoneum,Abdominal cavity membrane,Histology
+mesentery,Intestinal supporting fold,Histology
+omentum,Abdominal fatty fold,Histology
+zona,Distinct tissue layer,Histology
+hilum,Entry site for vessels and nerves,Histology
+cortex,Outer organ region,Histology
+medulla,Inner organ region,Histology
+germinal,Cell proliferating region,Histology
+seminiferous,Sperm producing tubule,Histology
+spermatid,Developing sperm cell,Histology
+spermatocyte,Sperm precursor cell,Histology
+oocyte,Immature egg cell,Histology
+follicular,Related to ovarian follicles,Histology
+blastocyst,Early embryonic stage,Histology
+embryo,Developing organism,Histology
+zygote,Fertilized egg cell,Histology
+morula,Early embryonic cell mass,Histology
+trophoblast,Outer embryonic cell layer,Histology
+homeostasis,Maintenance of stable internal conditions,Physiology
+osmosis,Movement of water across a membrane,Physiology
+diffusion,Passive movement of molecules,Physiology
+filtration,Movement driven by pressure differences,Physiology
+transport,Movement of substances within the body,Physiology
+absorption,Uptake of substances into tissues,Physiology
+secretion,Release of substances from cells,Physiology
+excretion,Removal of waste products,Physiology
+metabolism,Sum of all chemical reactions,Physiology
+catabolism,Breakdown of complex molecules,Physiology
+anabolism,Synthesis of complex molecules,Physiology
+enzyme,Biological catalyst,Physiology
+substrate,Molecule acted on by an enzyme,Physiology
+cofactor,Nonprotein helper for enzymes,Physiology
+hormone,Chemical messenger in the body,Physiology
+receptor,Protein binding a signaling molecule,Physiology
+feedback,Mechanism regulating physiological activity,Physiology
+stimulus,Factor triggering a response,Physiology
+response,Reaction to a stimulus,Physiology
+adaptation,Adjustment to environmental changes,Physiology
+glucose,Primary energy source for cells,Physiology
+glycogen,Stored form of glucose,Physiology
+insulin,Hormone lowering blood glucose,Physiology
+glucagon,Hormone raising blood glucose,Physiology
+cortisol,Stress response hormone,Physiology
+adrenaline,Fight or flight hormone,Physiology
+thyroxine,Hormone regulating metabolism,Physiology
+melatonin,Hormone regulating sleep cycles,Physiology
+calcitonin,Hormone lowering blood calcium,Physiology
+parathormone,Hormone increasing blood calcium,Physiology
+growthhormone,Hormone stimulating body growth,Physiology
+prolactin,Hormone promoting milk production,Physiology
+oxytocin,Hormone involved in labor and bonding,Physiology
+aldosterone,Hormone regulating sodium balance,Physiology
+vasopressin,Hormone regulating water retention,Physiology
+electrolyte,Mineral important for body function,Physiology
+sodium,Major extracellular ion,Physiology
+potassium,Major intracellular ion,Physiology
+calcium,Essential ion for muscles and nerves,Physiology
+chloride,Major extracellular anion,Physiology
+phosphate,Important cellular ion,Physiology
+bicarbonate,Buffer regulating blood pH,Physiology
+buffer,System resisting pH changes,Physiology
+acidbase,Balance of acids and bases,Physiology
+respiration,Process of gas exchange,Physiology
+ventilation,Movement of air into lungs,Physiology
+perfusion,Blood flow through tissues,Physiology
+oxygenation,Addition of oxygen to blood,Physiology
+hemoglobin,Protein carrying oxygen,Physiology
+hematocrit,Percentage of red blood cells,Physiology
+cardiac,Related to heart function,Physiology
+heartbeat,Rhythmic contraction of the heart,Physiology
+pulse,Pressure wave from heart contractions,Physiology
+circulation,Movement of blood through the body,Physiology
+bloodflow,Flow of blood through vessels,Physiology
+systole,Heart contraction phase,Physiology
+diastole,Heart relaxation phase,Physiology
+cardiacoutput,Blood pumped per minute,Physiology
+strokevolume,Blood ejected per heartbeat,Physiology
+bloodpressure,Force of blood against vessel walls,Physiology
+vasodilation,Widening of blood vessels,Physiology
+vasoconstriction,Narrowing of blood vessels,Physiology
+capillaryexchange,Movement of substances across capillaries,Physiology
+lymphflow,Movement of lymphatic fluid,Physiology
+neuron,Nerve cell transmitting signals,Physiology
+impulse,Electrical signal in a neuron,Physiology
+depolarization,Reduction of membrane charge difference,Physiology
+repolarization,Restoration of resting membrane charge,Physiology
+synapse,Junction between nerve cells,Physiology
+neurotransmitter,Chemical messenger of neurons,Physiology
+acetylcholine,Neurotransmitter at many synapses,Physiology
+dopamine,Neurotransmitter involved in reward,Physiology
+serotonin,Neurotransmitter affecting mood,Physiology
+gaba,Major inhibitory neurotransmitter,Physiology
+reflex,Automatic response to a stimulus,Physiology
+sensation,Detection of stimuli,Physiology
+perception,Interpretation of sensory information,Physiology
+vision,Ability to detect light,Physiology
+hearing,Ability to detect sound,Physiology
+balance,Maintenance of body equilibrium,Physiology
+taste,Detection of dissolved chemicals,Physiology
+smell,Detection of airborne chemicals,Physiology
+contraction,Shortening of muscle fibers,Physiology
+relaxation,Return of muscle to resting state,Physiology
+sarcomere,Functional contractile unit of muscle,Physiology
+actin,Thin filament protein,Physiology
+myosin,Motor protein generating force,Physiology
+fatigue,Decline in muscle performance,Physiology
+endurance,Ability to sustain activity,Physiology
+digestion,Breakdown of food into nutrients,Physiology
+mastication,Chewing of food,Physiology
+swallowing,Movement of food into esophagus,Physiology
+peristalsis,Wave like movement of the gut,Physiology
+motility,Movement activity of the digestive tract,Physiology
+appetite,Desire to eat food,Physiology
+satiety,Feeling of fullness,Physiology
+bile,Fluid aiding fat digestion,Physiology
+lipase,Enzyme digesting fats,Physiology
+amylase,Enzyme digesting starch,Physiology
+protease,Enzyme digesting proteins,Physiology
+lactase,Enzyme digesting lactose,Physiology
+filtrate,Fluid entering kidney tubules,Physiology
+reabsorption,Return of substances to blood,Physiology
+secretionkidney,Transfer of substances into urine,Physiology
+urination,Expulsion of urine,Physiology
+clearance,Rate of substance removal,Physiology
+hydration,Maintenance of body water balance,Physiology
+dehydration,Excessive loss of body water,Physiology
+fertilization,Fusion of sperm and egg,Physiology
+ovulation,Release of an egg from ovary,Physiology
+gestation,Period of pregnancy,Physiology
+lactation,Production of milk,Physiology
+puberty,Development of reproductive maturity,Physiology
+immunity,Ability to resist disease,Physiology
+antibody,Protein targeting antigens,Physiology
+antigen,Substance triggering immune response,Physiology
+inflammation,Protective response to injury,Physiology
+phagocytosis,Engulfment of particles by cells,Physiology
+fever,Rise in body temperature,Physiology
+thermoregulation,Control of body temperature,Physiology
+metabolicrate,Rate of energy expenditure,Physiology
+circadian,Biological daily rhythm,Physiology
+sleep,Physiological state of rest,Physiology
+arousal,State of alertness,Physiology
+consciousness,Awareness of self and environment,Physiology
+equilibrium,State of physiological balance,Physiology
+compliance,Ability of tissue to stretch,Physiology
+elasticity,Ability to return to original shape,Physiology
+conductance,Ease of substance movement,Physiology
+resistance,Opposition to flow or movement,Physiology
+threshold,Minimum stimulus for activation,Physiology
+excitability,Ability to respond to stimuli,Physiology
+automaticity,Ability to generate impulses spontaneously,Physiology
+synchrony,Coordinated physiological activity,Physiology
+integration,Coordination of body functions,Physiology
+regulation,Control of physiological processes,Physiology
+aminoacid,Building block of proteins,Biochemistry
+protein,Macromolecule made of amino acids,Biochemistry
+peptide,Short chain of amino acids,Biochemistry
+enzyme,Biological catalyst,Biochemistry
+substrate,Molecule acted upon by an enzyme,Biochemistry
+coenzyme,Organic helper molecule for enzymes,Biochemistry
+cofactor,Nonprotein component required by enzymes,Biochemistry
+catalysis,Acceleration of a chemical reaction,Biochemistry
+metabolism,Sum of all biochemical reactions,Biochemistry
+catabolism,Breakdown of complex molecules,Biochemistry
+anabolism,Synthesis of complex molecules,Biochemistry
+glycolysis,Pathway breaking down glucose,Biochemistry
+gluconeogenesis,Synthesis of glucose from noncarbohydrates,Biochemistry
+glycogen,Storage form of glucose,Biochemistry
+glycogenesis,Formation of glycogen,Biochemistry
+glycogenolysis,Breakdown of glycogen,Biochemistry
+glucose,Primary cellular fuel,Biochemistry
+fructose,Simple sugar found in fruits,Biochemistry
+galactose,Simple sugar component of lactose,Biochemistry
+sucrose,Common dietary disaccharide,Biochemistry
+lactose,Milk sugar,Biochemistry
+maltose,Disaccharide from starch digestion,Biochemistry
+starch,Plant storage polysaccharide,Biochemistry
+cellulose,Structural plant polysaccharide,Biochemistry
+lipid,Hydrophobic biological molecule,Biochemistry
+fattyacid,Building block of many lipids,Biochemistry
+triglyceride,Major storage form of fat,Biochemistry
+phospholipid,Major component of cell membranes,Biochemistry
+cholesterol,Sterol important in membranes,Biochemistry
+lipoprotein,Particle transporting lipids in blood,Biochemistry
+hdl,High density lipoprotein,Biochemistry
+ldl,Low density lipoprotein,Biochemistry
+ketone,Product of fatty acid metabolism,Biochemistry
+ketosis,State of elevated ketone production,Biochemistry
+betaoxidation,Fatty acid degradation pathway,Biochemistry
+acetylcoa,Central metabolic intermediate,Biochemistry
+citricacid,Component of the Krebs cycle,Biochemistry
+krebscycle,Major energy producing pathway,Biochemistry
+atp,Primary cellular energy molecule,Biochemistry
+adp,Lower energy phosphate carrier,Biochemistry
+amp,Low energy adenine nucleotide,Biochemistry
+oxidation,Loss of electrons,Biochemistry
+reduction,Gain of electrons,Biochemistry
+redox,Oxidation reduction reaction,Biochemistry
+electron,Subatomic charged particle,Biochemistry
+proton,Positively charged particle,Biochemistry
+mitochondria,Organelle producing cellular energy,Biochemistry
+respiration,Cellular energy generating process,Biochemistry
+oxidativephosphorylation,ATP generation using electron transport,Biochemistry
+electrontransport,Chain producing ATP,Biochemistry
+nadh,Electron carrying coenzyme,Biochemistry
+fadh2,Electron carrying coenzyme in respiration,Biochemistry
+pyruvate,End product of glycolysis,Biochemistry
+lactate,Product of anaerobic metabolism,Biochemistry
+insulin,Hormone lowering blood glucose,Biochemistry
+glucagon,Hormone raising blood glucose,Biochemistry
+cortisol,Hormone affecting metabolism,Biochemistry
+adrenaline,Hormone increasing energy availability,Biochemistry
+thyroxine,Hormone regulating metabolic rate,Biochemistry
+receptor,Protein receiving signals,Biochemistry
+signaling,Cell communication process,Biochemistry
+secondmessenger,Intracellular signaling molecule,Biochemistry
+camp,Common second messenger,Biochemistry
+cgmp,Intracellular signaling nucleotide,Biochemistry
+kinase,Enzyme adding phosphate groups,Biochemistry
+phosphatase,Enzyme removing phosphate groups,Biochemistry
+phosphorylation,Addition of phosphate groups,Biochemistry
+dephosphorylation,Removal of phosphate groups,Biochemistry
+buffer,System resisting pH changes,Biochemistry
+ph,Measure of acidity,Biochemistry
+acid,Proton donating substance,Biochemistry
+base,Proton accepting substance,Biochemistry
+bicarbonate,Major physiological buffer,Biochemistry
+carbonicacid,Component of buffer system,Biochemistry
+electrolyte,Ion in biological fluids,Biochemistry
+sodium,Major extracellular cation,Biochemistry
+potassium,Major intracellular cation,Biochemistry
+calcium,Important signaling ion,Biochemistry
+magnesium,Essential enzymatic cofactor,Biochemistry
+chloride,Major extracellular anion,Biochemistry
+phosphate,Important biological ion,Biochemistry
+nitrogen,Essential element in amino acids,Biochemistry
+sulfur,Element found in some amino acids,Biochemistry
+carbon,Fundamental element of life,Biochemistry
+hydrogen,Common biological element,Biochemistry
+oxygen,Essential element for respiration,Biochemistry
+dna,Genetic information molecule,Biochemistry
+rna,Nucleic acid involved in protein synthesis,Biochemistry
+nucleotide,Building block of nucleic acids,Biochemistry
+nucleoside,Sugar base molecular unit,Biochemistry
+adenine,Purine nitrogenous base,Biochemistry
+guanine,Purine nitrogenous base,Biochemistry
+cytosine,Pyrimidine nitrogenous base,Biochemistry
+thymine,DNA pyrimidine base,Biochemistry
+uracil,RNA pyrimidine base,Biochemistry
+replication,DNA copying process,Biochemistry
+transcription,RNA synthesis from DNA,Biochemistry
+translation,Protein synthesis from RNA,Biochemistry
+codon,Three base genetic code unit,Biochemistry
+anticodon,tRNA sequence pairing with codon,Biochemistry
+ribosome,Structure synthesizing proteins,Biochemistry
+trna,Transfer RNA molecule,Biochemistry
+mrna,Messenger RNA molecule,Biochemistry
+rrna,Ribosomal RNA molecule,Biochemistry
+mutation,Permanent DNA sequence change,Biochemistry
+genome,Complete genetic material,Biochemistry
+proteome,Complete protein complement,Biochemistry
+epigenetics,Regulation beyond DNA sequence,Biochemistry
+methylation,Addition of methyl groups,Biochemistry
+acetylation,Addition of acetyl groups,Biochemistry
+ubiquitin,Protein degradation tag,Biochemistry
+proteasome,Protein degradation complex,Biochemistry
+collagen,Major structural protein,Biochemistry
+elastin,Elastic connective tissue protein,Biochemistry
+keratin,Structural protein in skin and hair,Biochemistry
+albumin,Major plasma protein,Biochemistry
+globulin,Protein family in blood,Biochemistry
+hemoglobin,Oxygen carrying protein,Biochemistry
+myoglobin,Oxygen storing muscle protein,Biochemistry
+ferritin,Iron storage protein,Biochemistry
+transferrin,Iron transport protein,Biochemistry
+bilirubin,Heme breakdown product,Biochemistry
+heme,Iron containing prosthetic group,Biochemistry
+porphyrin,Ring structure in heme,Biochemistry
+creatine,Energy storage compound,Biochemistry
+creatinine,Waste product of creatine metabolism,Biochemistry
+urea,Nitrogen waste product,Biochemistry
+uricacid,Product of purine breakdown,Biochemistry
+ammonia,Toxic nitrogen containing compound,Biochemistry
+detoxification,Removal of harmful compounds,Biochemistry
+biotin,Vitamin acting as coenzyme,Biochemistry
+folate,Vitamin required for nucleotide synthesis,Biochemistry
+niacin,Vitamin precursor of NAD,Biochemistry
+riboflavin,Vitamin precursor of FAD,Biochemistry
+thiamine,Vitamin involved in energy metabolism,Biochemistry
+cobalamin,Vitamin B12,Biochemistry
+ascorbate,Vitamin C form,Biochemistry
+tocopherol,Vitamin E form,Biochemistry
+calciferol,Vitamin D form,Biochemistry
+retinol,Vitamin A form,Biochemistry
+hormone,Chemical messenger molecule,Biochemistry
+homeostasis,Maintenance of biochemical balance,Biochemistry
+metabolicrate,Rate of energy utilization,Biochemistry
+energybalance,Relationship between intake and expenditure,Biochemistry
+biosynthesis,Formation of biological molecules,Biochemistry
+microbe,Microscopic living organism,Microbiology
+bacteria,Single celled prokaryotic organism,Microbiology
+virus,Infectious particle requiring a host,Microbiology
+fungus,Eukaryotic organism including yeasts and molds,Microbiology
+parasite,Organism living at another's expense,Microbiology
+pathogen,Disease causing microorganism,Microbiology
+infection,Invasion by harmful microorganisms,Microbiology
+colonization,Presence of microbes without disease,Microbiology
+contamination,Introduction of unwanted microorganisms,Microbiology
+transmission,Spread of infectious agents,Microbiology
+reservoir,Natural habitat of a pathogen,Microbiology
+vector,Organism transmitting disease,Microbiology
+host,Organism harboring a microbe,Microbiology
+zoonosis,Disease transmitted from animals,Microbiology
+epidemic,Rapid spread of disease,Microbiology
+pandemic,Worldwide disease outbreak,Microbiology
+endemic,Disease constantly present in a region,Microbiology
+outbreak,Sudden increase in disease cases,Microbiology
+virulence,Degree of pathogenicity,Microbiology
+pathogenicity,Ability to cause disease,Microbiology
+toxin,Poison produced by microorganisms,Microbiology
+endotoxin,Toxin associated with gram negative bacteria,Microbiology
+exotoxin,Secreted bacterial toxin,Microbiology
+biofilm,Community of microbes on a surface,Microbiology
+spore,Dormant resistant microbial structure,Microbiology
+capsule,Protective outer bacterial layer,Microbiology
+flagellum,Structure enabling microbial movement,Microbiology
+fimbriae,Hairlike bacterial attachment structures,Microbiology
+pilus,Bacterial structure for adhesion or transfer,Microbiology
+plasmid,Small circular DNA molecule,Microbiology
+genome,Complete genetic material,Microbiology
+mutation,Permanent genetic change,Microbiology
+replication,Production of new genetic material,Microbiology
+culture,Growth of microorganisms in media,Microbiology
+colony,Visible mass of microbial cells,Microbiology
+medium,Nutrient material for growth,Microbiology
+agar,Solidifying agent in culture media,Microbiology
+broth,Liquid culture medium,Microbiology
+incubation,Growth under controlled conditions,Microbiology
+staining,Technique for visualizing microbes,Microbiology
+gramstain,Method classifying bacteria by cell wall,Microbiology
+acidfast,Staining characteristic of some bacteria,Microbiology
+microscopy,Examination using a microscope,Microbiology
+sterilization,Complete destruction of microorganisms,Microbiology
+disinfection,Reduction of harmful microorganisms,Microbiology
+antiseptic,Agent used on living tissue,Microbiology
+asepsis,Absence of pathogenic microbes,Microbiology
+decontamination,Removal of microbial contamination,Microbiology
+antibiotic,Drug active against bacteria,Microbiology
+resistance,Ability to survive antimicrobial drugs,Microbiology
+susceptibility,Sensitivity to antimicrobial agents,Microbiology
+antifungal,Drug active against fungi,Microbiology
+antiviral,Drug active against viruses,Microbiology
+antiparasitic,Drug active against parasites,Microbiology
+vaccination,Administration of a vaccine,Microbiology
+vaccine,Biological preparation inducing immunity,Microbiology
+immunity,Protection against infection,Microbiology
+antigen,Substance triggering immune response,Microbiology
+antibody,Protein targeting antigens,Microbiology
+serology,Study of antibodies in blood,Microbiology
+immunization,Process of acquiring immunity,Microbiology
+bacillus,Rod shaped bacterium,Microbiology
+coccus,Spherical bacterium,Microbiology
+spirillum,Spiral shaped bacterium,Microbiology
+vibrio,Curved rod shaped bacterium,Microbiology
+streptococcus,Chain forming spherical bacterium,Microbiology
+staphylococcus,Cluster forming spherical bacterium,Microbiology
+enterococcus,Intestinal gram positive bacterium,Microbiology
+lactobacillus,Lactic acid producing bacterium,Microbiology
+clostridium,Spore forming anaerobic bacterium,Microbiology
+bacillusgenus,Spore forming aerobic bacterium,Microbiology
+mycobacterium,Acid fast bacterial genus,Microbiology
+corynebacterium,Gram positive rod bacterium,Microbiology
+listeria,Foodborne pathogenic bacterium,Microbiology
+salmonella,Enteric pathogenic bacterium,Microbiology
+shigella,Cause of bacillary dysentery,Microbiology
+escherichia,Common intestinal bacterial genus,Microbiology
+klebsiella,Encapsulated gram negative bacterium,Microbiology
+proteus,Motile gram negative bacterium,Microbiology
+pseudomonas,Opportunistic gram negative bacterium,Microbiology
+neisseria,Gram negative diplococcal genus,Microbiology
+haemophilus,Respiratory tract pathogen,Microbiology
+bordetella,Cause of whooping cough,Microbiology
+legionella,Waterborne bacterial pathogen,Microbiology
+campylobacter,Curved enteric bacterium,Microbiology
+helicobacter,Gastric ulcer associated bacterium,Microbiology
+treponema,Spirochete causing syphilis,Microbiology
+borrelia,Spirochete causing Lyme disease,Microbiology
+chlamydia,Obligate intracellular bacterium,Microbiology
+rickettsia,Arthropod borne intracellular bacterium,Microbiology
+mycoplasma,Bacterium lacking a cell wall,Microbiology
+yeast,Single celled fungus,Microbiology
+mold,Multicellular filamentous fungus,Microbiology
+candida,Common opportunistic yeast,Microbiology
+aspergillus,Filamentous fungal genus,Microbiology
+cryptococcus,Encapsulated pathogenic yeast,Microbiology
+dermatophyte,Fungus infecting skin and nails,Microbiology
+protozoa,Single celled eukaryotic parasites,Microbiology
+amoeba,Shape changing protozoan,Microbiology
+plasmodium,Parasite causing malaria,Microbiology
+toxoplasma,Protozoan parasite of humans,Microbiology
+giardia,Flagellated intestinal parasite,Microbiology
+trichomonas,Flagellated protozoan parasite,Microbiology
+leishmania,Protozoan transmitted by sandflies,Microbiology
+trypanosoma,Protozoan causing sleeping sickness,Microbiology
+helminth,Parasitic worm,Microbiology
+nematode,Roundworm parasite,Microbiology
+cestode,Tapeworm parasite,Microbiology
+trematode,Fluke parasite,Microbiology
+adenovirus,Common respiratory virus,Microbiology
+coronavirus,RNA virus affecting respiratory tract,Microbiology
+influenza,Cause of seasonal flu,Microbiology
+rhinovirus,Common cold virus,Microbiology
+norovirus,Cause of viral gastroenteritis,Microbiology
+rotavirus,Cause of severe childhood diarrhea,Microbiology
+hepatitis,Virus affecting the liver,Microbiology
+retrovirus,RNA virus using reverse transcription,Microbiology
+lentivirus,Subclass of retrovirus,Microbiology
+papillomavirus,DNA virus causing warts,Microbiology
+herpesvirus,Virus causing latent infections,Microbiology
+varicella,Cause of chickenpox,Microbiology
+cytomegalovirus,Common herpesvirus pathogen,Microbiology
+epsteinbarr,Virus causing mononucleosis,Microbiology
+poxvirus,Large DNA virus family,Microbiology
+arbovirus,Virus transmitted by arthropods,Microbiology
+bacteriophage,Virus infecting bacteria,Microbiology
+virion,Complete infectious virus particle,Microbiology
+capsid,Protein coat of a virus,Microbiology
+envelope,Outer lipid layer of some viruses,Microbiology
+lysis,Destruction of a host cell,Microbiology
+latency,Dormant viral state,Microbiology
+incubationperiod,Time before symptoms appear,Microbiology
+communicable,Capable of being transmitted,Microbiology
+nosocomial,Acquired in a healthcare setting,Microbiology
+opportunistic,Causing disease in weakened hosts,Microbiology
+septicemia,Presence of pathogens in blood,Microbiology
+bacteremia,Bacteria present in blood,Microbiology
+viremia,Viruses present in blood,Microbiology
+fungemia,Fungi present in blood,Microbiology
+parasitology,Study of parasites,Microbiology
+bacteriology,Study of bacteria,Microbiology
+virology,Study of viruses,Microbiology
+mycology,Study of fungi,Microbiology
+microbiota,Community of microorganisms,Microbiology
+microbiome,Genetic content of microbiota,Microbiology
+probiotic,Beneficial microorganism,Microbiology
+commensal,Microbe living without harm,Microbiology
+symbiosis,Close biological association,Microbiology
+pathology,Study of disease processes,Pathology
+disease,Abnormal condition affecting the body,Pathology
+lesion,Area of abnormal tissue change,Pathology
+injury,Damage to tissue or organs,Pathology
+necrosis,Uncontrolled death of cells,Pathology
+apoptosis,Programmed cell death,Pathology
+atrophy,Decrease in tissue size,Pathology
+hypertrophy,Increase in cell size,Pathology
+hyperplasia,Increase in cell number,Pathology
+metaplasia,Replacement of one cell type by another,Pathology
+dysplasia,Disordered cellular growth,Pathology
+anaplasia,Loss of cellular differentiation,Pathology
+degeneration,Progressive deterioration of tissue,Pathology
+inflammation,Protective response to injury,Pathology
+edema,Abnormal fluid accumulation,Pathology
+exudate,Protein rich inflammatory fluid,Pathology
+transudate,Low protein fluid accumulation,Pathology
+congestion,Excess blood within vessels,Pathology
+hemorrhage,Escape of blood from vessels,Pathology
+hematoma,Localized collection of blood,Pathology
+thrombus,Blood clot within a vessel,Pathology
+embolus,Detached intravascular mass,Pathology
+infarction,Tissue death due to ischemia,Pathology
+ischemia,Reduced blood supply,Pathology
+hypoxia,Reduced oxygen availability,Pathology
+anoxia,Complete absence of oxygen,Pathology
+shock,Circulatory failure causing hypoperfusion,Pathology
+sepsis,Life threatening response to infection,Pathology
+bacteremia,Bacteria present in blood,Pathology
+toxemia,Toxins circulating in blood,Pathology
+fever,Elevation of body temperature,Pathology
+pyrexia,Medical term for fever,Pathology
+cachexia,Wasting syndrome associated with disease,Pathology
+cyanosis,Bluish discoloration from low oxygen,Pathology
+jaundice,Yellow discoloration from bilirubin,Pathology
+fibrosis,Excess fibrous tissue formation,Pathology
+scar,Fibrous tissue replacing injury,Pathology
+adhesion,Fibrous band connecting tissues,Pathology
+ulcer,Loss of surface tissue,Pathology
+abscess,Localized collection of pus,Pathology
+granuloma,Chronic inflammatory lesion,Pathology
+suppuration,Formation of pus,Pathology
+necrobiosis,Degenerative cellular change,Pathology
+gangrene,Necrosis with tissue decay,Pathology
+calcification,Abnormal calcium deposition,Pathology
+dystrophy,Degenerative tissue disorder,Pathology
+amyloidosis,Deposition of amyloid protein,Pathology
+amyloid,Abnormal extracellular protein,Pathology
+mutation,Permanent genetic alteration,Pathology
+carcinogen,Cancer causing agent,Pathology
+oncogene,Gene promoting tumor development,Pathology
+tumor,Abnormal tissue mass,Pathology
+neoplasm,New abnormal growth,Pathology
+benign,Noninvasive tumor type,Pathology
+malignant,Cancerous invasive tumor type,Pathology
+carcinoma,Malignant epithelial tumor,Pathology
+sarcoma,Malignant connective tissue tumor,Pathology
+adenoma,Benign glandular tumor,Pathology
+lymphoma,Malignant lymphoid tumor,Pathology
+leukemia,Malignancy of blood cells,Pathology
+melanoma,Malignant tumor of melanocytes,Pathology
+metastasis,Spread of cancer to distant sites,Pathology
+invasion,Direct spread into adjacent tissue,Pathology
+differentiation,Degree of cellular maturity,Pathology
+grading,Assessment of tumor aggressiveness,Pathology
+staging,Assessment of tumor extent,Pathology
+dysplasiaepithelial,Precancerous epithelial change,Pathology
+polyp,Mucosal tissue projection,Pathology
+papilloma,Benign epithelial tumor,Pathology
+adenocarcinoma,Malignant gland forming tumor,Pathology
+teratoma,Tumor containing multiple tissue types,Pathology
+blastoma,Tumor of immature cells,Pathology
+hamartoma,Benign disorganized tissue growth,Pathology
+cyst,Fluid filled sac,Pathology
+pseudocyst,Cyst lacking epithelial lining,Pathology
+necrotic,Affected by necrosis,Pathology
+purulent,Containing pus,Pathology
+serous,Watery fluid containing,Pathology
+fibrinous,Containing fibrin deposits,Pathology
+chronic,Long lasting condition,Pathology
+acute,Sudden onset condition,Pathology
+subacute,Intermediate disease duration,Pathology
+relapse,Return of disease after improvement,Pathology
+remission,Reduction of disease activity,Pathology
+prognosis,Expected disease outcome,Pathology
+diagnosis,Identification of disease,Pathology
+screening,Testing before symptoms appear,Pathology
+biopsy,Removal of tissue for examination,Pathology
+cytology,Study of cells for diagnosis,Pathology
+histology,Microscopic study of tissues,Pathology
+autopsy,Postmortem examination,Pathology
+pathogenesis,Mechanism of disease development,Pathology
+etiology,Cause of disease,Pathology
+idiopathic,Condition with unknown cause,Pathology
+iatrogenic,Caused by medical treatment,Pathology
+congenital,Present at birth,Pathology
+acquired,Developed after birth,Pathology
+hereditary,Passed through genes,Pathology
+genetic,Related to genes,Pathology
+syndrome,Group of associated findings,Pathology
+disorder,Disturbance of normal function,Pathology
+condition,State affecting health,Pathology
+manifestation,Observable sign of disease,Pathology
+symptom,Subjective evidence of disease,Pathology
+sign,Objective evidence of disease,Pathology
+morbidity,Disease occurrence rate,Pathology
+mortality,Death occurrence rate,Pathology
+prevalence,Existing cases in a population,Pathology
+incidence,New cases in a population,Pathology
+epidemic,Rapid increase of disease,Pathology
+pandemic,Worldwide disease spread,Pathology
+endemic,Constant disease presence,Pathology
+infection,Invasion by pathogens,Pathology
+infestation,Presence of parasites,Pathology
+contagious,Capable of transmission,Pathology
+opportunistic,Causing disease in weakened hosts,Pathology
+immunity,Protection against disease,Pathology
+autoimmune,Immune attack on self tissues,Pathology
+allergy,Hypersensitivity reaction,Pathology
+hypersensitivity,Exaggerated immune response,Pathology
+anaphylaxis,Severe allergic reaction,Pathology
+antibody,Immune response protein,Pathology
+antigen,Substance triggering immunity,Pathology
+necroinflammation,Necrosis with inflammation,Pathology
+vasculitis,Inflammation of blood vessels,Pathology
+arthritis,Inflammation of joints,Pathology
+hepatitis,Inflammation of the liver,Pathology
+nephritis,Inflammation of the kidney,Pathology
+dermatitis,Inflammation of the skin,Pathology
+gastritis,Inflammation of the stomach,Pathology
+colitis,Inflammation of the colon,Pathology
+pneumonia,Inflammation of lung tissue,Pathology
+myocarditis,Inflammation of heart muscle,Pathology
+encephalitis,Inflammation of the brain,Pathology
+meningitis,Inflammation of the meninges,Pathology
+osteomyelitis,Bone and marrow infection,Pathology
+sclerosis,Abnormal tissue hardening,Pathology
+stenosis,Abnormal narrowing,Pathology
+occlusion,Blockage of a passage,Pathology
+obstruction,Interference with normal flow,Pathology
+rupture,Tearing of tissue,Pathology
+perforation,Hole through an organ,Pathology
+necrotizing,Causing tissue necrosis,Pathology
+malformation,Abnormal structural development,Pathology
+deformity,Abnormal body shape,Pathology
+atrophic,Showing atrophy,Pathology
+hypertrophic,Showing hypertrophy,Pathology
+hyperplastic,Showing hyperplasia,Pathology
+dysplastic,Showing dysplasia,Pathology
+metastatic,Related to metastasis,Pathology
+recovery,Return to normal health,Pathology
+healing,Restoration of tissue integrity,Pathology
+repair,Replacement of damaged tissue,Pathology
+regeneration,Replacement with original tissue,Pathology
+pharmacology,Study of drugs and their effects,Pharmacology
+drug,Chemical substance used for treatment,Pharmacology
+medication,Substance used to prevent or treat disease,Pharmacology
+pharmacy,Science of preparing and dispensing drugs,Pharmacology
+pharmacokinetics,Study of drug movement through the body,Pharmacology
+pharmacodynamics,Study of drug effects on the body,Pharmacology
+absorption,Movement of a drug into circulation,Pharmacology
+distribution,Transport of a drug through the body,Pharmacology
+metabolism,Chemical modification of a drug,Pharmacology
+excretion,Removal of a drug from the body,Pharmacology
+bioavailability,Fraction of drug reaching circulation,Pharmacology
+clearance,Rate of drug elimination,Pharmacology
+halflife,Time required for drug concentration to halve,Pharmacology
+dose,Amount of drug administered,Pharmacology
+dosage,Regimen of drug administration,Pharmacology
+loadingdose,Initial larger drug dose,Pharmacology
+maintenance,Dose required to sustain effect,Pharmacology
+therapeutic,Producing desired medical effect,Pharmacology
+toxicity,Harmful effect of a drug,Pharmacology
+adverseeffect,Undesired effect of a drug,Pharmacology
+sideeffect,Secondary effect of a drug,Pharmacology
+contraindication,Reason a drug should not be used,Pharmacology
+interaction,Effect of one drug on another,Pharmacology
+synergism,Combined effect greater than expected,Pharmacology
+antagonism,One drug reducing another's effect,Pharmacology
+potency,Amount required to produce an effect,Pharmacology
+efficacy,Maximum effect achievable,Pharmacology
+agonist,Drug activating a receptor,Pharmacology
+antagonist,Drug blocking a receptor,Pharmacology
+partialagonist,Drug partially activating a receptor,Pharmacology
+receptor,Protein target of a drug,Pharmacology
+ligand,Molecule binding to a receptor,Pharmacology
+affinity,Strength of receptor binding,Pharmacology
+selectivity,Preference for a specific target,Pharmacology
+tolerance,Reduced response after repeated use,Pharmacology
+dependence,Need for continued drug use,Pharmacology
+withdrawal,Symptoms after stopping a drug,Pharmacology
+compliance,Following a treatment plan,Pharmacology
+adherence,Consistency with prescribed therapy,Pharmacology
+prescription,Authorization for medication use,Pharmacology
+generic,Nonbrand drug name,Pharmacology
+formulation,Specific drug preparation,Pharmacology
+tablet,Solid oral dosage form,Pharmacology
+capsule,Drug enclosed in a shell,Pharmacology
+syrup,Liquid oral preparation,Pharmacology
+injection,Administration by needle,Pharmacology
+infusion,Slow administration into circulation,Pharmacology
+topical,Applied to body surfaces,Pharmacology
+oral,Administered by mouth,Pharmacology
+intravenous,Administered into a vein,Pharmacology
+intramuscular,Administered into muscle,Pharmacology
+subcutaneous,Administered under the skin,Pharmacology
+transdermal,Delivered through the skin,Pharmacology
+analgesic,Drug relieving pain,Pharmacology
+anesthetic,Drug producing loss of sensation,Pharmacology
+sedative,Drug producing calmness,Pharmacology
+hypnotic,Drug inducing sleep,Pharmacology
+antipyretic,Drug reducing fever,Pharmacology
+antiinflammatory,Drug reducing inflammation,Pharmacology
+antibiotic,Drug active against bacteria,Pharmacology
+antiviral,Drug active against viruses,Pharmacology
+antifungal,Drug active against fungi,Pharmacology
+antiparasitic,Drug active against parasites,Pharmacology
+antiseptic,Agent preventing microbial growth,Pharmacology
+disinfectant,Agent destroying microorganisms,Pharmacology
+vaccine,Biological preparation inducing immunity,Pharmacology
+immunoglobulin,Antibody preparation for therapy,Pharmacology
+aspirin,Nonsteroidal antiinflammatory drug,Pharmacology
+ibuprofen,Common nonsteroidal antiinflammatory drug,Pharmacology
+naproxen,Long acting antiinflammatory drug,Pharmacology
+paracetamol,Analgesic and antipyretic drug,Pharmacology
+morphine,Opioid analgesic,Pharmacology
+codeine,Mild opioid analgesic,Pharmacology
+fentanyl,Potent synthetic opioid,Pharmacology
+tramadol,Opioid pain medication,Pharmacology
+lidocaine,Local anesthetic agent,Pharmacology
+ketamine,Dissociative anesthetic drug,Pharmacology
+propofol,Intravenous anesthetic drug,Pharmacology
+diazepam,Benzodiazepine sedative,Pharmacology
+lorazepam,Anxiolytic benzodiazepine,Pharmacology
+midazolam,Short acting benzodiazepine,Pharmacology
+alprazolam,Anxiety treatment benzodiazepine,Pharmacology
+zolpidem,Hypnotic sleep medication,Pharmacology
+fluoxetine,Selective serotonin reuptake inhibitor,Pharmacology
+sertraline,Common antidepressant medication,Pharmacology
+citalopram,Selective serotonin reuptake inhibitor,Pharmacology
+amitriptyline,Tricyclic antidepressant,Pharmacology
+haloperidol,Typical antipsychotic drug,Pharmacology
+risperidone,Atypical antipsychotic drug,Pharmacology
+olanzapine,Atypical antipsychotic drug,Pharmacology
+clozapine,Atypical antipsychotic medication,Pharmacology
+levodopa,Parkinson disease treatment,Pharmacology
+dopamine,Neurotransmitter and therapeutic agent,Pharmacology
+epinephrine,Adrenergic agonist drug,Pharmacology
+norepinephrine,Vasopressor catecholamine,Pharmacology
+atropine,Anticholinergic medication,Pharmacology
+pilocarpine,Cholinergic agonist drug,Pharmacology
+salbutamol,Bronchodilator beta agonist,Pharmacology
+ipratropium,Anticholinergic bronchodilator,Pharmacology
+theophylline,Bronchodilator methylxanthine,Pharmacology
+prednisone,Corticosteroid medication,Pharmacology
+dexamethasone,Potent corticosteroid,Pharmacology
+hydrocortisone,Natural corticosteroid,Pharmacology
+insulin,Hormone lowering blood glucose,Pharmacology
+metformin,First line diabetes medication,Pharmacology
+glibenclamide,Sulfonylurea antidiabetic drug,Pharmacology
+glucagon,Hormone raising blood glucose,Pharmacology
+levothyroxine,Synthetic thyroid hormone,Pharmacology
+methimazole,Antithyroid medication,Pharmacology
+omeprazole,Proton pump inhibitor,Pharmacology
+pantoprazole,Acid reducing medication,Pharmacology
+ranitidine,Histamine receptor blocker,Pharmacology
+ondansetron,Antiemetic medication,Pharmacology
+metoclopramide,Drug enhancing gastric motility,Pharmacology
+loperamide,Antidiarrheal medication,Pharmacology
+bisacodyl,Stimulant laxative,Pharmacology
+heparin,Anticoagulant medication,Pharmacology
+warfarin,Vitamin K antagonist anticoagulant,Pharmacology
+enoxaparin,Low molecular weight heparin,Pharmacology
+clopidogrel,Antiplatelet medication,Pharmacology
+aspirinlow,Low dose antiplatelet therapy,Pharmacology
+atorvastatin,Cholesterol lowering statin,Pharmacology
+simvastatin,Lipid lowering statin,Pharmacology
+amlodipine,Calcium channel blocker,Pharmacology
+verapamil,Calcium channel blocker,Pharmacology
+diltiazem,Cardiovascular calcium channel blocker,Pharmacology
+losartan,Angiotensin receptor blocker,Pharmacology
+enalapril,ACE inhibitor medication,Pharmacology
+lisinopril,ACE inhibitor drug,Pharmacology
+propranolol,Beta blocker medication,Pharmacology
+metoprolol,Cardioselective beta blocker,Pharmacology
+atenolol,Beta adrenergic blocker,Pharmacology
+furosemide,Loop diuretic,Pharmacology
+spironolactone,Potassium sparing diuretic,Pharmacology
+hydrochlorothiazide,Thiazide diuretic,Pharmacology
+nitroglycerin,Vasodilator for angina,Pharmacology
+digoxin,Cardiac glycoside medication,Pharmacology
+amiodarone,Antiarrhythmic medication,Pharmacology
+quinidine,Class I antiarrhythmic drug,Pharmacology
+ceftriaxone,Third generation cephalosporin,Pharmacology
+amoxicillin,Penicillin class antibiotic,Pharmacology
+penicillin,Classic beta lactam antibiotic,Pharmacology
+vancomycin,Glycopeptide antibiotic,Pharmacology
+azithromycin,Macrolide antibiotic,Pharmacology
+doxycycline,Tetracycline antibiotic,Pharmacology
+ciprofloxacin,Fluoroquinolone antibiotic,Pharmacology
+gentamicin,Aminoglycoside antibiotic,Pharmacology
+rifampicin,Antitubercular antibiotic,Pharmacology
+isoniazid,Tuberculosis treatment medication,Pharmacology
+acyclovir,Antiviral against herpes viruses,Pharmacology
+oseltamivir,Influenza antiviral medication,Pharmacology
+fluconazole,Azole antifungal medication,Pharmacology
+amphotericin,Broad spectrum antifungal,Pharmacology
+chloroquine,Antimalarial medication,Pharmacology
+artemisinin,Antimalarial compound,Pharmacology
+methotrexate,Antimetabolite medication,Pharmacology
+cyclophosphamide,Alkylating chemotherapy agent,Pharmacology
+tamoxifen,Selective estrogen receptor modulator,Pharmacology
+imatinib,Targeted anticancer therapy,Pharmacology
+monoclonal,Laboratory produced antibody therapy,Pharmacology
+biologic,Therapeutic product from living systems,Pharmacology
+cardiology,Study of the heart and circulation,Cardiology
+heart,Muscular organ pumping blood,Cardiology
+cardiac,Related to the heart,Cardiology
+atrium,Upper chamber of the heart,Cardiology
+ventricle,Lower chamber of the heart,Cardiology
+septum,Wall separating heart chambers,Cardiology
+valve,Structure controlling blood flow,Cardiology
+aorta,Main artery leaving the heart,Cardiology
+artery,Blood vessel carrying blood away from the heart,Cardiology
+vein,Blood vessel carrying blood toward the heart,Cardiology
+capillary,Smallest blood vessel,Cardiology
+venule,Small vein branch,Cardiology
+arteriole,Small artery branch,Cardiology
+coronary,Related to blood supply of the heart,Cardiology
+myocardium,Heart muscle layer,Cardiology
+endocardium,Inner lining of the heart,Cardiology
+epicardium,Outer heart layer,Cardiology
+pericardium,Membrane surrounding the heart,Cardiology
+perfusion,Delivery of blood to tissues,Cardiology
+circulation,Movement of blood through the body,Cardiology
+pulse,Pressure wave generated by heartbeats,Cardiology
+heartbeat,Rhythmic contraction of the heart,Cardiology
+systole,Phase of cardiac contraction,Cardiology
+diastole,Phase of cardiac relaxation,Cardiology
+cardiacoutput,Volume pumped by the heart per minute,Cardiology
+strokevolume,Blood ejected with each heartbeat,Cardiology
+bloodpressure,Force exerted by blood on vessel walls,Cardiology
+hypertension,Elevated blood pressure,Cardiology
+hypotension,Low blood pressure,Cardiology
+hemodynamics,Study of blood flow,Cardiology
+preload,Ventricular filling before contraction,Cardiology
+afterload,Resistance against ventricular ejection,Cardiology
+contractility,Strength of cardiac contraction,Cardiology
+compliance,Ability to stretch under pressure,Cardiology
+vascular,Related to blood vessels,Cardiology
+vasodilation,Widening of blood vessels,Cardiology
+vasoconstriction,Narrowing of blood vessels,Cardiology
+endothelium,Inner vessel lining,Cardiology
+intima,Innermost vessel layer,Cardiology
+media,Middle vessel layer,Cardiology
+adventitia,Outer vessel layer,Cardiology
+hemoglobin,Oxygen carrying blood protein,Cardiology
+hematocrit,Percentage of red blood cells,Cardiology
+oxygenation,Addition of oxygen to blood,Cardiology
+ischemia,Reduced blood supply,Cardiology
+hypoxia,Reduced tissue oxygenation,Cardiology
+infarction,Tissue death due to ischemia,Cardiology
+necrosis,Death of tissue,Cardiology
+angina,Chest pain due to ischemia,Cardiology
+atherosclerosis,Plaque buildup in arteries,Cardiology
+plaque,Fatty deposit in vessel walls,Cardiology
+thrombus,Blood clot within a vessel,Cardiology
+embolus,Detached intravascular clot or material,Cardiology
+thrombosis,Formation of a blood clot,Cardiology
+embolism,Obstruction caused by an embolus,Cardiology
+stenosis,Abnormal narrowing of a vessel,Cardiology
+occlusion,Complete blockage of a vessel,Cardiology
+aneurysm,Localized vessel dilation,Cardiology
+dissection,Tear within a vessel wall,Cardiology
+arrhythmia,Abnormal heart rhythm,Cardiology
+tachycardia,Fast heart rate,Cardiology
+bradycardia,Slow heart rate,Cardiology
+palpitation,Awareness of heartbeat,Cardiology
+fibrillation,Rapid uncoordinated contractions,Cardiology
+flutter,Rapid regular abnormal rhythm,Cardiology
+extrasystole,Premature heartbeat,Cardiology
+conduction,Transmission of electrical impulses,Cardiology
+automaticity,Ability to generate impulses spontaneously,Cardiology
+depolarization,Electrical activation of cells,Cardiology
+repolarization,Return to resting electrical state,Cardiology
+electrocardiogram,Recording of cardiac electrical activity,Cardiology
+ecg,Abbreviation for electrocardiogram,Cardiology
+ekg,Alternative abbreviation for electrocardiogram,Cardiology
+pwave,ECG representation of atrial depolarization,Cardiology
+qrs,ECG representation of ventricular depolarization,Cardiology
+twave,ECG representation of ventricular repolarization,Cardiology
+printerval,Time between atrial and ventricular activation,Cardiology
+qtinterval,Measure of ventricular electrical activity,Cardiology
+sinusrhythm,Normal cardiac rhythm,Cardiology
+sinusnode,Natural pacemaker of the heart,Cardiology
+avnode,Atrioventricular conduction node,Cardiology
+bundlehis,Part of cardiac conduction pathway,Cardiology
+purkinje,Terminal cardiac conduction fibers,Cardiology
+pacemaker,Device regulating heart rhythm,Cardiology
+defibrillator,Device correcting dangerous arrhythmias,Cardiology
+echocardiography,Ultrasound imaging of the heart,Cardiology
+ultrasound,Imaging using sound waves,Cardiology
+doppler,Technique measuring blood flow,Cardiology
+angiography,Imaging of blood vessels,Cardiology
+catheterization,Insertion of a catheter into vessels,Cardiology
+stent,Device keeping vessels open,Cardiology
+bypass,Surgical rerouting of blood flow,Cardiology
+revascularization,Restoration of blood supply,Cardiology
+cardiomyopathy,Disease of heart muscle,Cardiology
+dilated,Enlarged heart chamber condition,Cardiology
+hypertrophic,Abnormal thickening of heart muscle,Cardiology
+restrictive,Reduced ventricular filling disorder,Cardiology
+heartfailure,Inability of heart to pump adequately,Cardiology
+congestive,Heart failure with fluid accumulation,Cardiology
+edema,Fluid accumulation in tissues,Cardiology
+pulmonaryedema,Fluid accumulation in lungs,Cardiology
+shock,Circulatory failure causing hypoperfusion,Cardiology
+cardiogenic,Shock originating from heart dysfunction,Cardiology
+myocarditis,Inflammation of heart muscle,Cardiology
+endocarditis,Inflammation of endocardium,Cardiology
+pericarditis,Inflammation of pericardium,Cardiology
+rheumatic,Related to rheumatic heart disease,Cardiology
+valvular,Related to heart valves,Cardiology
+regurgitation,Backward flow through a valve,Cardiology
+prolapse,Abnormal valve displacement,Cardiology
+murmur,Abnormal heart sound,Cardiology
+auscultation,Listening to internal body sounds,Cardiology
+sphygmomanometer,Instrument measuring blood pressure,Cardiology
+cholesterol,Lipid associated with cardiovascular risk,Cardiology
+triglyceride,Blood lipid used for energy storage,Cardiology
+lipoprotein,Particle transporting lipids,Cardiology
+hdl,High density lipoprotein,Cardiology
+ldl,Low density lipoprotein,Cardiology
+statin,Cholesterol lowering medication,Cardiology
+anticoagulant,Drug preventing clot formation,Cardiology
+antiplatelet,Drug reducing platelet aggregation,Cardiology
+heparin,Common anticoagulant medication,Cardiology
+warfarin,Vitamin K antagonist anticoagulant,Cardiology
+clopidogrel,Antiplatelet medication,Cardiology
+aspirin,Antiplatelet and analgesic drug,Cardiology
+aceinhibitor,Medication blocking angiotensin conversion,Cardiology
+arb,Angiotensin receptor blocker,Cardiology
+diuretic,Medication increasing urine production,Cardiology
+nitroglycerin,Vasodilator used for angina,Cardiology
+digoxin,Cardiac glycoside medication,Cardiology
+amiodarone,Antiarrhythmic medication,Cardiology
+troponin,Marker of cardiac injury,Cardiology
+ckmb,Cardiac enzyme marker,Cardiology
+biomarker,Measurable indicator of disease,Cardiology
+screening,Testing before symptoms occur,Cardiology
+prevention,Measures reducing disease risk,Cardiology
+rehabilitation,Recovery after cardiovascular disease,Cardiology
+exercise,Physical activity improving heart health,Cardiology
+endurance,Ability to sustain activity,Cardiology
+fitness,State of cardiovascular conditioning,Cardiology
+metabolicsyndrome,Cluster of cardiovascular risk factors,Cardiology
+diabetes,Disease increasing cardiovascular risk,Cardiology
+obesity,Excess body fat accumulation,Cardiology
+smoking,Major cardiovascular risk factor,Cardiology
+lifestyle,Behavior influencing health outcomes,Cardiology
+mortality,Rate of death in a population,Cardiology
+morbidity,Rate of disease occurrence,Cardiology
+prognosis,Expected outcome of disease,Cardiology
+neurology,Study of the nervous system,Neurology
+neuron,Nerve cell transmitting signals,Neurology
+neuroglia,Supporting cells of nervous tissue,Neurology
+astrocyte,Star shaped glial cell,Neurology
+microglia,Immune cell of the central nervous system,Neurology
+oligodendrocyte,Cell producing CNS myelin,Neurology
+schwanncell,Cell producing peripheral myelin,Neurology
+ependyma,Cell lining brain ventricles,Neurology
+axon,Nerve fiber carrying impulses,Neurology
+dendrite,Neuron extension receiving signals,Neurology
+synapse,Junction between neurons,Neurology
+myelin,Insulating sheath around nerves,Neurology
+node,Gap between myelin segments,Neurology
+ganglion,Cluster of nerve cell bodies,Neurology
+nucleus,Collection of neurons in the CNS,Neurology
+tract,Bundle of CNS nerve fibers,Neurology
+nerve,Bundle of peripheral nerve fibers,Neurology
+plexus,Network of intersecting nerves,Neurology
+receptor,Sensory structure detecting stimuli,Neurology
+impulse,Electrical signal in a neuron,Neurology
+depolarization,Loss of membrane polarization,Neurology
+repolarization,Restoration of resting membrane charge,Neurology
+hyperpolarization,Increase in membrane potential difference,Neurology
+neurotransmitter,Chemical messenger between neurons,Neurology
+acetylcholine,Major neurotransmitter of motor neurons,Neurology
+dopamine,Neurotransmitter involved in reward and movement,Neurology
+serotonin,Neurotransmitter affecting mood,Neurology
+gaba,Major inhibitory neurotransmitter,Neurology
+glutamate,Major excitatory neurotransmitter,Neurology
+norepinephrine,Neurotransmitter involved in arousal,Neurology
+brain,Primary organ of the nervous system,Neurology
+cerebrum,Largest region of the brain,Neurology
+cortex,Outer layer of the cerebrum,Neurology
+cerebellum,Brain region coordinating movement,Neurology
+brainstem,Structure connecting brain and spinal cord,Neurology
+midbrain,Upper portion of the brainstem,Neurology
+pons,Middle portion of the brainstem,Neurology
+medulla,Lower portion of the brainstem,Neurology
+thalamus,Sensory relay center of the brain,Neurology
+hypothalamus,Homeostatic control center,Neurology
+pituitary,Endocrine gland controlled by hypothalamus,Neurology
+pineal,Gland regulating circadian rhythm,Neurology
+limbic,Region involved in emotion and memory,Neurology
+amygdala,Brain structure processing emotions,Neurology
+hippocampus,Brain structure important for memory,Neurology
+basalganglia,Group of nuclei controlling movement,Neurology
+ventricle,Fluid filled cavity in the brain,Neurology
+csf,Cerebrospinal fluid,Neurology
+meninges,Protective membranes around the CNS,Neurology
+duramater,Outer meningeal layer,Neurology
+arachnoid,Middle meningeal layer,Neurology
+piamater,Inner meningeal layer,Neurology
+spinalcord,Main CNS pathway,Neurology
+cervical,Neck region of the spinal cord,Neurology
+thoracic,Chest region of the spinal cord,Neurology
+lumbar,Lower back spinal region,Neurology
+sacral,Lowest spinal region,Neurology
+reflex,Automatic response to a stimulus,Neurology
+motor,Related to movement,Neurology
+sensory,Related to sensation,Neurology
+afferent,Conducting toward the CNS,Neurology
+efferent,Conducting away from the CNS,Neurology
+somatic,Related to voluntary control,Neurology
+autonomic,Related to involuntary control,Neurology
+sympathetic,Autonomic division preparing for action,Neurology
+parasympathetic,Autonomic division promoting rest,Neurology
+cranial,Related to cranial nerves,Neurology
+vagus,Major parasympathetic nerve,Neurology
+olfactory,Nerve responsible for smell,Neurology
+optic,Nerve responsible for vision,Neurology
+oculomotor,Nerve controlling eye movement,Neurology
+trochlear,Cranial nerve IV,Neurology
+trigeminal,Major sensory nerve of the face,Neurology
+abducens,Cranial nerve VI,Neurology
+facial,Nerve controlling facial expression,Neurology
+vestibular,Nerve involved in hearing and balance,Neurology
+glossopharyngeal,Cranial nerve IX,Neurology
+hypoglossal,Nerve controlling tongue movement,Neurology
+neuromuscular,Junction between nerve and muscle,Neurology
+sarcolemma,Membrane of a muscle fiber,Neurology
+conduction,Propagation of electrical signals,Neurology
+excitability,Ability to respond to stimuli,Neurology
+plasticity,Ability of the nervous system to adapt,Neurology
+memory,Storage of information,Neurology
+learning,Acquisition of knowledge or skills,Neurology
+attention,Selective focus on stimuli,Neurology
+consciousness,Awareness of self and environment,Neurology
+arousal,State of alertness,Neurology
+sleep,Physiological state of rest,Neurology
+dreaming,Mental activity during sleep,Neurology
+circadian,Biological daily rhythm,Neurology
+perception,Interpretation of sensory information,Neurology
+sensation,Detection of stimuli,Neurology
+vision,Sense of sight,Neurology
+hearing,Sense of sound,Neurology
+balance,Maintenance of equilibrium,Neurology
+taste,Sense detecting dissolved substances,Neurology
+smell,Sense detecting airborne chemicals,Neurology
+pain,Unpleasant sensory experience,Neurology
+nociceptor,Pain detecting receptor,Neurology
+proprioception,Sense of body position,Neurology
+coordination,Organization of movement,Neurology
+gait,Pattern of walking,Neurology
+speech,Production of language,Neurology
+language,System of communication,Neurology
+aphasia,Language impairment,Neurology
+dysarthria,Motor speech disorder,Neurology
+seizure,Abnormal electrical brain activity,Neurology
+epilepsy,Disorder characterized by recurrent seizures,Neurology
+migraine,Neurological headache disorder,Neurology
+stroke,Sudden interruption of brain blood flow,Neurology
+ischemia,Reduced blood supply,Neurology
+hemorrhage,Bleeding within tissues,Neurology
+paralysis,Loss of voluntary movement,Neurology
+paresis,Partial loss of movement,Neurology
+ataxia,Loss of coordination,Neurology
+vertigo,Sensation of spinning movement,Neurology
+tremor,Rhythmic involuntary movement,Neurology
+spasticity,Increased muscle tone,Neurology
+rigidity,Resistance to passive movement,Neurology
+neuropathy,Disease of peripheral nerves,Neurology
+myopathy,Disease affecting muscle tissue,Neurology
+dementia,Progressive cognitive decline,Neurology
+delirium,Acute disturbance of consciousness,Neurology
+amnesia,Loss of memory,Neurology
+parkinsonism,Movement disorder resembling Parkinson disease,Neurology
+alzheimer,Neurodegenerative dementia disorder,Neurology
+meningitis,Inflammation of the meninges,Neurology
+encephalitis,Inflammation of the brain,Neurology
+glioma,Tumor arising from glial cells,Neurology
+neuroma,Tumor of nerve tissue,Neurology
+hydrocephalus,Excess cerebrospinal fluid accumulation,Neurology
+coma,State of prolonged unconsciousness,Neurology
+syncope,Temporary loss of consciousness,Neurology
+electroencephalography,Recording of brain electrical activity,Neurology
+electromyography,Recording of muscle electrical activity,Neurology
+neuroimaging,Imaging of nervous system structures,Neurology
+rehabilitation,Restoration of neurological function,Neurology
+clinicalmedicine,Practice of diagnosing and treating patients,Clinical Medicine
+patient,Person receiving medical care,Clinical Medicine
+diagnosis,Identification of a disease,Clinical Medicine
+prognosis,Expected outcome of a disease,Clinical Medicine
+therapy,Treatment intended to improve health,Clinical Medicine
+treatment,Medical management of disease,Clinical Medicine
+symptom,Subjective evidence of disease,Clinical Medicine
+sign,Objective evidence of disease,Clinical Medicine
+history,Record of patient information,Clinical Medicine
+examination,Assessment of a patient,Clinical Medicine
+inspection,Visual assessment of the patient,Clinical Medicine
+palpation,Assessment by touch,Clinical Medicine
+percussion,Tapping to assess body structures,Clinical Medicine
+auscultation,Listening to internal body sounds,Clinical Medicine
+vitalsigns,Basic physiological measurements,Clinical Medicine
+temperature,Measurement of body heat,Clinical Medicine
+pulse,Measurement of heart rate,Clinical Medicine
+respiration,Measurement of breathing rate,Clinical Medicine
+bloodpressure,Measurement of arterial pressure,Clinical Medicine
+triage,Prioritization of patient care,Clinical Medicine
+emergency,Urgent medical condition,Clinical Medicine
+trauma,Physical injury to the body,Clinical Medicine
+fracture,Broken bone,Clinical Medicine
+dislocation,Displacement of a joint,Clinical Medicine
+sprain,Ligament injury,Clinical Medicine
+strain,Muscle or tendon injury,Clinical Medicine
+wound,Break in tissue integrity,Clinical Medicine
+laceration,Tear in soft tissue,Clinical Medicine
+abrasion,Superficial skin injury,Clinical Medicine
+contusion,Bruise caused by trauma,Clinical Medicine
+hemorrhage,Significant bleeding,Clinical Medicine
+shock,Circulatory failure causing hypoperfusion,Clinical Medicine
+sepsis,Life threatening response to infection,Clinical Medicine
+fever,Elevated body temperature,Clinical Medicine
+dehydration,Loss of body fluids,Clinical Medicine
+infection,Invasion by pathogens,Clinical Medicine
+inflammation,Protective response to injury,Clinical Medicine
+pain,Unpleasant sensory experience,Clinical Medicine
+chronic,Long lasting condition,Clinical Medicine
+acute,Sudden onset condition,Clinical Medicine
+relapse,Return of disease after improvement,Clinical Medicine
+remission,Reduction of disease activity,Clinical Medicine
+screening,Testing before symptoms develop,Clinical Medicine
+prevention,Measures reducing disease risk,Clinical Medicine
+vaccination,Administration of vaccines,Clinical Medicine
+immunization,Process of acquiring immunity,Clinical Medicine
+consultation,Professional medical evaluation,Clinical Medicine
+referral,Transfer to another specialist,Clinical Medicine
+specialist,Physician with advanced training,Clinical Medicine
+resident,Doctor in specialty training,Clinical Medicine
+intern,Physician in initial training,Clinical Medicine
+surgeon,Physician performing operations,Clinical Medicine
+physician,Medical doctor,Clinical Medicine
+nurse,Healthcare professional providing care,Clinical Medicine
+pharmacist,Medication specialist,Clinical Medicine
+radiologist,Physician interpreting imaging studies,Clinical Medicine
+pathologist,Physician diagnosing disease from specimens,Clinical Medicine
+anesthesiologist,Physician managing anesthesia,Clinical Medicine
+cardiologist,Heart specialist physician,Clinical Medicine
+neurologist,Nervous system specialist,Clinical Medicine
+oncologist,Cancer specialist physician,Clinical Medicine
+pediatrician,Child health specialist,Clinical Medicine
+dermatologist,Skin disease specialist,Clinical Medicine
+psychiatrist,Mental health specialist,Clinical Medicine
+obstetrician,Pregnancy care specialist,Clinical Medicine
+gynecologist,Female reproductive health specialist,Clinical Medicine
+orthopedic,Bone and joint specialist,Clinical Medicine
+urologist,Urinary tract specialist,Clinical Medicine
+endocrinologist,Hormone specialist physician,Clinical Medicine
+pulmonologist,Lung disease specialist,Clinical Medicine
+nephrologist,Kidney specialist physician,Clinical Medicine
+gastroenterologist,Digestive system specialist,Clinical Medicine
+hematologist,Blood disease specialist,Clinical Medicine
+rheumatologist,Autoimmune disease specialist,Clinical Medicine
+oncology,Field dealing with cancer,Clinical Medicine
+surgery,Treatment involving operative procedures,Clinical Medicine
+anesthesia,Loss of sensation for procedures,Clinical Medicine
+sedation,Reduced awareness during procedures,Clinical Medicine
+intubation,Placement of airway tube,Clinical Medicine
+ventilation,Mechanical support of breathing,Clinical Medicine
+resuscitation,Restoration of vital functions,Clinical Medicine
+cpr,Cardiopulmonary resuscitation technique,Clinical Medicine
+defibrillation,Electrical correction of arrhythmias,Clinical Medicine
+monitoring,Continuous assessment of patient status,Clinical Medicine
+admission,Entry into hospital care,Clinical Medicine
+discharge,Release from hospital care,Clinical Medicine
+ward,Hospital patient care unit,Clinical Medicine
+clinic,Outpatient medical facility,Clinical Medicine
+hospital,Institution providing healthcare,Clinical Medicine
+ambulance,Vehicle transporting patients,Clinical Medicine
+paramedic,Provider of emergency care,Clinical Medicine
+laboratory,Facility performing diagnostic tests,Clinical Medicine
+specimen,Sample collected for testing,Clinical Medicine
+biopsy,Removal of tissue for analysis,Clinical Medicine
+cytology,Study of cells for diagnosis,Clinical Medicine
+pathology,Study of disease,Clinical Medicine
+radiography,X ray imaging technique,Clinical Medicine
+ultrasound,Imaging using sound waves,Clinical Medicine
+tomography,Cross sectional imaging method,Clinical Medicine
+mri,Magnetic resonance imaging,Clinical Medicine
+ctscan,Computed tomography imaging,Clinical Medicine
+endoscopy,Internal examination with a scope,Clinical Medicine
+colonoscopy,Endoscopic examination of the colon,Clinical Medicine
+bronchoscopy,Endoscopic examination of airways,Clinical Medicine
+laparoscopy,Minimally invasive abdominal procedure,Clinical Medicine
+catheter,Flexible tube inserted into the body,Clinical Medicine
+drainage,Removal of accumulated fluid,Clinical Medicine
+transfusion,Transfer of blood products,Clinical Medicine
+dialysis,Artificial blood filtration,Clinical Medicine
+chemotherapy,Drug treatment for cancer,Clinical Medicine
+radiotherapy,Treatment using ionizing radiation,Clinical Medicine
+rehabilitation,Restoration of function after illness,Clinical Medicine
+palliative,Care focused on symptom relief,Clinical Medicine
+hospice,End of life supportive care,Clinical Medicine
+nutrition,Provision of dietary support,Clinical Medicine
+malnutrition,Deficiency of nutritional intake,Clinical Medicine
+obesity,Excess body fat accumulation,Clinical Medicine
+diabetes,Metabolic disease with high blood sugar,Clinical Medicine
+hypertension,Elevated blood pressure,Clinical Medicine
+asthma,Chronic inflammatory airway disease,Clinical Medicine
+copd,Chronic obstructive pulmonary disease,Clinical Medicine
+pneumonia,Infection of lung tissue,Clinical Medicine
+tuberculosis,Chronic infectious disease,Clinical Medicine
+hepatitis,Inflammation of the liver,Clinical Medicine
+cirrhosis,Chronic liver scarring,Clinical Medicine
+ulcer,Damage to a mucosal surface,Clinical Medicine
+gastritis,Inflammation of the stomach,Clinical Medicine
+arthritis,Inflammation of joints,Clinical Medicine
+osteoporosis,Loss of bone density,Clinical Medicine
+anemia,Deficiency of red blood cells,Clinical Medicine
+leukemia,Cancer of blood forming tissues,Clinical Medicine
+lymphoma,Cancer of lymphatic tissue,Clinical Medicine
+stroke,Acute disruption of brain blood flow,Clinical Medicine
+epilepsy,Disorder causing recurrent seizures,Clinical Medicine
+migraine,Neurological headache disorder,Clinical Medicine
+depression,Mood disorder with persistent sadness,Clinical Medicine
+anxiety,State of excessive worry,Clinical Medicine
+psychosis,Loss of contact with reality,Clinical Medicine
+dementia,Progressive decline in cognition,Clinical Medicine
+alzheimer,Common neurodegenerative dementia,Clinical Medicine
+parkinson,Neurodegenerative movement disorder,Clinical Medicine
+allergy,Hypersensitivity immune response,Clinical Medicine
+anaphylaxis,Severe life threatening allergic reaction,Clinical Medicine
+pregnancy,State of carrying a fetus,Clinical Medicine
+delivery,Birth of a baby,Clinical Medicine
+newborn,Infant immediately after birth,Clinical Medicine
+mortality,Rate of death in a population,Clinical Medicine
+morbidity,Rate of disease occurrence,Clinical Medicine
+epidemic,Rapid increase in disease cases,Clinical Medicine
+pandemic,Worldwide disease outbreak,Clinical Medicine
+endemic,Disease consistently present in a region,Clinical Medicine
+outcome,Result of treatment or disease,Clinical Medicine
+followup,Ongoing patient reassessment,Clinical Medicine
+recovery,Return to normal health,Clinical Medicine
+healing,Restoration of tissue integrity,Clinical Medicine

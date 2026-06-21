@@ -39,10 +39,16 @@ struct CampusQuestApp: App {
 /// is never written to disk.
 struct RootView: View {
     @Environment(AuthManager.self) private var auth
+    @Environment(ContentStore.self) private var store
 
     var body: some View {
         if case .signedOut = auth.state {
             LoginView()
+        } else if store.department == nil {
+            // No active major yet — first launch (or content still loading).
+            // Force a major choice before the home screen appears.
+            MajorOnboardingView()
+                .modelContainer(auth.activeContainer)
         } else {
             MainMenuView()
                 .modelContainer(auth.activeContainer)

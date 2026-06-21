@@ -70,5 +70,28 @@ struct Achievement: Identifiable {
                     icon: "lock.shield.fill", tier: .platinum, target: 4) { completed($0, prefix: "Cybersecurity") },
         Achievement(id: "db_explorer", title: "Database Explorer", detail: "Complete every Databases level.",
                     icon: "cylinder.split.1x2.fill", tier: .gold, target: 3) { completed($0, prefix: "Databases") },
+
+        // Medicine — one "complete every level" badge per subject (target = that
+        // subject's level count). Mirrors the Computer Engineering department badges.
+        Achievement(id: "anatomy_master", title: "Anatomy Master", detail: "Complete every Anatomy level.",
+                    icon: "figure.stand", tier: .platinum, target: 15) { completed($0, prefix: "Anatomy") },
+        Achievement(id: "histology_master", title: "Histology Master", detail: "Complete every Histology level.",
+                    icon: "circle.grid.cross.fill", tier: .platinum, target: 15) { completed($0, prefix: "Histology") },
+        Achievement(id: "physiology_master", title: "Physiology Master", detail: "Complete every Physiology level.",
+                    icon: "lungs.fill", tier: .platinum, target: 14) { completed($0, prefix: "Physiology") },
+        Achievement(id: "biochemistry_master", title: "Biochemistry Master", detail: "Complete every Biochemistry level.",
+                    icon: "atom", tier: .platinum, target: 15) { completed($0, prefix: "Biochemistry") },
+        Achievement(id: "microbiology_master", title: "Microbiology Master", detail: "Complete every Microbiology level.",
+                    icon: "allergens.fill", tier: .platinum, target: 15) { completed($0, prefix: "Microbiology") },
+        Achievement(id: "pathology_master", title: "Pathology Master", detail: "Complete every Pathology level.",
+                    icon: "waveform.path.ecg.rectangle.fill", tier: .platinum, target: 16) { completed($0, prefix: "Pathology") },
+        Achievement(id: "pharmacology_master", title: "Pharmacology Master", detail: "Complete every Pharmacology level.",
+                    icon: "pills.fill", tier: .platinum, target: 17) { completed($0, prefix: "Pharmacology") },
+        Achievement(id: "cardiology_expert", title: "Cardiac Expert", detail: "Complete every Cardiology level.",
+                    icon: "heart.fill", tier: .platinum, target: 15) { completed($0, prefix: "Cardiology") },
+        Achievement(id: "neurology_master", title: "Neurology Master", detail: "Complete every Neurology level.",
+                    icon: "brain.head.profile", tier: .platinum, target: 14) { completed($0, prefix: "Neurology") },
+        Achievement(id: "clinical_master", title: "Clinical Master", detail: "Complete every Clinical Medicine level.",
+                    icon: "stethoscope", tier: .platinum, target: 16) { completed($0, prefix: "Clinical Medicine") },
     ]
 }
