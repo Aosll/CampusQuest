@@ -24,9 +24,13 @@ struct AppearancePickerView: View {
                 VStack(spacing: 12) {
                     ForEach(AppAppearance.allCases) { option in
                         Button {
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
-                                appearanceRaw = option.rawValue
-                            }
+                            // Apply the scheme change without wrapping it in an
+                            // animation: animating a global colorScheme switch
+                            // makes SwiftUI leave stale layer snapshots behind
+                            // (the picker appears to "freeze" with ghost cards).
+                            // The checkmark still animates via its symbolEffect.
+                            guard appearanceRaw != option.rawValue else { return }
+                            appearanceRaw = option.rawValue
                         } label: {
                             row(for: option)
                         }
