@@ -46,8 +46,17 @@ struct RootView: View {
 
     var body: some View {
         content
-            // Force the chosen scheme app-wide, or follow the system (nil).
-            .preferredColorScheme(appearance.colorScheme)
+            // Force the chosen scheme app-wide, or follow the system.
+            //
+            // We drive this purely through the window's overrideUserInterfaceStyle
+            // (see applyToWindows) and deliberately do NOT use .preferredColorScheme.
+            // Mixing the two breaks presented sheets: SwiftUI stamps an explicit
+            // override onto the sheet's controller that then shadows the window
+            // and never refreshes, so the Settings/Appearance sheet would stay
+            // stuck in the old scheme after switching. The window override alone
+            // cascades cleanly into sheets, alerts and everything else.
+            .onAppear { appearance.applyToWindows() }
+            .onChange(of: appearanceRaw) { _, _ in appearance.applyToWindows() }
     }
 
     @ViewBuilder

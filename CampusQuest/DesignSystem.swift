@@ -44,6 +44,31 @@ enum AppAppearance: String, CaseIterable, Identifiable {
         case .dark:   return "moon.fill"
         }
     }
+
+    /// The matching UIKit style. `.unspecified` follows the system.
+    var uiStyle: UIUserInterfaceStyle {
+        switch self {
+        case .system: return .unspecified
+        case .light:  return .light
+        case .dark:   return .dark
+        }
+    }
+
+    /// Forces the chosen appearance directly on the app's window(s).
+    ///
+    /// We drive `overrideUserInterfaceStyle` at the window level instead of
+    /// relying only on SwiftUI's `.preferredColorScheme`: that modifier doesn't
+    /// reliably propagate into presented sheets, so picking Dark from the
+    /// Settings sheet would sometimes leave that sheet stuck in Light. The
+    /// window override covers the whole app — sheets, alerts, everything.
+    func applyToWindows() {
+        for scene in UIApplication.shared.connectedScenes {
+            guard let windowScene = scene as? UIWindowScene else { continue }
+            for window in windowScene.windows {
+                window.overrideUserInterfaceStyle = uiStyle
+            }
+        }
+    }
 }
 
 /// Builds a color that resolves differently in light and dark mode.
