@@ -49,6 +49,12 @@ struct LevelView: View {
     @State private var floatingXP = false
     @State private var completionPop = false
 
+    // First-level coachmark tour explaining how to play. Shown once per
+    // device (works in guest mode too — a UI preference, not tracked stats).
+    @AppStorage("hasSeenGameplayTour") private var hasSeenGameplayTour = false
+    @State private var tourActive = false
+    @State private var tourIndex = 0
+
     /// XP cost to reveal one letter via the Hint button.
     private let hintCost = 5
 
@@ -69,6 +75,21 @@ struct LevelView: View {
             }
         }
         .padding()
+        // Collect gameplay target frames and draw the how-to-play tour on top.
+        .overlayPreferenceValue(TourAnchorKey.self) { anchors in
+            if tourActive {
+                GeometryReader { proxy in
+                    OnboardingTourOverlay(index: $tourIndex,
+                                          stops: TourStop.gameplayStops,
+                                          anchors: anchors,
+                                          proxy: proxy) {
+                        withAnimation(.easeOut(duration: 0.25)) { tourActive = false }
+                        hasSeenGameplayTour = true
+                    }
+                }
+                .ignoresSafeArea()
+            }
+        }
         .overlay(alignment: .top) {
             if showWordFound {
                 WordFoundToast(word: foundWordText)
@@ -133,6 +154,7 @@ struct LevelView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal)
+            .tourTarget(.clue)
 
             // Answer slots with success particles + floating XP overlay.
             ZStack {
@@ -154,6 +176,7 @@ struct LevelView: View {
                         .allowsHitTesting(false)
                 }
             }
+            .tourTarget(.answerSlots)
 
             Spacer(minLength: 8)
 
@@ -163,6 +186,7 @@ struct LevelView: View {
                 onSubmit: handleGuess
             )
             .frame(height: 260)
+            .tourTarget(.letterWheel)
 
             Spacer(minLength: 4)
 
@@ -184,6 +208,14 @@ struct LevelView: View {
                 .controlSize(.large)
                 .tint(AppColor.warning)
                 .disabled(!canUseHint(for: word))
+            }
+            .tourTarget(.helpers)
+        }
+        .onAppear {
+            // Launch the how-to-play tour the first time a level is opened.
+            if !hasSeenGameplayTour && !tourActive {
+                tourIndex = 0
+                withAnimation(.easeIn(duration: 0.3)) { tourActive = true }
             }
         }
     }

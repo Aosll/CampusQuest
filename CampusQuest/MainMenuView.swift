@@ -74,6 +74,7 @@ struct MainMenuView: View {
                 if tourActive {
                     GeometryReader { proxy in
                         OnboardingTourOverlay(index: $tourIndex,
+                                              stops: TourStop.stops,
                                               anchors: anchors,
                                               proxy: proxy) {
                             withAnimation(.easeOut(duration: 0.25)) { tourActive = false }
@@ -421,6 +422,7 @@ struct SettingsView: View {
     @State private var notificationsEnabled = NotificationManager.shared.isEnabled
     @AppStorage(AppAppearance.storageKey) private var appearanceRaw = AppAppearance.system.rawValue
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @AppStorage("hasSeenGameplayTour") private var hasSeenGameplayTour = false
 
     private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
 
@@ -528,8 +530,10 @@ struct SettingsView: View {
                     .buttonStyle(PressableButtonStyle())
 
                     Button {
-                        // Re-arm the welcome tour and return to the home screen.
+                        // Re-arm both the welcome tour and the in-level tour,
+                        // then return to the home screen.
                         hasSeenOnboarding = false
+                        hasSeenGameplayTour = false
                         dismiss()
                     } label: {
                         HStack(spacing: 12) {

@@ -13,10 +13,16 @@ import SwiftUI
 /// The real controls on the home screen the tour can point at. Steps with
 /// no target (intro / outro) show a centered card instead of a spotlight.
 enum TourStep: String {
+    // Home screen.
     case settings
     case startQuest
     case dailyChallenge
     case features
+    // In-level gameplay.
+    case clue
+    case answerSlots
+    case letterWheel
+    case helpers
 }
 
 /// One stop in the tour: an optional spotlight target plus its copy.
@@ -27,7 +33,36 @@ struct TourStop: Identifiable {
     let titleKey: LocalizedStringKey
     let messageKey: LocalizedStringKey
 
-    /// The ordered script the tour plays through.
+    /// The ordered script for the in-level gameplay tour, shown the first
+    /// time the player opens a level.
+    static let gameplayStops: [TourStop] = [
+        TourStop(target: nil,
+                 icon: "gamecontroller.fill",
+                 titleKey: "How to Play",
+                 messageKey: "Find the hidden words to build up your lab. Here's how it works."),
+        TourStop(target: .clue,
+                 icon: "text.book.closed.fill",
+                 titleKey: "Read the Clue",
+                 messageKey: "Each clue describes a hidden word. Use it to work out the answer."),
+        TourStop(target: .answerSlots,
+                 icon: "square.dashed",
+                 titleKey: "Answer Slots",
+                 messageKey: "One box per letter. They fill in as you spell the word."),
+        TourStop(target: .letterWheel,
+                 icon: "hand.draw.fill",
+                 titleKey: "Spell with the Wheel",
+                 messageKey: "Drag across the letters to connect them, then release to submit your guess."),
+        TourStop(target: .helpers,
+                 icon: "lightbulb.fill",
+                 titleKey: "Shuffle & Hint",
+                 messageKey: "Shuffle rearranges the letters. Hint reveals a letter for a little XP."),
+        TourStop(target: nil,
+                 icon: "checkmark.seal.fill",
+                 titleKey: "That's it!",
+                 messageKey: "Find every word to complete the level. Good luck!")
+    ]
+
+    /// The ordered script the home-screen tour plays through.
     static let stops: [TourStop] = [
         TourStop(target: nil,
                  icon: "graduationcap.fill",
@@ -92,12 +127,13 @@ extension View {
 /// calls `onFinish` when the player skips or reaches the end.
 struct OnboardingTourOverlay: View {
     @Binding var index: Int
+    let stops: [TourStop]
     let anchors: [TourStep: Anchor<CGRect>]
     let proxy: GeometryProxy
     let onFinish: () -> Void
 
-    private var stop: TourStop { TourStop.stops[index] }
-    private var isLast: Bool { index == TourStop.stops.count - 1 }
+    private var stop: TourStop { stops[index] }
+    private var isLast: Bool { index == stops.count - 1 }
 
     /// The on-screen frame of the current target, if any.
     private var targetRect: CGRect? {
@@ -160,7 +196,7 @@ struct OnboardingTourOverlay: View {
 
             // Progress dots.
             HStack(spacing: 6) {
-                ForEach(0..<TourStop.stops.count, id: \.self) { i in
+                ForEach(0..<stops.count, id: \.self) { i in
                     Circle()
                         .fill(i == index ? AppColor.primary : AppColor.inkSecondary.opacity(0.3))
                         .frame(width: 7, height: 7)

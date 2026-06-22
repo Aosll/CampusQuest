@@ -954,6 +954,34 @@
         }
       }
     },
+    "Answer Slots" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Antwortfelder"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Casillas de respuesta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cases de réponse"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cevap Kutuları"
+          }
+        }
+      }
+    },
     "Appearance" : {
       "localizations" : {
         "de" : {
@@ -1918,6 +1946,62 @@
         }
       }
     },
+    "Drag across the letters to connect them, then release to submit your guess." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ziehe über die Buchstaben, um sie zu verbinden, und lass los, um zu raten."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrastra sobre las letras para conectarlas y suelta para enviar tu respuesta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glisse sur les lettres pour les relier, puis relâche pour valider."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harfleri birleştirmek için üzerlerinde sürükle, sonra tahminini göndermek için bırak."
+          }
+        }
+      }
+    },
+    "Each clue describes a hidden word. Use it to work out the answer." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeder Hinweis beschreibt ein verstecktes Wort. Nutze ihn, um die Antwort zu finden."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cada pista describe una palabra oculta. Úsala para deducir la respuesta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque indice décrit un mot caché. Sers-t'en pour trouver la réponse."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her ipucu gizli bir kelimeyi tanımlar. Cevabı bulmak için onu kullan."
+          }
+        }
+      }
+    },
     "Earned" : {
       "localizations" : {
         "de" : {
@@ -1942,6 +2026,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kazanıldı"
+          }
+        }
+      }
+    },
+    "Find every word to complete the level. Good luck!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finde alle Wörter, um das Level abzuschließen. Viel Glück!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encuentra todas las palabras para completar el nivel. ¡Suerte!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouve tous les mots pour terminer le niveau. Bonne chance !"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seviyeyi tamamlamak için tüm kelimeleri bul. Bol şans!"
+          }
+        }
+      }
+    },
+    "Find the hidden words to build up your lab. Here's how it works." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finde die versteckten Wörter, um dein Labor aufzubauen. So funktioniert's."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encuentra las palabras ocultas para construir tu laboratorio. Así funciona."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouve les mots cachés pour construire ton labo. Voici comment ça marche."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laboratuvarını inşa etmek için gizli kelimeleri bul. İşte nasıl çalıştığı."
           }
         }
       }
@@ -2195,6 +2335,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İpucu (%lld XP)"
+          }
+        }
+      }
+    },
+    "How to Play" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So wird gespielt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cómo jugar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comment jouer"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nasıl Oynanır"
           }
         }
       }
@@ -2847,6 +3015,34 @@
         }
       }
     },
+    "One box per letter. They fill in as you spell the word." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Feld pro Buchstabe. Sie füllen sich, während du das Wort schreibst."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una casilla por letra. Se rellenan mientras deletreas la palabra."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une case par lettre. Elles se remplissent au fur et à mesure."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her harf için bir kutu. Kelimeyi yazdıkça dolarlar."
+          }
+        }
+      }
+    },
     "Performance Analysis" : {
       "localizations" : {
         "de" : {
@@ -3109,6 +3305,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test, Sözlük ve Ödüller"
+          }
+        }
+      }
+    },
+    "Read the Clue" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lies den Hinweis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lee la pista"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lis l'indice"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İpucunu Oku"
           }
         }
       }
@@ -3479,6 +3703,62 @@
         }
       }
     },
+    "Shuffle & Hint" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mischen & Tipp"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mezclar y pista"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mélanger et indice"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karıştır ve İpucu"
+          }
+        }
+      }
+    },
+    "Shuffle rearranges the letters. Hint reveals a letter for a little XP." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mischen ordnet die Buchstaben neu. Tipp zeigt für etwas XP einen Buchstaben."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mezclar reordena las letras. Pista revela una letra por un poco de XP."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mélanger réarrange les lettres. Indice révèle une lettre contre un peu d'XP."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karıştır harfleri yeniden dizer. İpucu, biraz XP karşılığında bir harfi gösterir."
+          }
+        }
+      }
+    },
     "Sign Out" : {
       "localizations" : {
         "de" : {
@@ -3589,6 +3869,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atla"
+          }
+        }
+      }
+    },
+    "Spell with the Wheel" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mit dem Rad buchstabieren"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletrea con la rueda"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épelle avec la roue"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çarkla Hecele"
           }
         }
       }
@@ -3785,6 +4093,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kendini test et, öğrendiğin kelimeleri gözden geçir ve başarı rozetlerini buradan topla."
+          }
+        }
+      }
+    },
+    "That's it!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das war's!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Eso es todo!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C'est tout !"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hepsi bu!"
           }
         }
       }
