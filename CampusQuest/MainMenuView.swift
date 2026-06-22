@@ -24,8 +24,6 @@ struct MainMenuView: View {
     private var streak: Int { progress?.currentStreak ?? 0 }
     private var dailyChallengeDone: Bool { progress?.didCompleteDailyChallengeToday ?? false }
 
-    @State private var claimPulse = false
-    @State private var showDailyChallengeDetail = false
     @State private var showAchievementDetail = false
     @State private var showSettings = false
 
@@ -55,7 +53,6 @@ struct MainMenuView: View {
                                 campusIDCard
                             }
                             .buttonStyle(PressableButtonStyle(scale: 0.98))
-                            dailyChallengeCard
                             recentAchievementCard
                             buttons
                                 .padding(.top, 4)
@@ -267,104 +264,6 @@ struct MainMenuView: View {
                 .foregroundStyle(AppColor.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-        }
-    }
-
-    // MARK: - Daily challenge
-
-    private var dailyChallengeCard: some View {
-        let challenge = DailyChallenge.today()
-        let current = progress.map { challenge.progress(for: $0) } ?? 0
-        let target = challenge.target
-        let done = current >= target
-        let claimed = progress?.dailyChallengeClaimedToday ?? false
-        let fraction = target > 0 ? min(Double(current) / Double(target), 1) : 0
-
-        return VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 10) {
-                Image(systemName: challenge.iconName)
-                    .font(.headline.bold())
-                    .foregroundStyle(.white)
-                    .frame(width: 38, height: 38)
-                    .background(LinearGradient.brand, in: RoundedRectangle(cornerRadius: 12))
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Daily Challenge")
-                        .font(.caption.bold())
-                        .foregroundStyle(AppColor.inkSecondary)
-                    Text(challenge.title)
-                        .font(.headline)
-                        .foregroundStyle(AppColor.ink)
-                }
-
-                Spacer()
-
-                // Reward preview.
-                HStack(spacing: 4) {
-                    Image(systemName: "star.fill")
-                    Text("+\(challenge.rewardXP)")
-                }
-                .font(.caption.bold())
-                .foregroundStyle(AppColor.secondary)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(AppColor.secondary.opacity(0.14), in: Capsule())
-            }
-
-            ProgressView(value: fraction)
-                .tint(AppColor.primary)
-
-            HStack {
-                Text("\(min(current, target)) / \(target)")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppColor.inkSecondary)
-                Spacer()
-                if claimed {
-                    Label("Reward claimed", systemImage: "checkmark.seal.fill")
-                        .font(.caption.bold())
-                        .foregroundStyle(AppColor.success)
-                } else if done {
-                    Button {
-                        claimDailyReward(challenge)
-                    } label: {
-                        Text("Claim +\(challenge.rewardXP) XP")
-                            .font(.caption.bold())
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(AppColor.success, in: Capsule())
-                    }
-                    .buttonStyle(PressableButtonStyle())
-                    .scaleEffect(claimPulse ? 1.06 : 1)
-                }
-            }
-        }
-        .padding(16)
-        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppRadius.card)
-                .strokeBorder(AppColor.primary.opacity(0.12), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
-        .contentShape(RoundedRectangle(cornerRadius: AppRadius.card))
-        .onTapGesture { showDailyChallengeDetail = true }
-        .sheet(isPresented: $showDailyChallengeDetail) {
-            DailyChallengeDetailView(challenge: challenge, current: current, target: target)
-        }
-    }
-
-    private func claimDailyReward(_ challenge: DailyChallenge) {
-        guard let progress else { return }
-        let current = challenge.progress(for: progress)
-        let granted = progress.claimDailyChallenge(reward: challenge.rewardXP,
-                                                   progress: current,
-                                                   target: challenge.target)
-        if granted > 0 {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { claimPulse = true }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                withAnimation { claimPulse = false }
-            }
         }
     }
 
