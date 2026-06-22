@@ -29,6 +29,13 @@ struct MainMenuView: View {
     @State private var showAchievementDetail = false
     @State private var showSettings = false
 
+    // First-launch coachmark tour. The flag persists per device so the tour
+    // is shown only once (works in guest mode too — it's a UI preference,
+    // not tracked stats).
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+    @State private var tourActive = false
+    @State private var tourIndex = 0
+
     // Deep indigo used for readable text on the light background.
     private let ink = AppColor.ink
 
@@ -37,31 +44,66 @@ struct MainMenuView: View {
             ZStack {
                 CampusBackground()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 18) {
-                        streakRow
-                        logo
-                        NavigationLink {
-                            CampusIDDetailView()
-                        } label: {
-                            campusIDCard
+                ScrollViewReader { scroller in
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 18) {
+                            streakRow
+                            logo
+                            NavigationLink {
+                                CampusIDDetailView()
+                            } label: {
+                                campusIDCard
+                            }
+                            .buttonStyle(PressableButtonStyle(scale: 0.98))
+                            dailyChallengeCard
+                            recentAchievementCard
+                            buttons
+                                .padding(.top, 4)
                         }
-                        .buttonStyle(PressableButtonStyle(scale: 0.98))
-                        dailyChallengeCard
-                        recentAchievementCard
-                        buttons
-                            .padding(.top, 4)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 16)
                     }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
+                    // Scroll the next highlighted control into view as the tour advances.
+                    .onChange(of: tourIndex) { _, _ in
+                        guard tourActive, let target = TourStop.stops[tourIndex].target else { return }
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                            scroller.scrollTo(target, anchor: .center)
+                        }
+                    }
+                }
+            }
+            // Collect target frames and draw the tour overlay on top of the real UI.
+            .overlayPreferenceValue(TourAnchorKey.self) { anchors in
+                if tourActive {
+                    GeometryReader { proxy in
+                        OnboardingTourOverlay(index: $tourIndex,
+                                              anchors: anchors,
+                                              proxy: proxy) {
+                            withAnimation(.easeOut(duration: 0.25)) { tourActive = false }
+                            hasSeenOnboarding = true
+                        }
+                    }
+                    .ignoresSafeArea()
                 }
             }
             .sheet(isPresented: $showSettings) {
                 SettingsView()
             }
+            // "Replay Tutorial" in Settings resets the flag; restart the tour.
+            .onChange(of: hasSeenOnboarding) { _, seen in
+                if !seen && !tourActive {
+                    tourIndex = 0
+                    withAnimation(.easeIn(duration: 0.3)) { tourActive = true }
+                }
+            }
             .task {
                 // Refresh the play streak when the home screen first appears.
                 StreakManager.updateStreak(in: modelContext)
+                // Launch the welcome tour on the very first visit.
+                if !hasSeenOnboarding {
+                    tourIndex = 0
+                    withAnimation(.easeIn(duration: 0.3)) { tourActive = true }
+                }
             }
         }
     }
@@ -100,6 +142,8 @@ struct MainMenuView: View {
                     .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
             }
             .buttonStyle(PressableButtonStyle())
+            .id(TourStep.settings)
+            .tourTarget(.settings)
         }
     }
 
@@ -396,8 +440,12 @@ struct MainMenuView: View {
                     .shadow(color: AppColor.secondary.opacity(0.25), radius: 6, y: 2)
             }
             .buttonStyle(PressableButtonStyle(scale: 0.97))
+            .id(TourStep.startQuest)
+            .tourTarget(.startQuest)
 
             dailyChallengeButton
+                .id(TourStep.dailyChallenge)
+                .tourTarget(.dailyChallenge)
 
             HStack(spacing: 12) {
                 NavigationLink { QuizView() } label: {
@@ -413,6 +461,8 @@ struct MainMenuView: View {
                 }
                 .buttonStyle(PressableButtonStyle())
             }
+            .id(TourStep.features)
+            .tourTarget(.features)
         }
     }
 
@@ -471,6 +521,7 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var notificationsEnabled = NotificationManager.shared.isEnabled
     @AppStorage(AppAppearance.storageKey) private var appearanceRaw = AppAppearance.system.rawValue
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
 
     private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
 
@@ -564,6 +615,33 @@ struct SettingsView: View {
                                     .font(.subheadline.weight(.semibold))
                                     .foregroundStyle(AppColor.ink)
                                 Text(appearance.displayName)
+                                    .font(.caption)
+                                    .foregroundStyle(AppColor.inkSecondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption.bold())
+                                .foregroundStyle(AppColor.inkSecondary)
+                        }
+                        .padding(16)
+                        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    }
+                    .buttonStyle(PressableButtonStyle())
+
+                    Button {
+                        // Re-arm the welcome tour and return to the home screen.
+                        hasSeenOnboarding = false
+                        dismiss()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "questionmark.circle")
+                                .font(.title3)
+                                .foregroundStyle(AppColor.primary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Replay Tutorial")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(AppColor.ink)
+                                Text("Show the welcome tour again")
                                     .font(.caption)
                                     .foregroundStyle(AppColor.inkSecondary)
                             }

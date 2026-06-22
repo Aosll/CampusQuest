@@ -841,6 +841,34 @@
         }
       }
     },
+    "A fresh set of words every day for bonus XP. Keep your streak alive!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeden Tag neue Wörter für Bonus-XP. Halte deine Serie am Leben!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un nuevo conjunto de palabras cada día para XP extra. ¡Mantén viva tu racha!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une nouvelle série de mots chaque jour pour des XP bonus. Garde ta série en vie !"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her gün bonus XP için yeni bir kelime seti. Serini canlı tut!"
+          }
+        }
+      }
+    },
     "A nudge at 7:00 PM to keep your streak" : {
       "localizations" : {
         "de" : {
@@ -1974,6 +2002,34 @@
         }
       }
     },
+    "Got it" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verstanden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entendido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compris"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anladım"
+          }
+        }
+      }
+    },
     "Guest mode keeps your progress on this device only. No account, no cloud sync, no leaderboard — and no personal data or statistics are collected or stored." : {
       "localizations" : {
         "de" : {
@@ -2027,6 +2083,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Misafir modu · yalnızca bu cihaz"
+          }
+        }
+      }
+    },
+    "Have fun and build your future, one word at a time." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viel Spaß und bau deine Zukunft auf – Wort für Wort."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diviértete y construye tu futuro, palabra a palabra."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amuse-toi et construis ton avenir, un mot à la fois."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eğlen ve geleceğini kelime kelime inşa et."
+          }
+        }
+      }
+    },
+    "Here's a quick tour of the basics. You can skip it anytime." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier ist eine kurze Tour durch die Grundlagen. Du kannst sie jederzeit überspringen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquí tienes un recorrido rápido por lo básico. Puedes omitirlo en cualquier momento."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voici un tour rapide des bases. Tu peux le passer à tout moment."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İşte temel özelliklerin kısa bir turu. İstediğin an geçebilirsin."
           }
         }
       }
@@ -2449,6 +2561,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yeni başarımlar açıldı"
+          }
+        }
+      }
+    },
+    "Next" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weiter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivant"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İleri"
           }
         }
       }
@@ -2945,6 +3085,34 @@
         }
       }
     },
+    "Quiz, Dictionary & Awards" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiz, Wörterbuch & Auszeichnungen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuestionario, diccionario y premios"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quiz, dictionnaire et récompenses"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test, Sözlük ve Ödüller"
+          }
+        }
+      }
+    },
     "Recent Achievement · %@" : {
       "localizations" : {
         "de" : {
@@ -3027,6 +3195,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tekrar Oyna"
+          }
+        }
+      }
+    },
+    "Replay Tutorial" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutorial erneut ansehen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repetir tutorial"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revoir le tutoriel"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turu Tekrar İzle"
           }
         }
       }
@@ -3171,6 +3367,34 @@
         }
       }
     },
+    "Settings & Theme" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen & Design"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes y tema"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages et thème"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar ve Tema"
+          }
+        }
+      }
+    },
     "Share" : {
       "localizations" : {
         "de" : {
@@ -3195,6 +3419,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paylaş"
+          }
+        }
+      }
+    },
+    "Show the welcome tour again" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Willkommenstour erneut anzeigen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el recorrido de bienvenida otra vez"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher à nouveau la visite de bienvenue"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karşılama turunu tekrar göster"
           }
         }
       }
@@ -3313,6 +3565,62 @@
         }
       }
     },
+    "Skip" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Überspringen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omitir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atla"
+          }
+        }
+      }
+    },
+    "Start Playing" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spiel starten"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empezar a jugar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer à jouer"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oynamaya Başla"
+          }
+        }
+      }
+    },
     "Start Quest" : {
       "localizations" : {
         "de" : {
@@ -3397,6 +3705,34 @@
         }
       }
     },
+    "Tap the gear to change the language or switch between Light and Dark mode." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tippe auf das Zahnrad, um die Sprache zu ändern oder zwischen hellem und dunklem Modus zu wechseln."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca el engranaje para cambiar el idioma o alternar entre modo claro y oscuro."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touche la roue dentée pour changer la langue ou basculer entre les modes clair et sombre."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dili değiştirmek veya Açık ve Koyu mod arasında geçiş yapmak için dişliye dokun."
+          }
+        }
+      }
+    },
     "Term to classify" : {
       "localizations" : {
         "de" : {
@@ -3421,6 +3757,62 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sınıflandırılacak terim"
+          }
+        }
+      }
+    },
+    "Test yourself, review the words you've learned, and collect achievement badges here." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teste dich, wiederhole gelernte Wörter und sammle hier Erfolgsabzeichen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ponte a prueba, repasa las palabras aprendidas y colecciona insignias de logros aquí."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teste-toi, révise les mots appris et collectionne des badges de réussite ici."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kendini test et, öğrendiğin kelimeleri gözden geçir ve başarı rozetlerini buradan topla."
+          }
+        }
+      }
+    },
+    "This is your main quest. Tap here to begin solving word levels." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das ist deine Hauptquest. Tippe hier, um Wort-Level zu lösen."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta es tu misión principal. Toca aquí para empezar a resolver niveles de palabras."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C'est ta quête principale. Touche ici pour commencer à résoudre les niveaux de mots."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu senin ana görevin. Kelime seviyelerini çözmeye başlamak için buraya dokun."
           }
         }
       }
@@ -3477,6 +3869,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "KELİME BULUNDU!"
+          }
+        }
+      }
+    },
+    "Welcome to CampusQuest!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Willkommen bei CampusQuest!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Bienvenido a CampusQuest!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue sur CampusQuest !"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CampusQuest'e Hoş Geldin!"
           }
         }
       }
@@ -3595,6 +4015,34 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%2$@ içindeki %1$lld kelimenin hepsini buldun."
+          }
+        }
+      }
+    },
+    "You're all set!" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles bereit!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Todo listo!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout est prêt !"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Her şey hazır!"
           }
         }
       }
