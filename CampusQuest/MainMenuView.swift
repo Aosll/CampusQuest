@@ -470,6 +470,9 @@ struct SettingsView: View {
     @Environment(LanguageManager.self) private var language
     @Environment(\.dismiss) private var dismiss
     @State private var notificationsEnabled = NotificationManager.shared.isEnabled
+    @AppStorage(AppAppearance.storageKey) private var appearanceRaw = AppAppearance.system.rawValue
+
+    private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
 
     private var accountLabel: String {
         switch auth.state {
@@ -549,6 +552,31 @@ struct SettingsView: View {
                     }
                     .buttonStyle(PressableButtonStyle())
 
+                    NavigationLink {
+                        AppearancePickerView()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: appearance.icon)
+                                .font(.title3)
+                                .foregroundStyle(AppColor.primary)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Appearance")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(AppColor.ink)
+                                Text(appearance.displayName)
+                                    .font(.caption)
+                                    .foregroundStyle(AppColor.inkSecondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.caption.bold())
+                                .foregroundStyle(AppColor.inkSecondary)
+                        }
+                        .padding(16)
+                        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    }
+                    .buttonStyle(PressableButtonStyle())
+
                     Button(role: .destructive) {
                         auth.signOut()
                         dismiss()
@@ -557,7 +585,7 @@ struct SettingsView: View {
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.white.opacity(0.9),
+                            .background(AppColor.surface,
                                         in: RoundedRectangle(cornerRadius: AppRadius.control))
                     }
                     .buttonStyle(PressableButtonStyle())

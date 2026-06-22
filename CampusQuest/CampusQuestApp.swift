@@ -40,8 +40,18 @@ struct CampusQuestApp: App {
 struct RootView: View {
     @Environment(AuthManager.self) private var auth
     @Environment(ContentStore.self) private var store
+    @AppStorage(AppAppearance.storageKey) private var appearanceRaw = AppAppearance.system.rawValue
+
+    private var appearance: AppAppearance { AppAppearance(rawValue: appearanceRaw) ?? .system }
 
     var body: some View {
+        content
+            // Force the chosen scheme app-wide, or follow the system (nil).
+            .preferredColorScheme(appearance.colorScheme)
+    }
+
+    @ViewBuilder
+    private var content: some View {
         if case .signedOut = auth.state {
             LoginView()
         } else if store.department == nil {

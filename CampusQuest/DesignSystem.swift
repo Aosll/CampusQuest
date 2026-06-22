@@ -10,6 +10,42 @@
 import SwiftUI
 import UIKit
 
+/// The user's in-app appearance preference. "system" follows the device
+/// setting; "light"/"dark" force a fixed scheme regardless of the system.
+/// Persisted via `@AppStorage(AppAppearance.storageKey)`.
+enum AppAppearance: String, CaseIterable, Identifiable {
+    case system, light, dark
+
+    static let storageKey = "appearancePreference"
+
+    var id: String { rawValue }
+
+    /// The scheme to force, or `nil` to follow the system.
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light:  return .light
+        case .dark:   return .dark
+        }
+    }
+
+    var displayName: String {
+        switch self {
+        case .system: return String(localized: "System")
+        case .light:  return String(localized: "Light")
+        case .dark:   return String(localized: "Dark")
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .system: return "circle.lefthalf.filled"
+        case .light:  return "sun.max.fill"
+        case .dark:   return "moon.fill"
+        }
+    }
+}
+
 /// Builds a color that resolves differently in light and dark mode.
 /// Keeping this in one helper means every adaptive color reads the same way.
 private func adaptiveColor(
