@@ -78,7 +78,7 @@ struct LabSceneView: View {
                     CompletionGlow(accent: theme.accent)
                 }
             }
-            .frame(height: 210)
+            .frame(height: 184)
             .clipShape(RoundedRectangle(cornerRadius: 22))
             .overlay(
                 RoundedRectangle(cornerRadius: 22)

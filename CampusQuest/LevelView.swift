@@ -129,7 +129,7 @@ struct LevelView: View {
     // MARK: - Gameplay
 
     private func gameView(for word: WordItem) -> some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 12) {
             ZStack(alignment: .top) {
                 LabSceneView(levelTitle: level.title,
                              totalWords: level.words.count,
@@ -185,7 +185,7 @@ struct LevelView: View {
                 onPreview: { preview = $0 },
                 onSubmit: handleGuess
             )
-            .frame(height: 260)
+            .frame(height: 232)
             .tourTarget(.letterWheel)
 
             Spacer(minLength: 4)
