@@ -30,6 +30,7 @@ struct LetterWheelView: View {
 
             ZStack {
                 // Line connecting the selected letters, then to the finger.
+                // A gradient route reads more clearly than a flat stroke.
                 Path { path in
                     let points = selectedIDs.compactMap { positions[$0] }
                     guard let first = points.first else { return }
@@ -37,8 +38,8 @@ struct LetterWheelView: View {
                     for point in points.dropFirst() { path.addLine(to: point) }
                     if let dragPoint { path.addLine(to: dragPoint) }
                 }
-                .stroke(Color.accentColor,
-                        style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
+                .stroke(LinearGradient.brand,
+                        style: StrokeStyle(lineWidth: 7, lineCap: .round, lineJoin: .round))
 
                 // The letter tiles.
                 ForEach(tiles) { tile in
@@ -52,6 +53,11 @@ struct LetterWheelView: View {
                                           ? Color.accentColor
                                           : Color(.secondarySystemBackground))
                         )
+                        // Selected tiles pop and glow for clearer feedback.
+                        .scaleEffect(selected ? 1.18 : 1)
+                        .shadow(color: selected ? Color.accentColor.opacity(0.5) : .clear,
+                                radius: selected ? 8 : 0)
+                        .animation(.spring(response: 0.25, dampingFraction: 0.55), value: selected)
                         .position(positions[tile.id] ?? center)
                 }
             }

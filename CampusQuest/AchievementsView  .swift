@@ -37,7 +37,6 @@ struct AchievementsView: View {
         .background(LinearGradient.pageBackground.ignoresSafeArea())
         .navigationTitle("Awards")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
     }
 
     private var header: some View {
@@ -138,7 +137,7 @@ private struct AchievementTile: View {
         .padding(14)
         .background(
             RoundedRectangle(cornerRadius: AppRadius.card)
-                .fill(Color.white.opacity(unlocked ? 0.92 : 0.62))
+                .fill(unlocked ? AppColor.surface : AppColor.surfaceMuted)
         )
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.card)

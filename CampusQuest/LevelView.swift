@@ -130,6 +130,7 @@ struct LevelView: View {
                     .font(.callout)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.primary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.horizontal)
 
@@ -615,9 +616,10 @@ private struct RewardSummaryCard: View {
             }
         }
         .padding()
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 22))
         .background(
             LinearGradient(
-                colors: [Color.white, Color.accentColor.opacity(0.08)],
+                colors: [Color.clear, Color.accentColor.opacity(0.08)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             ),
@@ -658,7 +660,7 @@ private struct RewardMetric: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(Color.white.opacity(0.72), in: RoundedRectangle(cornerRadius: 16))
+        .background(AppColor.surfaceMuted, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 
@@ -710,7 +712,7 @@ private struct LearnedWordsPreview: View {
             }
         }
         .padding()
-        .background(Color.white.opacity(0.88), in: RoundedRectangle(cornerRadius: 22))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 22))
         .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
     }
 }

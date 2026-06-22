@@ -47,7 +47,7 @@ struct LoginView: View {
                             .foregroundStyle(AppColor.primary)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Color.white.opacity(0.85),
+                            .background(AppColor.surface,
                                         in: RoundedRectangle(cornerRadius: AppRadius.control))
                             .overlay(
                                 RoundedRectangle(cornerRadius: AppRadius.control)
@@ -75,7 +75,6 @@ struct LoginView: View {
                 .padding(.bottom, 32)
             }
         }
-        .preferredColorScheme(.light)
     }
 
     // MARK: - Apple sign-in handling

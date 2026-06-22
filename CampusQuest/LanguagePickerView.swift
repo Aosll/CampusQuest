@@ -34,7 +34,6 @@ struct LanguagePickerView: View {
         }
         .navigationTitle("Language")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
     }
 
     private func row(for lang: AppLanguage) -> some View {
@@ -58,10 +57,10 @@ struct LanguagePickerView: View {
                 .symbolEffect(.bounce, value: isSelected)
         }
         .padding(16)
-        .background(Color.white.opacity(0.92), in: RoundedRectangle(cornerRadius: AppRadius.card))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.card)
-                .strokeBorder(isSelected ? AppColor.primary.opacity(0.55) : Color.white.opacity(0.6),
+                .strokeBorder(isSelected ? AppColor.primary.opacity(0.55) : Color.primary.opacity(0.12),
                               lineWidth: isSelected ? 2 : 1)
         )
         .shadow(color: .black.opacity(isSelected ? 0.10 : 0.05), radius: isSelected ? 12 : 8, y: 4)

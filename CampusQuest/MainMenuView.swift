@@ -56,7 +56,6 @@ struct MainMenuView: View {
                     .padding(.vertical, 16)
                 }
             }
-            .preferredColorScheme(.light)
             .sheet(isPresented: $showSettings) {
                 SettingsView()
             }
@@ -97,7 +96,7 @@ struct MainMenuView: View {
                     .font(.headline)
                     .foregroundStyle(AppColor.inkSecondary)
                     .frame(width: 40, height: 40)
-                    .background(Color.white.opacity(0.85), in: Circle())
+                    .background(AppColor.surface, in: Circle())
                     .shadow(color: .black.opacity(0.06), radius: 6, y: 2)
             }
             .buttonStyle(PressableButtonStyle())
@@ -203,12 +202,12 @@ struct MainMenuView: View {
                 }
             }
             .padding(18)
-            .background(Color.white.opacity(0.92))
+            .background(AppColor.surface)
         }
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.largeCard))
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.largeCard)
-                .strokeBorder(Color.white.opacity(0.6), lineWidth: 1)
+                .strokeBorder(Color.primary.opacity(0.10), lineWidth: 1)
         )
         .shadow(color: .black.opacity(0.12), radius: 16, y: 7)
     }
@@ -297,7 +296,7 @@ struct MainMenuView: View {
             }
         }
         .padding(16)
-        .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
         .overlay(
             RoundedRectangle(cornerRadius: AppRadius.card)
                 .strokeBorder(AppColor.primary.opacity(0.12), lineWidth: 1)
@@ -356,7 +355,7 @@ struct MainMenuView: View {
                 }
             }
             .padding(14)
-            .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+            .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
             .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
             .contentShape(RoundedRectangle(cornerRadius: AppRadius.card))
             .onTapGesture { showAchievementDetail = true }
@@ -501,7 +500,7 @@ struct SettingsView: View {
                         Spacer()
                     }
                     .padding(16)
-                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
 
                     Toggle(isOn: $notificationsEnabled) {
                         HStack(spacing: 12) {
@@ -520,7 +519,7 @@ struct SettingsView: View {
                     }
                     .tint(AppColor.primary)
                     .padding(16)
-                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
                     .onChange(of: notificationsEnabled) { _, enabled in
                         Task { await NotificationManager.shared.setEnabled(enabled) }
                     }
@@ -546,7 +545,7 @@ struct SettingsView: View {
                                 .foregroundStyle(AppColor.inkSecondary)
                         }
                         .padding(16)
-                        .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
                     }
                     .buttonStyle(PressableButtonStyle())
 
@@ -574,7 +573,6 @@ struct SettingsView: View {
                     Button("Done") { dismiss() }
                 }
             }
-            .preferredColorScheme(.light)
         }
     }
 }
@@ -629,7 +627,7 @@ struct DailyChallengeDetailView: View {
                 }
             }
             .padding(16)
-            .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+            .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
 
             Spacer()
 
@@ -646,7 +644,6 @@ struct DailyChallengeDetailView: View {
         .padding(24)
         .background(CampusBackground())
         .presentationDetents([.medium, .large])
-        .preferredColorScheme(.light)
     }
 }
 
@@ -697,7 +694,6 @@ struct AchievementDetailView: View {
         .padding(24)
         .background(CampusBackground())
         .presentationDetents([.medium])
-        .preferredColorScheme(.light)
     }
 }
 
@@ -716,7 +712,7 @@ struct MenuTileLabel: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .foregroundStyle(Color.accentColor)
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 16))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
     }
 }
@@ -727,12 +723,7 @@ struct MenuTileLabel: View {
 struct CampusBackground: View {
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color(red: 0.82, green: 0.91, blue: 1.00),
-                         Color(red: 0.93, green: 0.89, blue: 0.99)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            LinearGradient.pageBackground
 
             // Soft, cheerful color glows.
             Circle()

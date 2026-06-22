@@ -24,11 +24,11 @@ struct LabSceneView: View {
                     .foregroundStyle(theme.accent)
                 Text(theme.title)
                     .font(.subheadline.bold())
-                    .foregroundStyle(theme.ink)
+                    .foregroundStyle(AppColor.ink)
                 Spacer()
                 Text("\(foundCount)/\(totalWords) completed")
                     .font(.caption.bold())
-                    .foregroundStyle(theme.ink.opacity(0.55))
+                    .foregroundStyle(AppColor.inkSecondary)
             }
 
             ZStack {
@@ -89,7 +89,7 @@ struct LabSceneView: View {
                 .tint(theme.accent)
         }
         .padding(14)
-        .background(Color.white.opacity(0.88), in: RoundedRectangle(cornerRadius: 24))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 24))
         .shadow(color: theme.accent.opacity(0.12), radius: 14, y: 6)
         .animation(.spring(response: 0.42, dampingFraction: 0.72), value: foundCount)
     }
@@ -115,6 +115,9 @@ struct LabSceneView: View {
 
 private struct IsoLabBackdrop: View {
     let theme: LabTheme
+    /// Gentle idle "breathing" so the scene feels alive even before any
+    /// module is online.
+    @State private var breathe = false
 
     var body: some View {
         ZStack {
@@ -152,10 +155,16 @@ private struct IsoLabBackdrop: View {
             }
 
             Circle()
-                .fill(theme.accent.opacity(0.18))
+                .fill(theme.accent.opacity(breathe ? 0.26 : 0.14))
                 .frame(width: 150, height: 150)
                 .blur(radius: 38)
                 .offset(x: 94, y: -72)
+                .scaleEffect(breathe ? 1.08 : 0.94)
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 2.6).repeatForever(autoreverses: true)) {
+                breathe = true
+            }
         }
     }
 }

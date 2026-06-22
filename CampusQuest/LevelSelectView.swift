@@ -17,7 +17,7 @@ struct LevelSelectView: View {
     @Query private var progressList: [PlayerProgress]
     private var progress: PlayerProgress? { progressList.first }
 
-    private let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
+    private let ink = AppColor.ink
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -89,7 +89,6 @@ struct LevelSelectView: View {
         .background(CampusMapBackground().ignoresSafeArea())
         .navigationTitle(department.name)
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
     }
 
     // MARK: - Progress logic
@@ -172,13 +171,13 @@ private struct CampusMapBanner: View {
                         .rotationEffect(.degrees(-12))
                         .offset(x: 18, y: -8)
                 }
-                .overlay {
+                .overlay(alignment: .top) {
                     HStack(spacing: 14) {
                         miniBuilding(icon: "curlybraces")
                         miniBuilding(icon: "server.rack")
                         miniBuilding(icon: "lock.shield")
                     }
-                    .offset(y: 10)
+                    .padding(.top, 16)
                 }
 
             VStack(alignment: .leading, spacing: 8) {
@@ -424,9 +423,9 @@ private struct LevelRoomCard: View {
     private var cardBackground: Color {
         switch state {
         case .completed, .available:
-            return .white
+            return AppColor.surface
         case .locked:
-            return Color.white.opacity(0.72)
+            return AppColor.surfaceMuted
         }
     }
 
@@ -484,14 +483,7 @@ private struct LevelRoomCard: View {
 private struct CampusMapBackground: View {
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.82, green: 0.91, blue: 1.00),
-                    Color(red: 0.94, green: 0.90, blue: 1.00)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            LinearGradient.pageBackground
 
             Circle()
                 .fill(Color.accentColor.opacity(0.18))

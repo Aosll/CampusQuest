@@ -18,7 +18,7 @@ struct DictionaryView: View {
     @State private var searchText = ""
     @State private var selectedCategory: String? = nil
 
-    private let ink = Color(red: 0.18, green: 0.20, blue: 0.42)
+    private let ink = AppColor.ink
     private let categories = ["Programming Fundamentals", "Data Structures",
                               "Computer Networks", "Databases", "Cybersecurity"]
 
@@ -56,7 +56,6 @@ struct DictionaryView: View {
         .background(DictionaryBackground().ignoresSafeArea())
         .navigationTitle("Dictionary")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
     }
 
     // MARK: Search + category filters
@@ -77,7 +76,7 @@ struct DictionaryView: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
-            .background(Color.white.opacity(0.9), in: Capsule())
+            .background(AppColor.surface, in: Capsule())
             .overlay(Capsule().strokeBorder(AppColor.primary.opacity(0.14), lineWidth: 1))
 
             ScrollView(.horizontal, showsIndicators: false) {
@@ -217,7 +216,7 @@ struct DictionaryView: View {
             }
         }
         .padding()
-        .background(Color.white.opacity(0.90), in: RoundedRectangle(cornerRadius: 24))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 24))
         .overlay(
             RoundedRectangle(cornerRadius: 24)
                 .strokeBorder(Color.accentColor.opacity(0.14), lineWidth: 1)
@@ -229,7 +228,7 @@ struct DictionaryView: View {
         VStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.white.opacity(0.80))
+                    .fill(AppColor.surfaceMuted)
                     .frame(width: 110, height: 110)
                     .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
 
@@ -251,7 +250,7 @@ struct DictionaryView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 44)
         .padding(.horizontal)
-        .background(Color.white.opacity(0.82), in: RoundedRectangle(cornerRadius: 26))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 26))
     }
 }
 
@@ -318,7 +317,7 @@ private struct LearnedLevelSection: View {
             }
         }
         .padding()
-        .background(Color.white.opacity(0.90), in: RoundedRectangle(cornerRadius: 24))
+        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: 24))
         .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
         .sheet(item: $selectedWord) { word in
             WordDetailSheet(
@@ -407,7 +406,7 @@ private struct WordCollectionCard: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(word.displayName)
                     .font(.headline.bold())
-                    .foregroundStyle(Color(red: 0.18, green: 0.20, blue: 0.42))
+                    .foregroundStyle(AppColor.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
 
@@ -431,7 +430,7 @@ private struct WordCollectionCard: View {
         .background(
             LinearGradient(
                 colors: [
-                    Color.white,
+                    AppColor.surface,
                     accent.opacity(0.06)
                 ],
                 startPoint: .topLeading,
@@ -536,14 +535,7 @@ private struct WordDetailSheet: View {
 private struct DictionaryBackground: View {
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.84, green: 0.92, blue: 1.00),
-                    Color(red: 0.95, green: 0.91, blue: 1.00)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            LinearGradient.pageBackground
 
             Circle()
                 .fill(Color.accentColor.opacity(0.16))

@@ -8,6 +8,19 @@
 //
 
 import SwiftUI
+import UIKit
+
+/// Builds a color that resolves differently in light and dark mode.
+/// Keeping this in one helper means every adaptive color reads the same way.
+private func adaptiveColor(
+    light: (CGFloat, CGFloat, CGFloat, CGFloat),
+    dark: (CGFloat, CGFloat, CGFloat, CGFloat)
+) -> Color {
+    Color(uiColor: UIColor { trait in
+        let c = trait.userInterfaceStyle == .dark ? dark : light
+        return UIColor(red: c.0, green: c.1, blue: c.2, alpha: c.3)
+    })
+}
 
 /// Semantic color palette. Colors carry meaning (success, locked, …),
 /// not just decoration, so screens stay coherent as the app grows.
@@ -23,10 +36,27 @@ enum AppColor {
     /// Soft grey — locked / disabled surfaces.
     static let locked = Color(red: 0.62, green: 0.65, blue: 0.74)
 
-    /// Deep indigo for primary text on light backgrounds.
-    static let ink = Color(red: 0.16, green: 0.18, blue: 0.40)
-    /// Muted blue-grey for secondary text.
-    static let inkSecondary = Color(red: 0.38, green: 0.42, blue: 0.56)
+    /// Primary text: deep indigo on light, near-white on dark.
+    static let ink = adaptiveColor(
+        light: (0.16, 0.18, 0.40, 1),
+        dark:  (0.93, 0.95, 1.00, 1)
+    )
+    /// Secondary text: muted blue-grey, lighter in dark mode.
+    static let inkSecondary = adaptiveColor(
+        light: (0.38, 0.42, 0.56, 1),
+        dark:  (0.66, 0.70, 0.82, 1)
+    )
+    /// Frosted card surface — translucent white on light, dark slate on dark.
+    /// Alpha is baked in so cards keep their soft glassy look in both modes.
+    static let surface = adaptiveColor(
+        light: (1.00, 1.00, 1.00, 0.90),
+        dark:  (0.16, 0.18, 0.26, 0.92)
+    )
+    /// Slightly stronger surface for locked/secondary cards.
+    static let surfaceMuted = adaptiveColor(
+        light: (1.00, 1.00, 1.00, 0.72),
+        dark:  (0.16, 0.18, 0.26, 0.70)
+    )
 }
 
 /// Standard type scale so headings, cards, and labels stay consistent.
@@ -94,11 +124,11 @@ extension LinearGradient {
         endPoint: .bottomTrailing
     )
 
-    /// The soft blue-lavender page background gradient.
+    /// The soft blue-lavender page background gradient (dark navy on dark mode).
     static let pageBackground = LinearGradient(
         colors: [
-            Color(red: 0.82, green: 0.91, blue: 1.00),
-            Color(red: 0.93, green: 0.89, blue: 0.99)
+            adaptiveColor(light: (0.82, 0.91, 1.00, 1), dark: (0.07, 0.09, 0.16, 1)),
+            adaptiveColor(light: (0.93, 0.89, 0.99, 1), dark: (0.10, 0.08, 0.17, 1))
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
@@ -118,11 +148,11 @@ struct GlassCard<Content: View>: View {
             )
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .fill(Color.white.opacity(0.55))
+                    .fill(AppColor.surface.opacity(0.7))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(Color.white.opacity(0.6), lineWidth: 1)
+                    .strokeBorder(Color.primary.opacity(0.12), lineWidth: 1)
             )
             .shadow(color: .black.opacity(0.08), radius: 14, y: 6)
     }

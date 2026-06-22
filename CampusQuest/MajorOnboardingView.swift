@@ -51,7 +51,6 @@ struct MajorOnboardingView: View {
                 }
             }
         }
-        .preferredColorScheme(.light)
     }
 
     private var header: some View {

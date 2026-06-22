@@ -52,7 +52,6 @@ struct MajorSelectView: View {
         .background(LinearGradient.pageBackground.ignoresSafeArea())
         .navigationTitle("Choose a Major")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
     }
 }
 
@@ -120,7 +119,7 @@ struct MajorCard: View {
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: AppRadius.card)
-                    .fill(Color.white.opacity(isLocked ? 0.6 : 0.92))
+                    .fill(isLocked ? AppColor.surfaceMuted : AppColor.surface)
                 patternOverlay
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.card))
             }

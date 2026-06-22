@@ -66,7 +66,6 @@ struct QuizView: View {
         }
         .navigationTitle("Quiz Challenge")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
         .onReceive(ticker) { _ in tick() }
         .onChange(of: model?.index) { _, _ in resetTimer() }
     }
@@ -490,7 +489,7 @@ struct QuizView: View {
                         .tint(AppColor.primary)
                 }
                 .padding()
-                .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
 
                 if !strongTopics.isEmpty || !weakTopics.isEmpty {
                     VStack(alignment: .leading, spacing: 10) {
@@ -507,7 +506,7 @@ struct QuizView: View {
                         }
                     }
                     .padding()
-                    .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                    .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
                 }
 
                 Button {
@@ -636,7 +635,7 @@ private struct AnswerCard: View {
 
     private var background: Color {
         switch state {
-        case .normal, .dimmed: return Color.white.opacity(0.92)
+        case .normal, .dimmed: return AppColor.surface
         case .correct: return AppColor.success.opacity(0.16)
         case .wrong: return Color.red.opacity(0.12)
         }

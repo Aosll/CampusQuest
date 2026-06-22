@@ -44,7 +44,6 @@ struct CampusIDDetailView: View {
         .background(LinearGradient.pageBackground.ignoresSafeArea())
         .navigationTitle("Campus ID")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.light)
         .sheet(isPresented: $showAvatarPicker) {
             AvatarPickerView(name: auth.studentName)
         }

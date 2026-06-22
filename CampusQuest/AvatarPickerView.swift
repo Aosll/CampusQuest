@@ -50,7 +50,7 @@ struct AvatarPickerView: View {
                             }
                         }
                         .padding(16)
-                        .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: AppRadius.card))
+                        .background(AppColor.surface, in: RoundedRectangle(cornerRadius: AppRadius.card))
 
                         if hasSelection {
                             Button(role: .destructive) {
@@ -60,7 +60,7 @@ struct AvatarPickerView: View {
                                     .font(.subheadline.bold())
                                     .frame(maxWidth: .infinity)
                                     .padding()
-                                    .background(Color.white.opacity(0.9),
+                                    .background(AppColor.surface,
                                                 in: RoundedRectangle(cornerRadius: AppRadius.control))
                             }
                             .buttonStyle(PressableButtonStyle())
@@ -82,7 +82,6 @@ struct AvatarPickerView: View {
                 }
                 .ignoresSafeArea()
             }
-            .preferredColorScheme(.light)
         }
     }
 
