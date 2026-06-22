@@ -730,6 +730,8 @@ struct MenuTileLabel: View {
 /// glows, and faint letter blocks. Swap in a generated image later if
 /// you want.
 struct CampusBackground: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         ZStack {
             LinearGradient.pageBackground
@@ -757,17 +759,27 @@ struct CampusBackground: View {
     private func decoBlock(_ letter: String,
                            x: CGFloat, y: CGFloat,
                            rotation: Double, size: CGFloat) -> some View {
-        RoundedRectangle(cornerRadius: size * 0.22)
-            .fill(.white.opacity(0.45))
+        // Adapt to the color scheme: on light backgrounds a soft white tile
+        // reads as a cheerful decoration, but the same white-on-dark turns
+        // into muddy translucent squares that look like a rendering glitch.
+        // In dark mode use a much subtler tint so the blocks stay decorative.
+        let isDark = colorScheme == .dark
+        let blockFill = Color.white.opacity(isDark ? 0.05 : 0.45)
+        let letterColor = isDark
+            ? Color.white.opacity(0.12)
+            : Color(red: 0.30, green: 0.34, blue: 0.60).opacity(0.25)
+
+        return RoundedRectangle(cornerRadius: size * 0.22)
+            .fill(blockFill)
             .overlay(
                 Text(letter)
                     .font(.system(size: size * 0.5, weight: .heavy, design: .rounded))
-                    .foregroundStyle(Color(red: 0.30, green: 0.34, blue: 0.60).opacity(0.25))
+                    .foregroundStyle(letterColor)
             )
             .frame(width: size, height: size)
             .rotationEffect(.degrees(rotation))
             .offset(x: x, y: y)
-            .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+            .shadow(color: .black.opacity(isDark ? 0 : 0.05), radius: 6, y: 3)
     }
 }
 
