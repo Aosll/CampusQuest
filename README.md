@@ -2,7 +2,7 @@
 
 # 🎓 CampusQuest Academy
 
-**A bright, gamified iOS word game that turns computer-science terminology into a daily learning habit.**
+**A bright, gamified iOS word game that turns academic terminology into a daily learning habit.**
 
 ![Platform](https://img.shields.io/badge/platform-iOS%2017.5%2B-blue)
 ![Swift](https://img.shields.io/badge/Swift-SwiftUI%20%2B%20SwiftData-orange)
@@ -19,12 +19,13 @@
 
 ### Overview
 
-CampusQuest Academy is an educational word game for iOS. Players uncover computer-science terms on a letter wheel, learn their definitions, earn XP, climb academic ranks (Freshman → Senior), unlock achievements, and keep a daily streak going. It's built entirely with **SwiftUI**, **SwiftData**, and **SpriteKit** — no backend, no accounts required.
+CampusQuest Academy is an educational word game for iOS. Players pick a **major** — Computer Engineering or Medicine — then uncover its terms on a letter wheel, learn their definitions, earn XP, climb academic ranks (Freshman → Senior), unlock achievements, and keep a daily streak going. It's built entirely with **SwiftUI**, **SwiftData**, and **SpriteKit** — no backend, no accounts required.
 
 ### ✨ Features
 
-- **Word puzzles** — Spin the letter wheel to spell out CS terms; each solved word reveals its definition.
-- **Quiz mode** — Multiple-choice questions across topics (Programming, Data Structures, Networks, Databases, Cybersecurity).
+- **Multiple majors** — Choose a major (Computer Engineering or Medicine) on first launch and switch any time; each major has its own levels and terminology.
+- **Word puzzles** — Spin the letter wheel to spell out terms; each solved word reveals its definition.
+- **Quiz mode** — Multiple-choice questions across the major's topics (e.g. Programming, Data Structures, Networks, Databases, Cybersecurity).
 - **Daily Challenge** — A deterministic, date-seeded word set with bonus XP, refreshed every day.
 - **Streak system** — A flame counter rewards you for playing on consecutive days.
 - **Ranks & XP** — Progress through academic levels with a live XP bar and rank-up milestones.
@@ -32,7 +33,7 @@ CampusQuest Academy is an educational word game for iOS. Players uncover compute
 - **Campus ID card** — A personal student-ID card with your name, major, rank, and stats.
 - **Avatars** — Pick a photo from your library or choose one of 12 app-themed generated avatars.
 - **Local notifications** — An optional daily reminder at 7:00 PM to keep your streak.
-- **5 languages** — Full in-app localization: English 🇺🇸, Turkish 🇹🇷, German 🇩🇪, French 🇫🇷, Spanish 🇪🇸 (UI only; the technical dictionary stays in English).
+- **5 languages** — Fully localized UI (100% coverage): English 🇺🇸, Turkish 🇹🇷, German 🇩🇪, French 🇫🇷, Spanish 🇪🇸 (UI only; the technical dictionary stays in English).
 - **Sign in with Apple** or **Continue as Guest** — Guest mode is fully private: nothing is stored off-device and no statistics are collected.
 - **Share** — Share a "Course Completed" card with your rank, terms learned, and XP earned.
 
@@ -44,7 +45,7 @@ CampusQuest Academy is an educational word game for iOS. Players uncover compute
 | Persistence | SwiftData (`@Model`, lightweight migration) |
 | Animations / scene | SpriteKit |
 | Auth | Sign in with Apple (`AuthenticationServices`) |
-| Content | Bundled JSON (`ComputerEngineering.json`) |
+| Content | Bundled JSON (`ComputerEngineering.json`, `Medicine.json`) |
 | Localization | String Catalog (`Localizable.xcstrings`) |
 | Notifications | `UNUserNotificationCenter` (local only) |
 
@@ -77,7 +78,11 @@ CampusQuest/
 ├── AvatarView.swift          # Profile avatar rendering
 ├── ProfilePhotoManager.swift # Photo picker + themed presets
 ├── Localization.swift        # In-app language switching
-├── ComputerEngineering.json  # The word/definition content
+├── ContentLoader.swift       # Loads majors from bundled JSON
+├── MajorOnboardingView.swift # First-run "Choose Your Major" screen
+├── MajorSelectView.swift     # Switch major any time
+├── ComputerEngineering.json  # Computer Engineering word/definition content
+├── Medicine.json             # Medicine word/definition content
 └── ...
 ```
 
@@ -94,12 +99,13 @@ Guest mode never writes to disk, syncs to the cloud, or collects statistics. Sig
 
 ### Genel Bakış
 
-CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular harf çarkında bilgisayar bilimleri terimlerini bulur, tanımlarını öğrenir, XP kazanır, akademik rütbelerde yükselir (Freshman → Senior), başarımların kilidini açar ve günlük serilerini sürdürür. Tamamen **SwiftUI**, **SwiftData** ve **SpriteKit** ile geliştirilmiştir — sunucu yok, hesap zorunluluğu yok.
+CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular bir **bölüm** seçer — Computer Engineering ya da Medicine — ardından o bölümün terimlerini harf çarkında bulur, tanımlarını öğrenir, XP kazanır, akademik rütbelerde yükselir (Freshman → Senior), başarımların kilidini açar ve günlük serilerini sürdürür. Tamamen **SwiftUI**, **SwiftData** ve **SpriteKit** ile geliştirilmiştir — sunucu yok, hesap zorunluluğu yok.
 
 ### ✨ Özellikler
 
-- **Kelime bulmacaları** — Harf çarkını çevirerek BB terimlerini hecele; çözülen her kelime tanımını gösterir.
-- **Quiz modu** — Konulara göre çoktan seçmeli sorular (Programlama, Veri Yapıları, Ağlar, Veritabanları, Siber Güvenlik).
+- **Birden çok bölüm** — İlk açılışta bir bölüm seç (Computer Engineering ya da Medicine), istediğin zaman değiştir; her bölümün kendi seviyeleri ve terminolojisi vardır.
+- **Kelime bulmacaları** — Harf çarkını çevirerek terimleri hecele; çözülen her kelime tanımını gösterir.
+- **Quiz modu** — Bölümün konularına göre çoktan seçmeli sorular (örn. Programlama, Veri Yapıları, Ağlar, Veritabanları, Siber Güvenlik).
 - **Günlük Görev** — Tarihe göre belirlenen, her gün yenilenen, bonus XP'li kelime seti.
 - **Seri (streak) sistemi** — Arka arkaya oynadıkça artan alev sayacı.
 - **Rütbe & XP** — Canlı XP çubuğu ve rütbe atlama kilometre taşlarıyla akademik seviyeler.
@@ -107,7 +113,7 @@ CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular harf çar
 - **Kampüs Kimlik kartı** — İsim, bölüm, rütbe ve istatistiklerle kişisel öğrenci kimlik kartı.
 - **Avatarlar** — Galeriden fotoğraf seç ya da uygulama temalı 12 hazır avatardan birini kullan.
 - **Yerel bildirimler** — Seriyi sürdürmek için akşam 19:00'da isteğe bağlı günlük hatırlatma.
-- **5 dil** — Tam uygulama içi yerelleştirme: İngilizce 🇺🇸, Türkçe 🇹🇷, Almanca 🇩🇪, Fransızca 🇫🇷, İspanyolca 🇪🇸 (yalnızca arayüz; teknik sözlük İngilizce kalır).
+- **5 dil** — Tamamen yerelleştirilmiş arayüz (%100 kapsama): İngilizce 🇺🇸, Türkçe 🇹🇷, Almanca 🇩🇪, Fransızca 🇫🇷, İspanyolca 🇪🇸 (yalnızca arayüz; teknik sözlük İngilizce kalır).
 - **Apple ile Giriş** veya **Misafir Olarak Devam** — Misafir modu tamamen gizlidir: cihaz dışına hiçbir şey kaydedilmez, istatistik toplanmaz.
 - **Paylaşım** — Rütbe, öğrenilen terimler ve kazanılan XP içeren "Course Completed" kartını paylaş.
 
@@ -119,7 +125,7 @@ CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular harf çar
 | Kalıcılık | SwiftData (`@Model`, hafif geçiş) |
 | Animasyon / sahne | SpriteKit |
 | Kimlik | Apple ile Giriş (`AuthenticationServices`) |
-| İçerik | Paketlenmiş JSON (`ComputerEngineering.json`) |
+| İçerik | Paketlenmiş JSON (`ComputerEngineering.json`, `Medicine.json`) |
 | Yerelleştirme | String Catalog (`Localizable.xcstrings`) |
 | Bildirimler | `UNUserNotificationCenter` (yalnızca yerel) |
 
@@ -152,7 +158,11 @@ CampusQuest/
 ├── AvatarView.swift          # Profil avatarı render
 ├── ProfilePhotoManager.swift # Fotoğraf seçici + temalı hazır avatarlar
 ├── Localization.swift        # Uygulama içi dil değişimi
-├── ComputerEngineering.json  # Kelime/tanım içeriği
+├── ContentLoader.swift       # Bölümleri paketli JSON'dan yükler
+├── MajorOnboardingView.swift # İlk açılış "Bölümünü Seç" ekranı
+├── MajorSelectView.swift     # Bölümü istediğin zaman değiştir
+├── ComputerEngineering.json  # Computer Engineering kelime/tanım içeriği
+├── Medicine.json             # Medicine kelime/tanım içeriği
 └── ...
 ```
 
