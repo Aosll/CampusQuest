@@ -364,6 +364,18 @@
           "definition": "A name given to a variable, function, class, or other program element.",
           "category": "Programming Fundamentals",
           "objectToUnlock": "identifier_visual"
+        },
+        {
+          "word": "pointer",
+          "definition": "A variable that holds the memory address of another variable.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "pointer_icon"
+        },
+        {
+          "word": "iterator",
+          "definition": "A construct that steps through items in a collection one by one.",
+          "category": "Programming Fundamentals",
+          "objectToUnlock": "iterator_icon"
         }
       ]
     },
@@ -606,6 +618,36 @@
           "definition": "The process of finding an item in a data structure.",
           "category": "Data Structures",
           "objectToUnlock": "searching_visual"
+        },
+        {
+          "word": "bucket",
+          "definition": "A storage slot used in hash-based data structures.",
+          "category": "Data Structures",
+          "objectToUnlock": "bucket_visual"
+        },
+        {
+          "word": "depth",
+          "definition": "The number of levels from the root to a node in a tree.",
+          "category": "Data Structures",
+          "objectToUnlock": "depth_visual"
+        },
+        {
+          "word": "degree",
+          "definition": "The number of edges connected to a node in a graph.",
+          "category": "Data Structures",
+          "objectToUnlock": "degree_visual"
+        },
+        {
+          "word": "entry",
+          "definition": "A single item stored in a data structure.",
+          "category": "Data Structures",
+          "objectToUnlock": "entry_visual"
+        },
+        {
+          "word": "cursor",
+          "definition": "A pointer that marks the current position in a data structure.",
+          "category": "Data Structures",
+          "objectToUnlock": "cursor_visual"
         }
       ]
     },
@@ -825,6 +867,36 @@
           "definition": "The arrangement of devices and connections in a network.",
           "category": "Computer Networks",
           "objectToUnlock": "topology_visual"
+        },
+        {
+          "word": "address",
+          "definition": "A unique identifier for a device or location on a network.",
+          "category": "Computer Networks",
+          "objectToUnlock": "address_icon"
+        },
+        {
+          "word": "channel",
+          "definition": "A communication path through which data is transmitted.",
+          "category": "Computer Networks",
+          "objectToUnlock": "channel_icon"
+        },
+        {
+          "word": "buffer",
+          "definition": "A temporary storage area used to manage data flow.",
+          "category": "Computer Networks",
+          "objectToUnlock": "buffer_icon"
+        },
+        {
+          "word": "mask",
+          "definition": "A pattern that identifies the network portion of an IP address.",
+          "category": "Computer Networks",
+          "objectToUnlock": "mask_icon"
+        },
+        {
+          "word": "link",
+          "definition": "A communication channel connecting two network nodes.",
+          "category": "Computer Networks",
+          "objectToUnlock": "link_icon"
         }
       ]
     },
@@ -1014,6 +1086,30 @@
           "definition": "Data that describes other data.",
           "category": "Databases",
           "objectToUnlock": "metadata_visual"
+        },
+        {
+          "word": "cursor",
+          "definition": "A pointer used to navigate through rows in a query result.",
+          "category": "Databases",
+          "objectToUnlock": "cursor_icon"
+        },
+        {
+          "word": "log",
+          "definition": "A chronological record of changes made to a database.",
+          "category": "Databases",
+          "objectToUnlock": "log_icon"
+        },
+        {
+          "word": "field",
+          "definition": "A single piece of data within a database record.",
+          "category": "Databases",
+          "objectToUnlock": "field_icon"
+        },
+        {
+          "word": "integrity",
+          "definition": "The accuracy and consistency of data stored in a database.",
+          "category": "Databases",
+          "objectToUnlock": "integrity_icon"
         }
       ]
     },
@@ -1274,6 +1370,48 @@
           "definition": "Anything with the potential to harm a system or data.",
           "category": "Cybersecurity",
           "objectToUnlock": "threat_visual"
+        },
+        {
+          "word": "audit",
+          "definition": "An independent review of a system to check for security issues.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "audit_icon"
+        },
+        {
+          "word": "access",
+          "definition": "The ability to read, write, or use a system resource.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "access_icon"
+        },
+        {
+          "word": "protocol",
+          "definition": "A set of rules governing secure communication between systems.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "protocol_icon"
+        },
+        {
+          "word": "recovery",
+          "definition": "The process of restoring a system after a security incident.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "recovery_icon"
+        },
+        {
+          "word": "backdoor",
+          "definition": "A hidden method of bypassing normal authentication in software.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "backdoor_icon"
+        },
+        {
+          "word": "sandbox",
+          "definition": "An isolated environment used to safely test untrusted code.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "sandbox_icon"
+        },
+        {
+          "word": "token",
+          "definition": "A digital credential used to verify identity or grant access.",
+          "category": "Cybersecurity",
+          "objectToUnlock": "token_icon"
         }
       ]
     }
