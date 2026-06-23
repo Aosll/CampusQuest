@@ -57,6 +57,9 @@ struct RootView: View {
             // cascades cleanly into sheets, alerts and everything else.
             .onAppear { appearance.applyToWindows() }
             .onChange(of: appearanceRaw) { _, _ in appearance.applyToWindows() }
+            // Drop the local session if the user revoked the app's Apple
+            // sign-in access (or the credential is otherwise no longer valid).
+            .task { await auth.revalidateAppleCredentialIfNeeded() }
     }
 
     @ViewBuilder
