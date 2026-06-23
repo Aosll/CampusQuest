@@ -32,6 +32,8 @@ CampusQuest Academy is an educational word game for iOS. Players pick a **major*
 - **Achievements** — Earn tiered badges (Bronze, Silver, Gold) for milestones.
 - **Campus ID card** — A personal student-ID card with your name, major, rank, and stats.
 - **Avatars** — Pick a photo from your library or choose one of 12 app-themed generated avatars.
+- **Appearance** — Light, Dark, or follow the System setting, switchable any time from Settings (full dark-mode support across every screen).
+- **Guided tutorial** — A first-launch welcome tour plus an in-level "how to play" coachmark walkthrough; replayable any time from Settings.
 - **Local notifications** — An optional daily reminder at 7:00 PM to keep your streak.
 - **5 languages** — Fully localized UI (100% coverage): English 🇺🇸, Turkish 🇹🇷, German 🇩🇪, French 🇫🇷, Spanish 🇪🇸 (UI only; the technical dictionary stays in English).
 - **Sign in with Apple** or **Continue as Guest** — Guest mode is fully private: nothing is stored off-device and no statistics are collected.
@@ -51,7 +53,7 @@ CampusQuest Academy is an educational word game for iOS. Players pick a **major*
 
 ### 🚀 Getting Started
 
-**Requirements:** Xcode 16+, iOS 17.5+ device or simulator.
+**Requirements:** Xcode 26+, iOS 17.5+ device or simulator.
 
 ```bash
 git clone https://github.com/Aosll/CampusQuest.git
@@ -86,9 +88,17 @@ CampusQuest/
 └── ...
 ```
 
+### 🧪 Tests
+
+A `CampusQuestTests` unit-test target covers the security-sensitive auth/storage paths (sign-out PII clearing, per-account data isolation, one-time legacy migration) and the core scoring logic (XP, streaks, daily rewards). Run them with **⌘U**, or:
+
+```bash
+xcodebuild test -scheme CampusQuest -destination 'platform=iOS Simulator,name=iPhone 17'
+```
+
 ### 🔒 Privacy
 
-Guest mode never writes to disk, syncs to the cloud, or collects statistics. Sign-in is local only — there is no server. Profile photos are stored on-device.
+Guest mode never writes to disk, syncs to the cloud, or collects statistics. Sign-in is local only — there is no server. Each signed-in Apple account gets its own on-device store, so progress never leaks between users sharing a device, and the profile photo is cleared on sign-out. The Apple credential is re-validated on launch, signing the user out if access was revoked. Profile photos and other data stay on-device.
 
 </details>
 
@@ -112,6 +122,8 @@ CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular bir **bö
 - **Başarımlar** — Kilometre taşları için kademeli rozetler (Bronz, Gümüş, Altın).
 - **Kampüs Kimlik kartı** — İsim, bölüm, rütbe ve istatistiklerle kişisel öğrenci kimlik kartı.
 - **Avatarlar** — Galeriden fotoğraf seç ya da uygulama temalı 12 hazır avatardan birini kullan.
+- **Görünüm** — Açık, Koyu ya da Sistem ayarını izle; Ayarlar'dan istediğin zaman değiştirilebilir (her ekranda tam koyu mod desteği).
+- **Rehberli öğretici** — İlk açılış karşılama turu ve seviye içi "nasıl oynanır" coachmark anlatımı; Ayarlar'dan istediğin zaman tekrar oynatılabilir.
 - **Yerel bildirimler** — Seriyi sürdürmek için akşam 19:00'da isteğe bağlı günlük hatırlatma.
 - **5 dil** — Tamamen yerelleştirilmiş arayüz (%100 kapsama): İngilizce 🇺🇸, Türkçe 🇹🇷, Almanca 🇩🇪, Fransızca 🇫🇷, İspanyolca 🇪🇸 (yalnızca arayüz; teknik sözlük İngilizce kalır).
 - **Apple ile Giriş** veya **Misafir Olarak Devam** — Misafir modu tamamen gizlidir: cihaz dışına hiçbir şey kaydedilmez, istatistik toplanmaz.
@@ -131,7 +143,7 @@ CampusQuest Academy, iOS için eğitici bir kelime oyunudur. Oyuncular bir **bö
 
 ### 🚀 Başlangıç
 
-**Gereksinimler:** Xcode 16+, iOS 17.5+ cihaz veya simülatör.
+**Gereksinimler:** Xcode 26+, iOS 17.5+ cihaz veya simülatör.
 
 ```bash
 git clone https://github.com/Aosll/CampusQuest.git
@@ -166,8 +178,16 @@ CampusQuest/
 └── ...
 ```
 
+### 🧪 Testler
+
+`CampusQuestTests` birim test hedefi, güvenlik açısından kritik kimlik/depolama yollarını (çıkışta PII temizliği, hesap başına veri izolasyonu, tek seferlik eski veri taşıması) ve çekirdek puanlama mantığını (XP, seriler, günlük ödüller) kapsar. **⌘U** ile ya da şununla çalıştır:
+
+```bash
+xcodebuild test -scheme CampusQuest -destination 'platform=iOS Simulator,name=iPhone 17'
+```
+
 ### 🔒 Gizlilik
 
-Misafir modu hiçbir zaman diske yazmaz, buluta senkronlamaz veya istatistik toplamaz. Giriş yalnızca yereldir — sunucu yoktur. Profil fotoğrafları cihazda saklanır.
+Misafir modu hiçbir zaman diske yazmaz, buluta senkronlamaz veya istatistik toplamaz. Giriş yalnızca yereldir — sunucu yoktur. Giriş yapan her Apple hesabı kendi cihaz içi deposunu kullanır; böylece bir cihazı paylaşan kullanıcılar arasında ilerleme sızmaz ve profil fotoğrafı çıkışta silinir. Apple kimliği açılışta yeniden doğrulanır; erişim iptal edilmişse kullanıcı otomatik olarak çıkış yapar. Profil fotoğrafları ve diğer veriler cihazda kalır.
 
 </details>
