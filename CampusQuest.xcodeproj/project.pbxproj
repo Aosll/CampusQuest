@@ -14,11 +14,19 @@
 			remoteGlobalIDString = 1734125C2FD3530100EE903C;
 			remoteInfo = CampusQuest;
 		};
+		AA0000000000000000000016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 173412552FD3530100EE903C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1734125C2FD3530100EE903C;
+			remoteInfo = CampusQuest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1734125D2FD3530100EE903C /* CampusQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		173412742FD3530300EE903C /* CampusQuestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusQuestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000011 /* CampusQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +40,11 @@
 			path = CampusQuestUITests;
 			sourceTree = "<group>";
 		};
+		AA0000000000000000000012 /* CampusQuestTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CampusQuestTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		173412712FD3530300EE903C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000014 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +86,7 @@
 			children = (
 				1734125D2FD3530100EE903C /* CampusQuest.app */,
 				173412742FD3530300EE903C /* CampusQuestUITests.xctest */,
+				AA0000000000000000000011 /* CampusQuestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +140,29 @@
 			productReference = 173412742FD3530300EE903C /* CampusQuestUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		AA0000000000000000000010 /* CampusQuestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000018 /* Build configuration list for PBXNativeTarget "CampusQuestTests" */;
+			buildPhases = (
+				AA0000000000000000000013 /* Sources */,
+				AA0000000000000000000014 /* Frameworks */,
+				AA0000000000000000000015 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000000000000000000017 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AA0000000000000000000012 /* CampusQuestTests */,
+			);
+			name = CampusQuestTests;
+			packageProductDependencies = (
+			);
+			productName = CampusQuestTests;
+			productReference = AA0000000000000000000011 /* CampusQuestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -133,6 +177,10 @@
 						CreatedOnToolsVersion = 26.5;
 					};
 					173412732FD3530300EE903C = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 1734125C2FD3530100EE903C;
+					};
+					AA0000000000000000000010 = {
 						CreatedOnToolsVersion = 26.5;
 						TestTargetID = 1734125C2FD3530100EE903C;
 					};
@@ -158,6 +206,7 @@
 			targets = (
 				1734125C2FD3530100EE903C /* CampusQuest */,
 				173412732FD3530300EE903C /* CampusQuestUITests */,
+				AA0000000000000000000010 /* CampusQuestTests */,
 			);
 		};
 /* End PBXProject section */
@@ -171,6 +220,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		173412722FD3530300EE903C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000015 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,6 +268,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA0000000000000000000013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -219,6 +282,11 @@
 			isa = PBXTargetDependency;
 			target = 1734125C2FD3530100EE903C /* CampusQuest */;
 			targetProxy = 173412752FD3530300EE903C /* PBXContainerItemProxy */;
+		};
+		AA0000000000000000000017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1734125C2FD3530100EE903C /* CampusQuest */;
+			targetProxy = AA0000000000000000000016 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -489,6 +557,52 @@
 			};
 			name = Release;
 		};
+		AA0000000000000000000019 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5329D3FPD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.omer.CampusQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CampusQuest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CampusQuest";
+			};
+			name = Debug;
+		};
+		AA000000000000000000001A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R5329D3FPD;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.omer.CampusQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CampusQuest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CampusQuest";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -515,6 +629,15 @@
 			buildConfigurations = (
 				173412852FD3530300EE903C /* Debug */,
 				173412862FD3530300EE903C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000018 /* Build configuration list for PBXNativeTarget "CampusQuestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000019 /* Debug */,
+				AA000000000000000000001A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
