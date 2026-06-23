@@ -77,6 +77,7 @@
 			children = (
 				1734125F2FD3530100EE903C /* CampusQuest */,
 				173412772FD3530300EE903C /* CampusQuestUITests */,
+				AA0000000000000000000012 /* CampusQuestTests */,
 				1734125E2FD3530100EE903C /* Products */,
 			);
 			sourceTree = "<group>";
