@@ -98,9 +98,19 @@ final class ProfilePhotoManager {
         PresetAvatar.preset(id: defaults.string(forKey: ProfilePhotoKeys.avatarID))
     }
 
+    /// The pixel size avatar photos are stored at. The avatar never renders
+    /// larger than ~96pt (≈288px @3x), so 512 stays crisp with headroom while
+    /// keeping the stored image tiny.
+    private static let avatarPixelSize: CGFloat = 512
+
     /// Stores a freshly picked library photo and clears any preset.
     func save(image: UIImage) {
-        guard let data = image.jpegData(compressionQuality: 0.8) else { return }
+        // Downscale before encoding: a full-resolution library photo is several
+        // megabytes, and UserDefaults is loaded wholesale into memory at launch
+        // (and re-decoded on every avatar render). A small square cuts storage
+        // from megabytes to tens of kilobytes with no visible quality loss.
+        let prepared = image.squareCropped(toPixels: Self.avatarPixelSize)
+        guard let data = prepared.jpegData(compressionQuality: 0.8) else { return }
         defaults.set(data, forKey: ProfilePhotoKeys.photoData)
         defaults.removeObject(forKey: ProfilePhotoKeys.avatarID)
     }
@@ -115,6 +125,35 @@ final class ProfilePhotoManager {
     func reset() {
         defaults.removeObject(forKey: ProfilePhotoKeys.photoData)
         defaults.removeObject(forKey: ProfilePhotoKeys.avatarID)
+    }
+}
+
+// MARK: - Image downscaling
+
+private extension UIImage {
+    /// Returns a square, center-cropped copy at most `pixels` on a side, drawn
+    /// at scale 1 so the byte footprint matches the pixel size. Never upscales
+    /// a smaller source. Orientation is normalised by the renderer.
+    func squareCropped(toPixels pixels: CGFloat) -> UIImage {
+        let side = min(size.width, size.height)
+        let target = min(side, pixels)
+        guard target > 0 else { return self }
+
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = 1
+        format.opaque = true
+
+        let renderer = UIGraphicsImageRenderer(
+            size: CGSize(width: target, height: target), format: format)
+        return renderer.image { _ in
+            // Scale the whole image so its shorter side equals `target`, then
+            // offset so the centered square lands in the output rect.
+            let scale = target / side
+            let drawSize = CGSize(width: size.width * scale, height: size.height * scale)
+            let drawOrigin = CGPoint(x: (target - drawSize.width) / 2,
+                                     y: (target - drawSize.height) / 2)
+            draw(in: CGRect(origin: drawOrigin, size: drawSize))
+        }
     }
 }
 
